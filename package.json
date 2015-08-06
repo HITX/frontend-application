@@ -1,0 +1,19 @@
+{
+  "name": "internshpys",
+  "version": "0.0.0",
+  "description": "Internshyps frontend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo 'no tests currently' && exit 0",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/internshyps/frontend-application.git"
+  },
+  "author": "Ben Parham",
+  "license": "NA",
+  "bugs": {
+    "url": "https://github.com/internshyps/frontend-application/issues"
+  }
+}
