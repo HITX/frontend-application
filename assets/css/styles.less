@@ -1,5 +1,54 @@
+@import 'reset.less';
+
+// =============== COLORS ================
+
+@colorWhite: #FFFFFF;
+@colorLightGray: #D3D3D3;
+@colorDarkGray: #ABABAB;
+@colorLightBlack: #666666;
+@colorBlackShadow: #AFAFAF;
+@colorLightOrange: #FABF34;
+@colorDarkOrange: #E1AB2E;
+
+// =============== MIXINS ===============
+
+.shadow {
+	box-shadow: 2px 2px 4px @colorBlackShadow;
+}
 
 
-input[type=submit] {
-	cursor: pointer;
+// =============== GENERAL =============
+input {
+  border: none;
+  cursor: pointer;
+}
+
+
+// =============== STUFF ===============
+#body {
+  background-color: @colorLightGray;
+}
+
+#application {
+  margin: 0, auto;
+  text-align: center;
+
+  input {
+    margin: 20rem auto 3rem;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    outline: none;
+    color: @colorWhite;
+    background-color: @colorLightOrange;
+    font-size: 3rem;
+    .shadow;
+
+    &:hover {
+      background-color: @colorDarkOrange;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+  }
 }
