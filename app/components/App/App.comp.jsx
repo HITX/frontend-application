@@ -1,6 +1,7 @@
 'use strict'
 
 var React = require('react');
+var Header = require('../Header/Header.comp.jsx')
 
 var App = React.createClass({
 
@@ -15,11 +16,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div id='application'>
-        <input
-          type='submit'
-          value='Click Me'
-          onClick={this.handleClick}/>
-        <p>{this.state.message}</p>
+        <Header/>
       </div>
     );
   }

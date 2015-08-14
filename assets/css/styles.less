@@ -3,52 +3,164 @@
 // =============== COLORS ================
 
 @colorWhite: #FFFFFF;
-@colorLightGray: #D3D3D3;
+@colorLightGray: #F2F2F2;
 @colorDarkGray: #ABABAB;
 @colorLightBlack: #666666;
-@colorBlackShadow: #AFAFAF;
-@colorLightOrange: #FABF34;
-@colorDarkOrange: #E1AB2E;
+@colorShadowLow: #575757;
+@colorShadowMid: #AFAFAF;
+@colorShadowHigh: #CFCFCF;
+@colorThemeOrange: #FF9933;
+@colorThemeOrangeDark: #CC7A28;
+@colorThemeBlue: #333366;
+
 
 // =============== MIXINS ===============
 
-.shadow {
-	box-shadow: 2px 2px 4px @colorBlackShadow;
+.shadow_low {
+	box-shadow: 0px 0px 2px @colorShadowLow;
+}
+
+.shadow_mid {
+	box-shadow: 2px 2px 4px @colorShadowMid;
+}
+
+.shadow_high {
+	box-shadow: 4px 4px 6px @colorShadowHigh;
+}
+
+.pseudolink {
+	&:hover {cursor: pointer;}
+}
+
+.themeOrangeBackground {
+	background-color: @colorThemeOrange;
+	color: @colorWhite;
+}
+
+.themeOrangeText {
+	color: @colorThemeOrange;
+}
+
+.themeBlueBackground {
+	background-color: @colorThemeBlue;
+	color: @colorWhite;
+}
+
+.themeBlueText {
+	color: @colorThemeBlue;
 }
 
 
 // =============== GENERAL =============
-input {
-  border: none;
-  cursor: pointer;
-}
-
-
-// =============== STUFF ===============
-#body {
+body {
   background-color: @colorLightGray;
 }
 
-#application {
-  margin: 0, auto;
-  text-align: center;
 
-  input {
-    margin: 20rem auto 3rem;
-    padding: .5rem 1rem;
-    border-radius: 1rem;
-    outline: none;
-    color: @colorWhite;
-    background-color: @colorLightOrange;
-    font-size: 3rem;
-    .shadow;
+// ================ HEADER =============
 
-    &:hover {
-      background-color: @colorDarkOrange;
-    }
+@headerHeight: 5rem;
 
-    &:active {
-      box-shadow: none;
-    }
-  }
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: @headerHeight;
+	background-color: @colorWhite;
+	z-index: 100;
+	white-space: nowrap;
+
+	#headerLeft, #headerRight {
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+
+		& > * {
+			display: inline-block;
+			vertical-align: middle;
+			line-height: @headerHeight;
+		}
+	}
+
+	#headerLeft {
+		float: left;
+		margin-left: 2rem;
+
+		#headerHome {
+			font-size: 2.5rem;
+			font-weight: bold;
+			text-align: center;
+
+			.pseudolink;
+
+			& > * {
+				display: inline-block;
+			}
+		}
+	}
+
+	#headerRight {
+		float: right;
+		margin-right: 2rem;
+
+		#headerSearch {
+			padding: 0 1rem;
+			margin-right: 3rem;
+
+			input {
+				width: 40rem;
+				padding: .5rem 1rem;
+				border-color: @colorThemeBlue;
+				border-radius: .5rem;
+				border-width: .2rem;
+				font-size: 1.25rem;
+			}
+		}
+
+		#headerLogin {
+			a {
+				padding: .5rem .5rem;
+				font-size: 1.5rem;
+				border-radius: .5rem;
+				outline: none;
+
+				.pseudolink;
+				.themeOrangeBackground;
+				.shadow_high;
+
+		    &:active {
+		      box-shadow: none;
+					background-color: @colorThemeOrangeDark;
+		    }
+			}
+		}
+	}
 }
+
+
+
+
+// #application {
+//   margin: 0, auto;
+//   text-align: center;
+//
+//   input {
+//     margin: 20rem auto 3rem;
+//     padding: .5rem 1rem;
+//     border-radius: 1rem;
+//     outline: none;
+//     color: @colorWhite;
+//     background-color: @colorLightOrange;
+//     font-size: 3rem;
+//     .shadow;
+//
+//     &:hover {
+//       background-color: @colorDarkOrange;
+//     }
+//
+//     &:active {
+//       box-shadow: none;
+//     }
+//   }
+// }
