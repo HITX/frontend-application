@@ -9,9 +9,14 @@
 @colorShadowLow: #575757;
 @colorShadowMid: #AFAFAF;
 @colorShadowHigh: #CFCFCF;
-@colorThemeOrange: #FF9933;
-@colorThemeOrangeDark: #CC7A28;
-@colorThemeBlue: #333366;
+@colorThemeA: #FF9933;
+@colorThemeADark: #CC7A28;
+@colorThemeB: #333366;
+
+
+// =============== CONSTANTS ============
+
+@headerHeight: 5rem;
 
 
 // =============== MIXINS ===============
@@ -32,22 +37,22 @@
 	&:hover {cursor: pointer;}
 }
 
-.themeOrangeBackground {
-	background-color: @colorThemeOrange;
+.themeABackground {
+	background-color: @colorThemeA;
 	color: @colorWhite;
 }
 
-.themeOrangeText {
-	color: @colorThemeOrange;
+.themeAText {
+	color: @colorThemeA;
 }
 
-.themeBlueBackground {
-	background-color: @colorThemeBlue;
+.themeBBackground {
+	background-color: @colorThemeB;
 	color: @colorWhite;
 }
 
-.themeBlueText {
-	color: @colorThemeBlue;
+.themeBText {
+	color: @colorThemeB;
 }
 
 
@@ -57,9 +62,26 @@ body {
 }
 
 
-// ================ HEADER =============
+// =============== Content =============
+#content {
+	margin-top: @headerHeight;
+	padding: 1.5rem;
+}
 
-@headerHeight: 5rem;
+
+// ================ Logo ==============
+
+.logo {
+	font-weight: bold;
+	text-align: center;
+
+	& > * {
+		display: inline-block;
+	}
+}
+
+
+// ================ HEADER =============
 
 #header {
 	position: fixed;
@@ -87,16 +109,9 @@ body {
 		float: left;
 		margin-left: 2rem;
 
-		#headerHome {
+		.logo {
 			font-size: 2.5rem;
-			font-weight: bold;
-			text-align: center;
-
 			.pseudolink;
-
-			& > * {
-				display: inline-block;
-			}
 		}
 	}
 
@@ -111,7 +126,7 @@ body {
 			input {
 				width: 40rem;
 				padding: .5rem 1rem;
-				border-color: @colorThemeBlue;
+				border-color: @colorThemeB;
 				border-radius: .5rem;
 				border-width: .2rem;
 				font-size: 1.25rem;
@@ -126,12 +141,16 @@ body {
 				outline: none;
 
 				.pseudolink;
-				.themeOrangeBackground;
+				.themeABackground;
 				.shadow_high;
+
+				&:hover {
+					color: @colorThemeB;
+				}
 
 		    &:active {
 		      box-shadow: none;
-					background-color: @colorThemeOrangeDark;
+					background-color: @colorThemeADark;
 		    }
 			}
 		}
@@ -139,28 +158,54 @@ body {
 }
 
 
+// ============= Home ==================
+
+#home {
+	text-align: center;
+	font-size: 2rem;
+	font-weight: bold;
+	margin-top: 3rem;
+}
 
 
-// #application {
-//   margin: 0, auto;
-//   text-align: center;
-//
-//   input {
-//     margin: 20rem auto 3rem;
-//     padding: .5rem 1rem;
-//     border-radius: 1rem;
-//     outline: none;
-//     color: @colorWhite;
-//     background-color: @colorLightOrange;
-//     font-size: 3rem;
-//     .shadow;
-//
-//     &:hover {
-//       background-color: @colorDarkOrange;
-//     }
-//
-//     &:active {
-//       box-shadow: none;
-//     }
-//   }
-// }
+// ============= Not Found ==============
+
+#notFound {
+	text-align: center;
+	margin-top: 4rem;
+
+	.logo {
+		font-size: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	#notFoundContainer {
+		display: inline-block;
+		// margin: 4rem, auto;
+		padding: 2rem;
+		background-color: @colorWhite;
+		border-radius: 1rem;
+
+		#notFoundTitle {
+				margin: auto;
+				font-size: 2.5rem;
+				font-weight: bold;
+				.themeBText
+		}
+		#notFoundText {
+			font-size: 1.25rem;
+
+			& > * {
+				display: inline-block;
+			}
+
+			a {
+				font-weight: bold;
+				text-decoration: underline;
+				margin-left: .5rem;
+				.themeAText;
+				.pseudolink;
+			}
+		}
+	}
+}

@@ -21,7 +21,9 @@
   "dependencies": {
     "express": "^4.13.3",
     "node-jsx": "^0.13.3",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "connect-history-api-fallback": "1.1.0"
   },
   "devDependencies": {
     "browserify": "^11.0.1",
