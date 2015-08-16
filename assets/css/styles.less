@@ -158,6 +158,102 @@ body {
 }
 
 
+// ============= Login =================
+
+#login {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, .3);
+
+	#loginContent {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		width: 25rem;
+		height: 26rem;
+		background-color: @colorWhite;
+		border-radius: 1rem;
+		padding: 1rem;
+		box-shadow: 4px 4px 6px 2px #808080;
+
+		& > * {
+			display: block;
+		}
+
+		hr {
+			border-color: @colorThemeB;
+			margin: 2.5rem 0;
+			// width: 23rem;
+		}
+
+		#loginTitle {
+			margin: 2rem auto;
+			text-align: center;
+			font-size: 2.5rem;
+		}
+
+		#loginEmail, #loginPassword {
+			margin: 1rem 0;
+			box-sizing: border-box;
+			width: 100%;
+			padding: .5rem 1rem;
+			border-color: @colorThemeB;
+			border-radius: .5rem;
+			border-width: .2rem;
+			font-size: 1.25rem;
+		}
+
+		#loginSubmit, #loginSignup {
+			margin: 1rem 0;
+
+			& > * {
+				display: inline-block;
+			}
+
+			button {
+				outline: none;
+				.pseudolink;
+				.shadow_high;
+			}
+		}
+
+		#loginSignup {
+			text-align: center;
+		}
+
+		#loginSubmitButton {
+			padding: .5rem .5rem;
+			font-size: 1.25rem;
+			border-radius: .5rem;
+			.themeABackground;
+		}
+
+		#loginSignupButton {
+			padding: .5rem .5rem;
+			font-size: 1rem;
+			border-radius: .5rem;
+			.themeBBackground;
+		}
+
+		#loginSubmitText {
+			margin-left: 1rem;
+			.themeAText;
+			.pseudolink;
+		}
+
+		#loginSignupText {
+			margin-right: 1rem;
+		}
+	}
+}
+
+
 // ============= Home ==================
 
 #home {
