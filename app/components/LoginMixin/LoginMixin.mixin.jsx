@@ -1,6 +1,7 @@
 'use strict'
 
 var React = require('react');
+var Link = require('react-router').Link;
 
 var LoginModal = React.createClass({
 
@@ -26,7 +27,11 @@ var LoginModal = React.createClass({
           <hr/>
           <div id='loginSignup'>
             <p id='loginSignupText'>Don't have an account?</p>
-            <button id='loginSignupButton'>Sign Up</button>
+            <Link to='signup'>
+              <button id='loginSignupButton' onClick={this.props.onRequestClose}>
+                Sign Up
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -40,7 +45,7 @@ var LoginMixin = {
   },
 
   getInitialState: function() {
-    return {showLogin: true};
+    return {showLogin: false};
   },
 
   openLogin: function() {

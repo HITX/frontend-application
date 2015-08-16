@@ -12,6 +12,7 @@
 @colorThemeA: #FF9933;
 @colorThemeADark: #CC7A28;
 @colorThemeB: #333366;
+@colorThemeBDark: #1E1E3D;
 
 
 // =============== CONSTANTS ============
@@ -61,11 +62,15 @@ body {
   background-color: @colorLightGray;
 }
 
+button {
+	outline: none;
+}
+
 
 // =============== Content =============
 #content {
 	margin-top: @headerHeight;
-	padding: 1.5rem;
+	// padding: 1.5rem;
 }
 
 
@@ -92,6 +97,7 @@ body {
 	background-color: @colorWhite;
 	z-index: 100;
 	white-space: nowrap;
+	overflow: hidden;
 
 	#headerLeft, #headerRight {
 		display: inline-block;
@@ -232,6 +238,11 @@ body {
 			font-size: 1.25rem;
 			border-radius: .5rem;
 			.themeABackground;
+
+			&:active {
+				box-shadow: none;
+				background-color: @colorThemeADark;
+			}
 		}
 
 		#loginSignupButton {
@@ -239,6 +250,11 @@ body {
 			font-size: 1rem;
 			border-radius: .5rem;
 			.themeBBackground;
+
+			&:active {
+				box-shadow: none;
+				background-color: @colorThemeBDark;
+			}
 		}
 
 		#loginSubmitText {
@@ -249,6 +265,63 @@ body {
 
 		#loginSignupText {
 			margin-right: 1rem;
+		}
+	}
+}
+
+
+// ============= Signup ================
+
+#signup {
+
+	#signupBackgroundImage {
+		min-width: 90rem;
+	}
+
+	& > * {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		margin-top: @headerHeight;
+	}
+
+	#signupContent {
+		z-index: 100;
+
+		& > * {
+			display: block;
+		}
+
+		#signupTitle {
+			margin: 2rem 0 3rem;
+			text-align: center;
+			font-size: 2.5rem;
+		}
+
+		#signupEmail, #signupUsername,
+		#signupPassword, #signupRetypePassword {
+			width: 20rem;
+			margin: 1rem auto;
+			padding: .5rem 1rem;
+			border-color: @colorThemeB;
+			border-radius: .5rem;
+			border-width: .2rem;
+			font-size: 1.25rem;
+		}
+
+		#signupSubmitButton {
+			margin: 1.5rem auto;
+			padding: .5rem .5rem;
+			font-size: 1.75rem;
+			border-radius: .5rem;
+			.themeABackground;
+			box-shadow: 7px 7px 9px #333333;
+
+			&:active {
+				box-shadow: none;
+				background-color: @colorThemeADark;
+			}
 		}
 	}
 }
