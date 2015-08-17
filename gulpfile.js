@@ -13,18 +13,24 @@ var nodemon = require('gulp-nodemon');
 var isProd = process.env.NODE_ENV === 'production';
 
 var paths = {
-  app: './app/main.jsx',
-  js: [
-    './server.js',
-    './app/**/*.jsx'
-  ],
-  css: ['assets/css/*.less']
+  app: {
+    entry: './app/main.jsx',
+    css: './assets/css/*.less',
+    js: [
+      './server.js',
+      './app/**/*.jsx'
+    ]
+  },
+  apilib: {
+    entry: './assets/js/apilib/main.js',
+    js: './assets/js/apilib/*.js'
+  }
 };
 
 var builder = function builder() {
   return browserify({
     // entries: './app/main.jsx',
-    entries: paths.app,
+    entries: paths.app.entry,
     extensions: ['.jsx']
   })
     .transform(reactify)
@@ -34,8 +40,22 @@ var builder = function builder() {
     .pipe(rename('bundle.js'));
 };
 
-gulp.task('build-js', function() {
+var apilib_builder = function apilib_builder() {
+  return browserify({
+    entries: paths.apilib.entry,
+  })
+    .bundle()
+    .pipe(source('main.js'))
+    .pipe(rename('apilib.js'));
+};
+
+gulp.task('build-app', function() {
   return builder()
+    .pipe(gulp.dest('./public/js/'));
+});
+
+gulp.task('build-apilib', function() {
+  return apilib_builder()
     .pipe(gulp.dest('./public/js/'));
 });
 
@@ -45,7 +65,7 @@ gulp.task('less', function() {
     .pipe(gulp.dest('./public/css/'));
 });
 
-gulp.task('build', ['build-js', 'less']);
+gulp.task('build', ['build-app', 'build-apilib', 'less']);
 
 function watch() {
 
@@ -57,17 +77,14 @@ function watch() {
     ext: 'js less html'
   });
 
-  gulp.watch(paths.js, ['build']);
-  gulp.watch(paths.css, ['less']);
-}
+  gulp.watch(paths.app.js, ['build-app']);
+  gulp.watch(paths.app.css, ['less']);
+  gulp.watch(paths.apilib.js, ['build-apilib']);
 
-// gulp.task('watch', ['build'], function() {
-//   isProd ? gutil.noop() : process.stdout.write('Will watch here\n');
-  //   gulp.watch(paths.app, ['build']),
-  //   gulp.watch(paths.js, ['build']),
-  //   gulp.watch(paths.css, ['less'])
-  // );
-// });
+  // gulp.watch(paths.js, ['build']);
+  // gulp.watch(paths.css, ['less']);
+  // gulp.watch(paths.apilib.all, [''])
+}
 
 gulp.task('default', ['build'], function() {
   isProd ? gutil.noop() : watch();
