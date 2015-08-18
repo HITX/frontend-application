@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "description": "Internshyps frontend",
   "private": true,
-  "main": "server.js",
+  "main": "server/main.js",
   "scripts": {
     "test": "echo 'no tests currently' && exit 0",
-    "start": "node server.js"
+    "start": "node server/main.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/internshyps/frontend-application",
   "dependencies": {
+    "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "node-jsx": "^0.13.3",
     "react": "^0.13.3",

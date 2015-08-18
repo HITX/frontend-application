@@ -1,7 +1,8 @@
 'use strict'
 
 var Config = {
-  host: 'TODO'
+  client_id: 'TODO',
+  client_secret: 'TODO'
 };
 
 module.exports = Config;
