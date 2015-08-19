@@ -24,7 +24,8 @@
     "node-jsx": "^0.13.3",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
-    "connect-history-api-fallback": "1.1.0"
+    "connect-history-api-fallback": "1.1.0",
+    "cookies-js": "1.2.1"
   },
   "devDependencies": {
     "browserify": "^11.0.1",
