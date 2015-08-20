@@ -2,7 +2,7 @@
 
 module.exports = {
   api: {
-    hostname: 'TODO',
-    port: 'TODO'
+    hostname: 'localhost',
+    port: 8000
   }
 };

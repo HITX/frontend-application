@@ -2,7 +2,7 @@
 
 var Cookies = require('cookies-js');
 
-var Config = require('../../config.js');
+var Config = require('../../../config/app/config.js');
 
 var _buildUrl = function(path) {
   path = path.replace(/\/$|^\//g, '');

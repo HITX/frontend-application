@@ -2,11 +2,13 @@
 
 var querystring = require('querystring');
 var http = require('http');
-var Config = require('./config.js');
+// var Config = require('./config.js');
+var ServerConfig = require('../config/server/config.js');
+var AppConfig = require('../config/app/config.js');
 
-var app_auth = Config.oauth.client_id +
+var app_auth = ServerConfig.oauth.client_id +
                ':' +
-               Config.oauth.client_secret;
+               ServerConfig.oauth.client_secret;
 
 function login(clientReq, clientResp) {
 
@@ -19,8 +21,8 @@ function login(clientReq, clientResp) {
   });
 
   var options = {
-    hostname: SharedConfig.api.hostname,
-    port: Config.shared.api.port,
+    hostname: AppConfig.api.hostname,
+    port: AppConfig.api.port,
     path: '/o/token/',
     auth: app_auth,
     method: 'POST',
