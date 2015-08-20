@@ -2,12 +2,12 @@
 
 var Cookies = require('cookies-js');
 
-var Config = require('./config.js');
+var Config = require('../../config.js');
 
 var _buildUrl = function(path) {
   path = path.replace(/\/$|^\//g, '');
   path = path.replace()
-  return 'http://' + Config.host + '/' + path + '/';
+  return 'http://' + Config.api.hostname + ':' + Config.api.port + '/' + path + '/';
 };
 
 var _statusIsSuccess = function(status) {
