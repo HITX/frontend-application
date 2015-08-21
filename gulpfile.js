@@ -35,9 +35,9 @@ var app_builder = function builder() {
   return browserify({
     entries: paths.app.entry,
     extensions: ['.jsx']
-  })
-    .transform(reactify)
-    .transform(envify)
+  }).on('error', errorHandler)
+    .transform(reactify).on('error', errorHandler)
+    .transform(envify).on('error', errorHandler)
     .bundle()
     .pipe(source('main.jsx'))
     .pipe(rename('bundle.js'));
@@ -46,7 +46,7 @@ var app_builder = function builder() {
 var apilib_builder = function apilib_builder() {
   return browserify({
     entries: paths.apilib.entry,
-  })
+  }).on('error', errorHandler)
     .bundle()
     .pipe(source('main.js'))
     .pipe(rename('apilib.js'));
@@ -64,7 +64,7 @@ gulp.task('build-apilib', function() {
 
 gulp.task('less', function() {
   return gulp.src('./assets/css/styles.less')
-    .pipe(less())
+    .pipe(less()).on('error', errorHandler)
     .pipe(gulp.dest('./public/css/'));
 });
 
@@ -92,3 +92,8 @@ gulp.task('default', ['build']);
 gulp.task('watch', ['build'], function() {
   isProd ? gutil.noop() : watch();
 });
+
+function errorHandler(err) {
+  console.log('Error handler:');
+  console.log(err.toString());
+}
