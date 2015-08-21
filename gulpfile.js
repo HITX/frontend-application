@@ -87,7 +87,7 @@ function watch() {
   gulp.watch(paths.server.js);
 }
 
-gulp.task('default', ['build']);
+gulp.task('default', ['build-apilib']);
 
 gulp.task('watch', ['build'], function() {
   isProd ? gutil.noop() : watch();
