@@ -41,9 +41,6 @@ var _handler = function(req, res, rej) {
 window.Internshyps = (function() {
   var authToken = Cookies.get('authToken');
 
-  console.log("Auth token:");
-  console.log(authToken);
-
   function _setAuth(token) {
     authToken = token;
     Cookies.set('authToken', token);
@@ -55,7 +52,7 @@ window.Internshyps = (function() {
         var req = new XMLHttpRequest();
         req.open('GET', _buildUrl(urlPath));
         if (authToken) {
-          req.setRequestHeader('Authoriztion', 'Bearer ' + authToken);
+          req.setRequestHeader('Authorization', 'Bearer ' + authToken);
         }
         _handler(req, resolve, reject);
         req.send();
@@ -121,6 +118,11 @@ window.Internshyps = (function() {
           password: password
         }));
       });
+    },
+
+    logout: function() {
+      authToken = undefined;
+      Cookies.expire('authToken');
     }
   }
 })();

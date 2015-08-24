@@ -34,6 +34,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.6",
     "reactify": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "flux": "^2.1.1"
   }
 }

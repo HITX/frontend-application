@@ -3,6 +3,8 @@
 var React = window.React = require('react');
 var router = require('./router.jsx');
 
+var SessionActions = require('./actions/Session.actions.js');
+
 // Internshyps.login('uname', 'pwrd', 'http://localhost:8080/api/login').then(
 //   function(result) {
 //     console.log('LOGIN Result:');
@@ -18,13 +20,12 @@ var router = require('./router.jsx');
 // Immediately check authenticated status
 Internshyps.get('users/me').then(
   function(result) {
-    console.log('GET Result:');
-    console.log(result);
-    console.log(result.response);
+    SessionActions.loadSession(result.response);
+    renderApp();
   },
   function(err) {
-    console.log('GET Error:');
-    console.log(err);
+    SessionActions.dropSession();
+    renderApp();
   }
 );
 
@@ -46,7 +47,8 @@ Internshyps.get('users/me').then(
 //     console.log(err);
 //   }
 // );
-
-router.run(function(Handler) {
-  React.render(<Handler/>, document.getElementById('appContainer'));
-});
+function renderApp() {
+  router.run(function(Handler) {
+    React.render(<Handler/>, document.getElementById('appContainer'));
+  });
+}
