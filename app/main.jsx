@@ -15,17 +15,18 @@ var router = require('./router.jsx');
 //   }
 // );
 
-// Internshyps.get('users').then(
-//   function(result) {
-//     console.log('GET Result:');
-//     console.log(result);
-//     console.log(result.response);
-//   },
-//   function(err) {
-//     console.log('GET Error:');
-//     console.log(err);
-//   }
-// );
+// Immediately check authenticated status
+Internshyps.get('users/me').then(
+  function(result) {
+    console.log('GET Result:');
+    console.log(result);
+    console.log(result.response);
+  },
+  function(err) {
+    console.log('GET Error:');
+    console.log(err);
+  }
+);
 
 // Internshyps.post('users', {
 //   username: 'post_test_username5',

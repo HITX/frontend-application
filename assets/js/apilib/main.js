@@ -41,6 +41,9 @@ var _handler = function(req, res, rej) {
 window.Internshyps = (function() {
   var authToken = Cookies.get('authToken');
 
+  console.log("Auth token:");
+  console.log(authToken);
+
   function _setAuth(token) {
     authToken = token;
     Cookies.set('authToken', token);
@@ -51,6 +54,9 @@ window.Internshyps = (function() {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
         req.open('GET', _buildUrl(urlPath));
+        if (authToken) {
+          req.setRequestHeader('Authoriztion', 'Bearer ' + authToken);
+        }
         _handler(req, resolve, reject);
         req.send();
       });
@@ -60,6 +66,9 @@ window.Internshyps = (function() {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
         req.open('POST', _buildUrl(urlPath));
+        if (authtoken) {
+          req.setRequestHeader('Authorization', 'Bearer ' + authToken);
+        }
         req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         _handler(req, resolve, reject);
         req.send(JSON.stringify(data));
