@@ -63,7 +63,7 @@ window.Internshyps = (function() {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
         req.open('POST', _buildUrl(urlPath));
-        if (authtoken) {
+        if (authToken) {
           req.setRequestHeader('Authorization', 'Bearer ' + authToken);
         }
         req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');

@@ -69,6 +69,11 @@ var LoginModal = React.createClass({
     return false;
   },
 
+  handleSignupClick: function() {
+    this.props.onRequestClose();
+    this.props.onRequestSignup();
+  },
+
   handleLoginClick: function() {
 
     if (this._credentialsInvalid()) {
@@ -98,7 +103,7 @@ var LoginModal = React.createClass({
     return (
       <div id='login' onClick={this.handleBackdropClick}>
         <div id='loginContent' onClick={this.killClick}>
-          <p id='loginTitle'>Welcome</p>
+          <p id='loginTitle'>OHai!</p>
           <input
             id='loginEmail'
             type='text'
@@ -111,21 +116,17 @@ var LoginModal = React.createClass({
             placeholder='Password'
             value={this.state.passwordVal}
             onChange={this.handlePasswordChange}/>
+          <div id='loginMessage'>
+            <p>{this.state.message}&nbsp;</p>
+          </div>
           <div id='loginSubmit'>
             <button id='loginSubmitButton' onClick={this.handleLoginClick}>Log In</button>
             <p id='loginSubmitText'>Forgot Password?</p>
           </div>
-          <div id='loginMessage'>
-            <p>{this.state.message}</p>
-          </div>
           <hr/>
           <div id='loginSignup'>
             <p id='loginSignupText'>Don't have an account?</p>
-            <Link to='signup'>
-              <button id='loginSignupButton' onClick={this.props.onRequestClose}>
-                Sign Up
-              </button>
-            </Link>
+            <button id='loginSignupButton' onClick={this.handleSignupClick}>Sign Up</button>
           </div>
         </div>
       </div>
@@ -134,7 +135,8 @@ var LoginModal = React.createClass({
 });
 
 var LoginMixin = {
-  _close: function() {
+
+  _closeLogin: function() {
     this.setState({showLogin: false});
   },
 
@@ -146,8 +148,12 @@ var LoginMixin = {
     this.setState({showLogin: true});
   },
 
-  loginModal: function() {
-    return this.state.showLogin ? <LoginModal onRequestClose={this._close}/> : {};
+  loginModal: function(signupHandler) {
+    return this.state.showLogin
+      ? <LoginModal
+          onRequestClose={this._closeLogin}
+          onRequestSignup={signupHandler}/>
+        : {};
   }
 };
 

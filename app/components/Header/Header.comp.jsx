@@ -5,14 +5,15 @@ var Link = require('react-router').Link;
 
 var HeaderSearch = require('./HeaderSearch.comp.jsx');
 var Logo = require('../Logo/Logo.comp.jsx');
-var Login = require('../LoginMixin/LoginMixin.mixin.jsx');
+var LoginMixin = require('../LoginMixin/LoginMixin.mixin.jsx');
+var SignupMixin = require('../SignupMixin/SignupMixin.mixin.jsx');
 
 var SessionStore = require('../../stores/Session.store.js');
 var SessionActions = require('../../actions/Session.actions.js');
 
 var Header = React.createClass({
 
-  mixins: [Login],
+  mixins: [LoginMixin, SignupMixin],
 
   getInitialState: function() {
     return {
@@ -28,6 +29,7 @@ var Header = React.createClass({
 
   componentDidMount: function() {
     SessionStore.addChangeListener(this._onChange);
+    this.signup
   },
 
   componentWillUnmount: function() {
@@ -60,7 +62,8 @@ var Header = React.createClass({
 
     return (
       <div id='header'>
-        {this.loginModal()}
+        {this.loginModal(this.openSignup)}
+        {this.signupModal(this.openLogin)}
         <div id='headerLeft'>
           <Link to="home"><Logo/></Link>
         </div>

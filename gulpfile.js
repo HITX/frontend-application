@@ -12,9 +12,6 @@ var nodemon = require('gulp-nodemon');
 
 var isProd = process.env.NODE_ENV === 'production';
 
-console.log('Is Production:');
-console.log(isProd ? 'True' : 'False');
-
 var paths = {
   app: {
     entry: './app/main.jsx',

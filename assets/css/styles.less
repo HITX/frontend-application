@@ -215,6 +215,10 @@ button {
 			font-size: 1.25rem;
 		}
 
+		#loginMessage {
+			text-align: center;
+		}
+
 		#loginSubmit, #loginSignup {
 			margin: 1rem 0;
 
@@ -272,56 +276,108 @@ button {
 
 // ============= Signup ================
 
+// ============= Login =================
+
 #signup {
-
-	#signupBackgroundImage {
-		min-width: 90rem;
-	}
-
-	& > * {
-		position: fixed;
-		left: 0;
-		top: 0;
-		width: 100%;
-		margin-top: @headerHeight;
-	}
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, .3);
 
 	#signupContent {
-		z-index: 100;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		width: 25rem;
+		height: 35rem;
+		background-color: @colorWhite;
+		border-radius: 1rem;
+		padding: 1rem;
+		box-shadow: 4px 4px 6px 2px #808080;
 
 		& > * {
 			display: block;
 		}
 
-		#signupTitle {
-			margin: 2rem 0 3rem;
-			text-align: center;
-			font-size: 2.5rem;
+		hr {
+			border-color: @colorThemeB;
+			margin: 2rem 0;
 		}
 
-		#signupEmail, #signupUsername,
-		#signupPassword, #signupRetypePassword {
-			width: 20rem;
+		#signupTitle {
 			margin: 1rem auto;
+			text-align: center;
+			font-size: 2rem;
+		}
+
+		.signupInput {
+			margin: .5rem 0;
+			box-sizing: border-box;
+			width: 100%;
 			padding: .5rem 1rem;
 			border-color: @colorThemeB;
 			border-radius: .5rem;
 			border-width: .2rem;
-			font-size: 1.25rem;
+			font-size: 1rem;
+		}
+
+		#signupMessage {
+			text-align: center;
+			margin-top: 1.5rem;
+		}
+
+		#signupSubmit, #signupLogin {
+			margin: 1rem 0;
+			text-align: center;
+
+			& > * {
+				display: inline-block;
+			}
+
+			button {
+				outline: none;
+				.pseudolink;
+				.shadow_high;
+			}
 		}
 
 		#signupSubmitButton {
-			margin: 1.5rem auto;
 			padding: .5rem .5rem;
-			font-size: 1.75rem;
+			font-size: 1.25rem;
 			border-radius: .5rem;
 			.themeABackground;
-			box-shadow: 7px 7px 9px #333333;
 
 			&:active {
 				box-shadow: none;
 				background-color: @colorThemeADark;
 			}
+		}
+
+		#signupLoginButton {
+			padding: .5rem .5rem;
+			font-size: 1rem;
+			border-radius: .5rem;
+			.themeBBackground;
+
+			&:active {
+				box-shadow: none;
+				background-color: @colorThemeBDark;
+			}
+		}
+
+		#signupSubmitText {
+			margin-left: 1rem;
+			.themeAText;
+			.pseudolink;
+		}
+
+		#signupLoginText {
+			margin-right: 1rem;
 		}
 	}
 }
