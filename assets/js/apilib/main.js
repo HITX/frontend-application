@@ -25,7 +25,8 @@ var _handler = function(req, res, rej) {
     } else {
       rej({
         status: req.status,
-        message: req.statusText
+        message: req.statusText,
+        response: JSON.parse(req.response)
       });
     }
   }

@@ -216,7 +216,10 @@ button {
 		}
 
 		#loginMessage {
+			// text-align: center;
 			text-align: center;
+			margin-top: 1.5rem;
+			color: red;
 		}
 
 		#loginSubmit, #loginSignup {
@@ -306,13 +309,46 @@ button {
 
 		hr {
 			border-color: @colorThemeB;
-			margin: 2rem 0;
+			margin-top: 1.5rem;
+			margin-bottom: .5rem;
+
 		}
 
 		#signupTitle {
 			margin: 1rem auto;
 			text-align: center;
 			font-size: 2rem;
+		}
+
+		#signupType {
+			text-align: center;
+			width: 100%;
+
+			button {
+				width: 50%;
+				text-align: center;
+				padding: .5rem .5rem;
+				font-size: 1.25rem;
+				border: .2rem solid @colorThemeB;
+
+				&.selected {
+					.themeBBackground;
+				}
+
+				&:hover:not(.selected){
+					background-color: fade(@colorThemeB, 20%);
+				}
+			}
+
+			#intern {
+				border-top-left-radius: .5rem;
+				border-bottom-left-radius: .5rem;
+			}
+
+			#org {
+				border-top-right-radius: .5rem;
+				border-bottom-right-radius: .5rem;
+			}
 		}
 
 		.signupInput {
@@ -324,11 +360,16 @@ button {
 			border-radius: .5rem;
 			border-width: .2rem;
 			font-size: 1rem;
+
+			&.invalid {
+				background-color: rgba(255, 0, 0, .2);
+			}
 		}
 
 		#signupMessage {
 			text-align: center;
 			margin-top: 1.5rem;
+			color: red;
 		}
 
 		#signupSubmit, #signupLogin {
