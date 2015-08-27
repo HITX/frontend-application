@@ -9,7 +9,7 @@ var login = require('./login.js');
 
 var app = new express();
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', AppConfig.node_api.port);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.post('/' + AppConfig.node_api.login_path, login);

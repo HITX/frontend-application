@@ -2,7 +2,7 @@
 
 var querystring = require('querystring');
 var http = require('http');
-// var Config = require('./config.js');
+
 var ServerConfig = require('../config/server/config.js');
 var AppConfig = require('../config/app/config.js');
 
