@@ -10,7 +10,7 @@ var Navigation= require('react-router').Navigation;
 var SessionStore = require('../../stores/Session.store.js');
 var SessionActions = require('../../actions/Session.actions.js');
 
-var loginUrl = 'http://' + NodeApiConfig.hostname + ':' + NodeApiConfig.port + '/' + NodeApiConfig.login_path;
+var LOGIN_URL = 'http://' + NodeApiConfig.hostname + ':' + NodeApiConfig.port + '/' + NodeApiConfig.login_path;
 
 var LoginModal = React.createClass({
 
@@ -84,9 +84,9 @@ var LoginModal = React.createClass({
       return;
     }
 
-    Internshyps.login(this.state.emailVal, this.state.passwordVal, loginUrl).then(
+    Internshyps.login(this.state.emailVal, this.state.passwordVal, LOGIN_URL).then(
       function(result) {
-        Internshyps.get('users/me').then(
+        Internshyps.get('me').then(
           function(result) {
             SessionActions.loadSession(result.response);
           },

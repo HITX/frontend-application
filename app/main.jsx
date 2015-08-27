@@ -6,7 +6,7 @@ var router = require('./router.jsx');
 var SessionActions = require('./actions/Session.actions.js');
 
 // Immediately check authenticated status
-Internshyps.get('users/me').then(
+Internshyps.get('me').then(
   function(result) {
     SessionActions.loadSession(result.response);
     renderApp();

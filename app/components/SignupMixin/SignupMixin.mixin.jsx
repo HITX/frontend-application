@@ -1,11 +1,15 @@
 'use strict'
 
+var NodeApiConfig = require('../../../config/app/config.js').node_api;
+
 var React = require('react');
 
 var Navigation= require('react-router').Navigation;
 
 var SessionStore = require('../../stores/Session.store.js');
 var SessionActions = require('../../actions/Session.actions.js');
+
+var LOGIN_URL = 'http://' + NodeApiConfig.hostname + ':' + NodeApiConfig.port + '/' + NodeApiConfig.login_path;
 
 var INPUTS = {
   firstName: {name: 'First Name', required: false},
@@ -94,13 +98,13 @@ var SignupModal = React.createClass({
       password: this.state.password
     };
 
-    Internshyps.post('users', data).then(
+    Internshyps.post('interns', data).then(
       function(result) {
         this.setState({ messages: 'User created. Logging in...' });
 
-        Internshyps.login(data.username, data.password, 'http://localhost:8080/api/login').then(
+        Internshyps.login(data.username, data.password, LOGIN_URL).then(
           function(result) {
-            Internshyps.get('users/me').then(
+            Internshyps.get('me').then(
               function(result) {
                 SessionActions.loadSession(result.response);
               },
