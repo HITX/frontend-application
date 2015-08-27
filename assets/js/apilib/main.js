@@ -2,12 +2,12 @@
 
 var Cookies = require('cookies-js');
 
-var Config = require('../../../config/app/config.js');
+var ApiConfig = require('../../../config/app/config.js').api;
 
 var _buildUrl = function(path) {
   path = path.replace(/\/$|^\//g, '');
   path = path.replace()
-  return 'http://' + Config.api.hostname + ':' + Config.api.port + '/' + path + '/';
+  return 'http://' + ApiConfig.hostname + ':' + ApiConfig.port + '/' + path + '/';
 };
 
 var _statusIsSuccess = function(status) {

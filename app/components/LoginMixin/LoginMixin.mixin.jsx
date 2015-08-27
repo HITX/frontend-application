@@ -1,5 +1,7 @@
 'use strict'
 
+var NodeApiConfig = require('../../../config/app/config.js').node_api;
+
 var React = require('react');
 
 var Link = require('react-router').Link;
@@ -7,6 +9,8 @@ var Navigation= require('react-router').Navigation;
 
 var SessionStore = require('../../stores/Session.store.js');
 var SessionActions = require('../../actions/Session.actions.js');
+
+var loginUrl = 'http://' + NodeApiConfig.hostname + ':' + NodeApiConfig.port + '/' + NodeApiConfig.login_path;
 
 var LoginModal = React.createClass({
 
@@ -80,7 +84,7 @@ var LoginModal = React.createClass({
       return;
     }
 
-    Internshyps.login(this.state.emailVal, this.state.passwordVal, 'http://localhost:8080/api/login').then(
+    Internshyps.login(this.state.emailVal, this.state.passwordVal, loginUrl).then(
       function(result) {
         Internshyps.get('users/me').then(
           function(result) {
