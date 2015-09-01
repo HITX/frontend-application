@@ -12,5 +12,10 @@ module.exports = {
 	PayloadSources: keyMirror({
 		SERVER_ACTION: null,
 		CLIENT_ACTION: null
-	})
+	}),
+
+	UserTypes: {
+		INTERN: 1,
+		ORG: 2
+	}
 };
