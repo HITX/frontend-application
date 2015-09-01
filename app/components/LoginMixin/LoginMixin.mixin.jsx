@@ -10,6 +10,7 @@ var Navigation= require('react-router').Navigation;
 var SessionStore = require('../../stores/Session.store.js');
 var SessionActions = require('../../actions/Session.actions.js');
 
+var KEY_CODE_ENTER = 13;
 var LOGIN_URL = 'http://' + NodeApiConfig.hostname + ':' + NodeApiConfig.port + '/' + NodeApiConfig.login_path;
 
 var LoginModal = React.createClass({
@@ -103,6 +104,12 @@ var LoginModal = React.createClass({
     );
   },
 
+  handleKeyDown: function(event) {
+    if (event.keyCode == KEY_CODE_ENTER) {
+      this.handleLoginClick();
+    }
+  },
+
   render: function() {
     return (
       <div id='login' onClick={this.handleBackdropClick}>
@@ -113,13 +120,15 @@ var LoginModal = React.createClass({
             type='text'
             placeholder='Email / Username'
             value={this.state.emailVal}
-            onChange={this.handleEmailChange}/>
+            onChange={this.handleEmailChange}
+            onKeyDown={this.handleKeyDown}/>
           <input
             id='loginPassword'
             type='password'
             placeholder='Password'
             value={this.state.passwordVal}
-            onChange={this.handlePasswordChange}/>
+            onChange={this.handlePasswordChange}
+            onKeyDown={this.handleKeyDown}/>
           <div id='loginMessage'>
             <p>{this.state.message}&nbsp;</p>
           </div>
