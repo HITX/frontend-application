@@ -10,8 +10,12 @@ var InternHome = React.createClass({
     return (
       <div id='internHome'>
         <p>{'Intern Home: ' + this.props.session.username}</p>
-        <Newsfeed/>
-        <InternSubmissionList/>
+        <div id='itemList'>
+          <Newsfeed/>
+        </div>
+        <div id='sidebar'>
+          <InternSubmissionList/>
+        </div>
       </div>
     );
   }

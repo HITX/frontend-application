@@ -70,6 +70,7 @@ button {
 // =============== Content =============
 #content {
 	margin-top: @headerHeight;
+	overflow: auto;
 	// padding: 1.5rem;
 }
 
@@ -279,8 +280,6 @@ button {
 
 // ============= Signup ================
 
-// ============= Login =================
-
 #signup {
 	position: fixed;
 	left: 0;
@@ -428,9 +427,43 @@ button {
 
 #home {
 	text-align: center;
-	font-size: 2rem;
-	font-weight: bold;
-	margin-top: 3rem;
+	// font-size: 2rem;
+	// font-weight: bold;
+	// margin-top: 3rem;
+
+	#itemList {
+		display: inline-block;
+		width: 75%;
+		float: left;
+
+		#newsfeed {
+			display: inline-block;
+			background-color: red;
+
+			.newsfeedItem {
+				margin: 1rem;
+				background-color: @colorWhite;
+			}
+		}
+	}
+
+	#sidebar {
+		display: inline-block;
+		width: 25%;
+
+		#internSubmissionList {
+			display: inline-block;
+			background-color: green;
+		}
+	}
+
+	// #newsfeed {
+	// 	width: 50%;
+	//
+	// 	.newsfeedItem {
+	// 		background-color: @colorWhite;
+	// 	}
+	// }
 }
 
 
