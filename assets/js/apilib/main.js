@@ -4,11 +4,21 @@ var Cookies = require('cookies-js');
 
 var ApiConfig = require('../../../config/app/config.js').api;
 
-var _buildUrl = function(path) {
+// var _buildUrl = function(path, query_params = null) {
+function _buildUrl(path, query_params) {
   path = path.replace(/\/$|^\//g, '');
-  path = path.replace()
-  return 'http://' + ApiConfig.hostname + ':' + ApiConfig.port + '/' + path + '/';
-};
+  // path = path.replace()
+  var url = 'http://' + ApiConfig.hostname + ':' + ApiConfig.port + '/' + path + '/';
+  if (query_params) {
+    var isFirst = true;
+    for (var param in query_params) {
+      url += isFirst ? '?' : '&';
+      url += param + '=' + query_params[param];
+      isFirst = false;
+    }
+  }
+  return url;
+}
 
 var _statusIsSuccess = function(status) {
   return (status >= 200 && status <= 208) || status == 226;
@@ -48,10 +58,10 @@ window.Internshyps = (function() {
   }
 
   return {
-    get: function(urlPath) {
+    get: function(urlPath, params) {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
-        req.open('GET', _buildUrl(urlPath));
+        req.open('GET', _buildUrl(urlPath, params));
         if (authToken) {
           req.setRequestHeader('Authorization', 'Bearer ' + authToken);
         }
@@ -63,7 +73,7 @@ window.Internshyps = (function() {
     post: function(urlPath, data) {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
-        req.open('POST', _buildUrl(urlPath));
+        req.open('POST', _buildUrl(urlPath, null));
         if (authToken) {
           req.setRequestHeader('Authorization', 'Bearer ' + authToken);
         }

@@ -10,7 +10,7 @@ var Newsfeed = React.createClass({
   },
 
   componentDidMount: function() {
-    Internshyps.get('newsfeed').then(
+    Internshyps.get('newsfeed', {'expand': 'owner'}).then(
       function(result) {
         if (this.isMounted()){
           this.setState({

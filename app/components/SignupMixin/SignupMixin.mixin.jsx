@@ -157,7 +157,7 @@ var SignupModal = React.createClass({
 
         Internshyps.login(data.username, data.password, LOGIN_URL).then(
           function(result) {
-            Internshyps.get('me').then(
+            Internshyps.get('me', null).then(
               function(result) {
                 SessionActions.loadSession(result.response);
               },
@@ -167,7 +167,7 @@ var SignupModal = React.createClass({
                 SessionActions.dropSession();
               }.bind(this)
             );
-          },
+          }.bind(this),
           function(err) {
             this._safeSetState({ message: 'Error logging in to new user' });
           }.bind(this)

@@ -87,17 +87,18 @@ var LoginModal = React.createClass({
 
     Internshyps.login(this.state.emailVal, this.state.passwordVal, LOGIN_URL).then(
       function(result) {
-        Internshyps.get('me').then(
+        Internshyps.get('me', null).then(
           function(result) {
             SessionActions.loadSession(result.response);
           },
           function(err) {
+            console.log(err);
             this.setState({ message: 'Error retrieving user data' });
             Internshyps.logout();
             SessionActions.dropSession();
-          }
+          }.bind(this)
         );
-      },
+      }.bind(this),
       function(err) {
         this.setState({ message: 'Invalid User/Password' });
       }.bind(this)
