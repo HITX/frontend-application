@@ -9,7 +9,6 @@ var InternHome = React.createClass({
   render: function() {
     return (
       <div id='internHome'>
-        <p>{'Intern Home: ' + this.props.session.username}</p>
         <div id='itemList'>
           <Newsfeed/>
         </div>

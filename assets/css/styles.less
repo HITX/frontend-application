@@ -70,8 +70,7 @@ button {
 // =============== Content =============
 #content {
 	margin-top: @headerHeight;
-	overflow: auto;
-	// padding: 1.5rem;
+	overflow: hidden;
 }
 
 
@@ -422,33 +421,115 @@ button {
 	}
 }
 
-
 // ============= Home ==================
 
-#home {
+#internHome {
 	text-align: center;
-	// font-size: 2rem;
-	// font-weight: bold;
-	// margin-top: 3rem;
+	margin-top: 2rem;
+
+	& > * {
+		display: inline-block;
+	}
 
 	#itemList {
-		display: inline-block;
 		width: 75%;
 		float: left;
 
 		#newsfeed {
 			display: inline-block;
-			background-color: red;
+			// background-color: red;
 
 			.newsfeedItem {
-				margin: 1rem;
+				margin: 1.5rem;
+				padding: 1rem;
+				border-radius: .5rem;
 				background-color: @colorWhite;
+
+				.itemListItem;
+				.shadow_mid;
+
+				& > * {
+					width: 100%;
+				}
+
+				.newsfeedItemTop {
+					text-align: left;
+					& > * {
+						display: inline-block;
+					}
+
+					img.newsfeedItemLogo {
+						width: 5rem;
+						height: 5rem;
+						vertical-align: middle;
+					}
+
+					.newsfeedItemOrgName {
+						margin-left: 2rem;
+						font-size: 2rem;
+						font-weight: bold;
+					}
+				}
+
+				.newsfeedItemMiddle {
+					position: relative;
+					margin-top: .5rem;
+					text-align: left;
+
+					.newsfeedItemTitle {
+						display: inline-block;
+						width: 100% - 20rem;
+						font-size: 1.5rem;
+						vertical-align: middle;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+
+					.newsfeedItemPrize {
+						position: absolute;
+						right: 0;
+						display: inline-block;
+						padding: 3.5px;
+						font-weight: bold;
+						color: @colorThemeB;
+						border: 2px solid @colorThemeB;
+						border-radius: .35rem;
+						vertical-align: middle;
+					}
+
+					.newsfeedItemDesc {
+						margin-top: .5rem;
+					}
+				}
+
+				.newsfeedItemBottom {
+					position: relative;
+					text-align: left;
+
+					& * {
+						display: inline-block;
+					}
+
+					.newsfeedItemSubmissionsVal {
+						color: @colorThemeA;
+						font-weight: bold;
+					}
+
+					.newsfeedItemDeadlineBlock {
+						position: absolute;
+						right: 0;
+
+						.newsfeedItemDeadlineVal {
+							color: @colorThemeA;
+							font-weight: bold;
+						}
+					}
+				}
 			}
 		}
 	}
 
 	#sidebar {
-		display: inline-block;
 		width: 25%;
 
 		#internSubmissionList {
@@ -456,14 +537,14 @@ button {
 			background-color: green;
 		}
 	}
+}
 
-	// #newsfeed {
-	// 	width: 50%;
-	//
-	// 	.newsfeedItem {
-	// 		background-color: @colorWhite;
-	// 	}
-	// }
+
+// ================= TODO ==================
+
+.itemListItem {
+	width: 30rem;
+	max-height: 15rem;
 }
 
 
