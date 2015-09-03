@@ -1,28 +1,66 @@
 'use strict'
 
 var React = require('react');
+var Navigation = require('react-router').Navigation;
+var classNames = require('classnames');
 
 var NewsfeedItem = React.createClass({
+
+  mixins: [Navigation],
 
   propTypes: {
     data: React.PropTypes.object.isRequired
   },
 
-  handleClick: function() {
-    console.log('Will transition to project id: ' + this.props.data.id);
+  getInitialState: function() {
+    return {
+      baseHovered: false,
+      orgHovered: false
+    };
+  },
+
+  handleBaseHover: function(hovered) {
+    this.setState({
+      baseHovered: hovered
+    });
+  },
+
+  handleOrgHover: function(hovered) {
+    this.setState({
+      orgHovered: hovered
+    });
+  },
+
+  handleBaseClick: function() {
+    this.transitionTo('projects', {id: this.props.data.id});
+  },
+
+  handleOrgClick: function(event) {
+    this.transitionTo('orgs', {id: this.props.data.owner.id});
+    event.stopPropagation();
   },
 
   render: function() {
-    // var submissionText = this.props.data.submission_count + ' submission';
-    // if (this.props.data.submission_count != 1) {
-    //   submissionText += 's';
-    // }
-
     return (
-      <div className='newsfeedItem'>
+      <div
+        className={classNames('newsfeedItem', {highlight: this.state.baseHovered})}
+        onClick={this.handleBaseClick}
+        onMouseEnter={this.handleBaseHover.bind(this, true)}
+        onMouseLeave={this.handleBaseHover.bind(this, false)}>
         <div className='newsfeedItemTop'>
-          <img className='newsfeedItemLogo' src='/img/initec_logo.jpg'/>
-          <p className='newsfeedItemOrgName'>{this.props.data.owner.org_name}</p>
+          <img
+            className='newsfeedItemLogo'
+            src='/img/initec_logo.jpg'
+            onClick={this.handleOrgClick}
+            onMouseEnter={this.handleOrgHover.bind(this, true)}
+            onMouseLeave={this.handleOrgHover.bind(this, false)}/>
+          <p
+            className={classNames('newsfeedItemOrgName', {highlight: this.state.orgHovered})}
+            onClick={this.handleOrgClick}
+            onMouseEnter={this.handleOrgHover.bind(this, true)}
+            onMouseLeave={this.handleOrgHover.bind(this, false)}>
+              {this.props.data.owner.org_name}
+          </p>
         </div>
         <div className='newsfeedItemMiddle'>
           <div className='newsfeedItemTitleBlock'>

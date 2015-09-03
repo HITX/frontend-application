@@ -437,16 +437,21 @@ button {
 
 		#newsfeed {
 			display: inline-block;
-			// background-color: red;
 
 			.newsfeedItem {
 				margin: 1.5rem;
 				padding: 1rem;
+				border: 2px solid transparent;
 				border-radius: .5rem;
 				background-color: @colorWhite;
 
 				.itemListItem;
 				.shadow_mid;
+
+				&.highlight {
+					cursor: pointer;
+					border: 2px solid fade(@colorThemeB, 10%);
+				}
 
 				& > * {
 					width: 100%;
@@ -462,12 +467,21 @@ button {
 						width: 5rem;
 						height: 5rem;
 						vertical-align: middle;
+
+						&:hover {
+							cursor: pointer;
+						}
 					}
 
 					.newsfeedItemOrgName {
 						margin-left: 2rem;
 						font-size: 2rem;
 						font-weight: bold;
+
+						&.highlight {
+							color: @colorThemeA;
+							cursor: pointer;
+						}
 					}
 				}
 

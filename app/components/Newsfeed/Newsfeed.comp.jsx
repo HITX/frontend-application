@@ -31,7 +31,7 @@ var Newsfeed = React.createClass({
         {
           this.state.items.map(function(item) {
             return <NewsfeedItem data={item} key={item.id}/>
-          })
+          }.bind(this))
         }
       </div>
     );
