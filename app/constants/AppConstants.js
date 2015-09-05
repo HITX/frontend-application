@@ -17,5 +17,12 @@ module.exports = {
 	UserTypes: {
 		INTERN: 1,
 		ORG: 2
+	},
+
+	SubmissionStatuses: {
+		REGISTERED: 1,
+		SUBMITTED: 2,
+		ACCEPTED: 3,
+		REJECTED: 4
 	}
 };

@@ -3,9 +3,14 @@
 var React = require('react');
 
 var Newsfeed = require('../Newsfeed/Newsfeed.comp.jsx');
-var InternSubmissionList = require('../Submission/InternSubmissionList.comp.jsx');
+var InternSubmissionsSidebar = require('../Submissions/InternSubmissionsSidebar.comp.jsx');
 
 var InternHome = React.createClass({
+
+  propTypes: {
+    session: React.PropTypes.object.isRequired
+  },
+
   render: function() {
     return (
       <div id='internHome'>
@@ -13,7 +18,7 @@ var InternHome = React.createClass({
           <Newsfeed/>
         </div>
         <div id='sidebar'>
-          <InternSubmissionList/>
+          <InternSubmissionsSidebar submissions={this.props.session.submissions}/>
         </div>
       </div>
     );

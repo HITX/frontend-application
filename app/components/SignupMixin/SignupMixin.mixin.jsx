@@ -157,7 +157,7 @@ var SignupModal = React.createClass({
 
         Internshyps.login(data.username, data.password, LOGIN_URL).then(
           function(result) {
-            Internshyps.get('me', null).then(
+            Internshyps.get('me', {'expand': 'submissions.project.owner'}).then(
               function(result) {
                 SessionActions.loadSession(result.response);
               },

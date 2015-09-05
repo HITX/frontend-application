@@ -432,8 +432,9 @@ button {
 	}
 
 	#itemList {
-		width: 75%;
+		width: 60%;
 		float: left;
+		text-align: right;
 
 		#newsfeed {
 			display: inline-block;
@@ -477,6 +478,7 @@ button {
 						margin-left: 2rem;
 						font-size: 2rem;
 						font-weight: bold;
+						vertical-align: middle;
 
 						&.highlight {
 							color: @colorThemeA;
@@ -524,19 +526,14 @@ button {
 						display: inline-block;
 					}
 
-					.newsfeedItemSubmissionsVal {
-						color: @colorThemeA;
-						font-weight: bold;
-					}
-
 					.newsfeedItemDeadlineBlock {
 						position: absolute;
 						right: 0;
+					}
 
-						.newsfeedItemDeadlineVal {
-							color: @colorThemeA;
-							font-weight: bold;
-						}
+					.newsfeedItemSubmissionsVal, .newsfeedItemDeadlineVal {
+						color: @colorThemeA;
+						font-weight: bold;
 					}
 				}
 			}
@@ -544,11 +541,103 @@ button {
 	}
 
 	#sidebar {
-		width: 25%;
+		// position: fixed;
+		width: 40%;
+		text-align: left;
 
-		#internSubmissionList {
+		#internSubmissionsSidebar {
+			position: fixed;
 			display: inline-block;
-			background-color: green;
+			// background-color: green;
+
+			& > * {
+				width: 15rem;
+				margin: 1.5rem;
+				padding: 1rem;
+				background-color: @colorWhite;
+				border-radius: .5rem;
+			}
+
+			#iSSHeader {
+				font-size: 1rem;
+
+				& > * {
+					display: inline-block;
+				}
+
+				.shadow_mid;
+				.pseudolink;
+
+				#iSSHeaderArrow {
+					margin-left: .5rem;
+					float: right;
+				}
+			}
+
+			#iSSBody {
+				.iSSItem {
+
+					.pseudolink;
+
+					.iSSItemTop {
+
+						& > * {
+							text-align: left;
+							display: inline-block;
+						}
+
+						.iSSItemLogo {
+							width: 4rem;
+							height: 4rem;
+							vertical-align: middle;
+						}
+
+						.iSSItemTitleBlock {
+							margin-left: 1rem;
+							vertical-align: middle;
+
+							.iSSItemTitle {
+								margin-bottom: .2rem;
+							}
+
+							.iSSItemPrize {
+								display: inline-block;
+								padding: 3.5px;
+								font-size: .75rem;
+								font-weight: bold;
+								color: @colorThemeB;
+								border: 1px solid @colorThemeB;
+								border-radius: .35rem;
+								// text-align: center;
+							}
+						}
+					}
+
+					.iSSItemBottom {
+						margin-top: .5rem;
+
+						& > * {
+							display: inline-block;
+						}
+
+						.iSSStatus {
+							margin-right: 1rem;
+						}
+
+						.iSSEndDateVal {
+							font-weight: bold;
+							color: @colorThemeA;
+						}
+
+						.iSSEndDateText, .iSSEndDateVal {
+							float: right;
+						}
+
+					}
+				}
+
+				.shadow_mid;
+			}
 		}
 	}
 }

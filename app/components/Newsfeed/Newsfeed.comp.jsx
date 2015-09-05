@@ -12,6 +12,10 @@ var Newsfeed = React.createClass({
   componentDidMount: function() {
     Internshyps.get('newsfeed', {'expand': 'owner'}).then(
       function(result) {
+
+        // TODO: Change this to calling an action
+        // add registration to appropriate store in mount/unmount
+
         if (this.isMounted()){
           this.setState({
             items: result.response
@@ -31,7 +35,7 @@ var Newsfeed = React.createClass({
         {
           this.state.items.map(function(item) {
             return <NewsfeedItem data={item} key={item.id}/>
-          }.bind(this))
+          })
         }
       </div>
     );
