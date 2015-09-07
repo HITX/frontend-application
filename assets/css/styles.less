@@ -17,7 +17,9 @@
 
 // =============== CONSTANTS ============
 
-@headerHeight: 5rem;
+@headerHeight: 4rem;
+@headerLogoWidth: 15rem;
+@headerLinksWidth: 28rem;
 
 
 // =============== MIXINS ===============
@@ -94,71 +96,63 @@ button {
 	left: 0;
 	width: 100%;
 	height: @headerHeight;
-	background-color: @colorWhite;
 	z-index: 50;
+	padding: 0 1rem;
 	white-space: nowrap;
 	overflow: hidden;
+	min-width: 55rem;
 
-	#headerLeft, #headerRight {
-		display: inline-block;
-		height: 100%;
-		vertical-align: middle;
+	.themeBBackground;
 
-		& > * {
-			display: inline-block;
-			vertical-align: middle;
-			line-height: @headerHeight;
-		}
+	#headerLogo, #headerLinks, #headerSearch {
+		line-height: @headerHeight;
+		text-align: center;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 
-	#headerLeft {
+	#headerLogo {
 		float: left;
-		margin-left: 2rem;
+		width: @headerLogoWidth;
+		font-size: 2rem;
+		font-weight: bold;
 
-		.logo {
-			font-size: 2.5rem;
+		.pseudolink;
+	}
+
+	#headerLinks {
+		float: right;
+		width: @headerLinksWidth;
+		font-size: 1.1rem;
+
+		& > p {
+			display: inline-block;
+			margin: 0 .75rem;
+
 			.pseudolink;
+
+			&.active {
+				font-weight: bold;
+				letter-spacing: -1px;
+			}
+
+			&:hover:not(.active) {
+				color: #C1C1D1;
+			}
 		}
 	}
 
-	#headerRight {
-		float: right;
-		margin-right: 2rem;
+	#headerSearch {
+		margin-left: @headerLogoWidth;
+		margin-right: @headerLinksWidth;
 
-		#headerSearch {
-			padding: 0 1rem;
-			margin-right: 3rem;
-
-			input {
-				width: 40rem;
-				padding: .5rem 1rem;
-				border-color: @colorThemeB;
-				border-radius: .5rem;
-				border-width: .2rem;
-				font-size: 1.25rem;
-			}
-		}
-
-		#headerLogin, #headerLogout {
-			a {
-				padding: .5rem .5rem;
-				font-size: 1.5rem;
-				border-radius: .5rem;
-				outline: none;
-
-				.pseudolink;
-				.themeABackground;
-				.shadow_high;
-
-				&:hover {
-					color: @colorThemeB;
-				}
-
-		    &:active {
-		      box-shadow: none;
-					background-color: @colorThemeADark;
-		    }
-			}
+		input {
+			width: 80%;
+			max-width: 30rem;
+			padding: .5rem 1rem;
+			font-size: 1.1rem;
+			border-radius: .3rem;
+			border-width: 0;
 		}
 	}
 }
@@ -173,16 +167,16 @@ button {
 	top: 0;
 	bottom: 0;
 	background: rgba(0, 0, 0, .3);
+	line-height: normal;
+	color: initial;
 
 	#loginContent {
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		margin: auto;
+		position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  // TODO: prefixes on translate
+	  transform: translate(-50%, -50%);
 		width: 25rem;
-		height: 26rem;
 		background-color: @colorWhite;
 		border-radius: 1rem;
 		padding: 1rem;
@@ -192,82 +186,74 @@ button {
 			display: block;
 		}
 
-		hr {
-			border-color: @colorThemeB;
-			margin: 2.5rem 0;
-			// width: 23rem;
-		}
-
-		#loginTitle {
-			margin: 2rem auto;
-			text-align: center;
-			font-size: 2.5rem;
-		}
-
 		#loginEmail, #loginPassword {
-			margin: 1rem 0;
+			margin-bottom: 1rem;
 			box-sizing: border-box;
 			width: 100%;
 			padding: .5rem 1rem;
-			border-color: @colorThemeB;
 			border-radius: .5rem;
-			border-width: .2rem;
-			font-size: 1.25rem;
+			font-size: 1.1rem;
 		}
 
-		#loginMessage {
-			// text-align: center;
+		#loginMessage.show {
 			text-align: center;
-			margin-top: 1.5rem;
-			color: red;
+			padding: .5rem 0;
+			color: darken(#FF7F7F, 20%);
+			background-color: rgba(255, 127, 127, .3);
 		}
 
 		#loginSubmit, #loginSignup {
-			margin: 1rem 0;
-
 			& > * {
 				display: inline-block;
 			}
 
 			button {
-				outline: none;
 				.pseudolink;
-				.shadow_high;
 			}
+		}
+
+		#loginSubmit {
+			text-align: left;
+			margin-bottom: 1rem;
 		}
 
 		#loginSignup {
 			text-align: center;
 		}
 
-		#loginSubmitButton {
-			padding: .5rem .5rem;
-			font-size: 1.25rem;
+		#loginSubmitButton, #loginSignupButton {
+			padding: .4rem .5rem;
 			border-radius: .5rem;
-			.themeABackground;
+		}
 
-			&:active {
-				box-shadow: none;
-				background-color: @colorThemeADark;
+		#loginSubmitButton {
+			font-size: 1.1rem;
+			color: @colorThemeA;
+			border: .2rem solid @colorThemeA;
+
+			&:hover {
+				.themeABackground;
 			}
 		}
 
 		#loginSignupButton {
-			padding: .5rem .5rem;
-			font-size: 1rem;
-			border-radius: .5rem;
-			.themeBBackground;
+			font-size: 1.1rem;
+			color: @colorThemeB;
+			border: .2rem solid @colorThemeB;
 
-			&:active {
-				box-shadow: none;
-				background-color: @colorThemeBDark;
+			&:hover {
+				.themeBBackground;
 			}
 		}
 
 		#loginSubmitText {
-			margin-left: 1rem;
+			margin-left: 1.5rem;
 			.themeAText;
 			.pseudolink;
+
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 
 		#loginSignupText {
@@ -286,16 +272,16 @@ button {
 	top: 0;
 	bottom: 0;
 	background: rgba(0, 0, 0, .3);
+	line-height: normal;
+	color: initial;
 
 	#signupContent {
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		margin: auto;
+		position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  // TODO: prefixes on translate
+	  transform: translate(-50%, -50%);
 		width: 25rem;
-		height: 35rem;
 		background-color: @colorWhite;
 		border-radius: 1rem;
 		padding: 1rem;
@@ -305,35 +291,29 @@ button {
 			display: block;
 		}
 
-		hr {
-			border-color: @colorThemeB;
-			margin-top: 1.5rem;
-			margin-bottom: .5rem;
-
-		}
-
-		#signupTitle {
-			margin: 1rem auto;
-			text-align: center;
-			font-size: 2rem;
-		}
-
 		#signupType {
-			text-align: center;
+			text-align: left;
+			margin-left: 1rem;
 			width: 100%;
 
+			#signupTypeText {
+				display: inline-block;
+				font-size: 1rem;
+				margin-right: 2rem;
+			}
+
 			button {
-				width: 50%;
+				width: 8rem;
 				text-align: center;
 				padding: .5rem .5rem;
-				font-size: 1.25rem;
+				font-size: 1rem;
 				border: .2rem solid @colorThemeB;
 
 				&.selected {
 					.themeBBackground;
 				}
 
-				&:hover:not(.selected){
+				&:hover:not(.selected) {
 					background-color: fade(@colorThemeB, 20%);
 				}
 			}
@@ -354,24 +334,22 @@ button {
 			box-sizing: border-box;
 			width: 100%;
 			padding: .5rem 1rem;
-			border-color: @colorThemeB;
 			border-radius: .5rem;
-			border-width: .2rem;
 			font-size: 1rem;
 
 			&.invalid {
-				background-color: rgba(255, 0, 0, .2);
+				background-color: rgba(255, 127, 127, .3);
 			}
 		}
 
-		#signupMessage {
+		#signupMessage.show {
 			text-align: center;
-			margin-top: 1.5rem;
-			color: red;
+			padding: .5rem 0;
+			color: darken(#FF7F7F, 20%);
+			background-color: rgba(255, 127, 127, .3);
 		}
 
 		#signupSubmit, #signupLogin {
-			margin: 1rem 0;
 			text-align: center;
 
 			& > * {
@@ -379,33 +357,36 @@ button {
 			}
 
 			button {
-				outline: none;
 				.pseudolink;
-				.shadow_high;
 			}
 		}
 
-		#signupSubmitButton {
-			padding: .5rem .5rem;
-			font-size: 1.25rem;
-			border-radius: .5rem;
-			.themeABackground;
+		#signupSubmit {
+			margin-bottom: 1rem;
+		}
 
-			&:active {
-				box-shadow: none;
-				background-color: @colorThemeADark;
+		#signupSubmitButton, #signupLoginButton {
+			padding: .4rem .5rem;
+			border-radius: .5rem;
+		}
+
+		#signupSubmitButton {
+			font-size: 1.1rem;
+			color: @colorThemeB;
+			border: .2rem solid @colorThemeB;
+
+			&:hover {
+				.themeBBackground;
 			}
 		}
 
 		#signupLoginButton {
-			padding: .5rem .5rem;
-			font-size: 1rem;
-			border-radius: .5rem;
-			.themeBBackground;
+			font-size: 1.1rem;
+			color: @colorThemeA;
+			border: .2rem solid @colorThemeA;
 
-			&:active {
-				box-shadow: none;
-				background-color: @colorThemeBDark;
+			&:hover {
+				.themeABackground;
 			}
 		}
 

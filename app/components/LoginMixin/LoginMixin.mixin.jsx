@@ -2,13 +2,15 @@
 
 var NodeApiConfig = require('../../../config/app/config.js').node_api;
 
-var React = require('react');
+var React = require('react/addons');
 
-var Link = require('react-router').Link;
+// var Link = require('react-router').Link;
 var Navigation= require('react-router').Navigation;
 
 var SessionStore = require('../../stores/Session.store.js');
 var SessionActions = require('../../actions/Session.actions.js');
+
+var classNames = require('classnames');
 
 var KEY_CODE_ENTER = 13;
 var LOGIN_URL = 'http://' + NodeApiConfig.hostname + ':' + NodeApiConfig.port + '/' + NodeApiConfig.login_path;
@@ -115,7 +117,6 @@ var LoginModal = React.createClass({
     return (
       <div id='login' onClick={this.handleBackdropClick}>
         <div id='loginContent' onClick={this.killClick}>
-          <p id='loginTitle'>OHai!</p>
           <input
             id='loginEmail'
             type='text'
@@ -130,12 +131,12 @@ var LoginModal = React.createClass({
             value={this.state.passwordVal}
             onChange={this.handlePasswordChange}
             onKeyDown={this.handleKeyDown}/>
-          <div id='loginMessage'>
-            <p>{this.state.message}&nbsp;</p>
-          </div>
           <div id='loginSubmit'>
             <button id='loginSubmitButton' onClick={this.handleLoginClick}>Log In</button>
             <p id='loginSubmitText'>Forgot Password?</p>
+          </div>
+          <div id='loginMessage' className={classNames({show: this.state.message.length})}>
+            <p>{this.state.message}</p>
           </div>
           <hr/>
           <div id='loginSignup'>
@@ -163,11 +164,14 @@ var LoginMixin = {
   },
 
   loginModal: function(signupHandler) {
-    return this.state.showLogin
-      ? <LoginModal
+    if (this.state.showLogin) {
+      return (
+        <LoginModal
           onRequestClose={this._closeLogin}
           onRequestSignup={signupHandler}/>
-        : {};
+      );
+    }
+    return {};
   }
 };
 

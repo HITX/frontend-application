@@ -198,8 +198,8 @@ var SignupModal = React.createClass({
     return (
       <div id='signup' onClick={this.handleBackdropClick}>
         <div id='signupContent' onClick={this.killClick}>
-          <p id='signupTitle'>Sign Up Bro!</p>
           <div id='signupType'>
+            <p id='signupTypeText'>As an: </p>
             <button
               id='intern'
               className={classNames({selected: this.state.type == 'INTERN'})}
@@ -231,11 +231,11 @@ var SignupModal = React.createClass({
             }.bind(this))
           }
 
-          <div id='signupMessage'>
-            <p>{message}&nbsp;</p>
-          </div>
           <div id='signupSubmit'>
             <button id='signupSubmitButton' onClick={this.handleSignupClick}>Sign Up</button>
+          </div>
+          <div id='signupMessage' className={classNames({show: message.length})}>
+            <p>{message}</p>
           </div>
           <hr/>
           <div id='signupLogin'>
