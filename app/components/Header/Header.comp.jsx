@@ -9,10 +9,12 @@ var HeaderLinks = require('./HeaderLinks.comp.jsx');
 var Header = React.createClass({
   render: function() {
     return (
-      <div id='header'>
-        <HeaderLogo/>
-        <HeaderLinks/>
-        <HeaderSearch/>
+      <div id='headerContainer'>
+        <div id='header'>
+          <HeaderLogo/>
+          <HeaderLinks/>
+          <HeaderSearch/>
+        </div>
       </div>
     );
   }

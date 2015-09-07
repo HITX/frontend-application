@@ -7,6 +7,8 @@ var Navigation = require('react-router').Navigation;
 
 var classNames = require('classnames');
 
+var MediaQuery = require('react-responsive');
+
 var LoginMixin = require('../LoginMixin/LoginMixin.mixin.jsx');
 var SignupMixin = require('../SignupMixin/SignupMixin.mixin.jsx');
 
@@ -76,19 +78,24 @@ var HeaderLinks = React.createClass({
       <div id='headerLinks'>
         {this.loginModal(this.openSignup)}
         {this.signupModal(this.openLogin)}
-        <p
-          id='headerLinksHome'
-          className={classNames({active: this.testActive('home')})}
-          onClick={this.handleLinkClick}>Home</p>
-        <p
-          id='headerLinksHow'
-          className={classNames({active: this.testActive('howitworks')})}
-          onClick={this.handleLinkClick}>How it works</p>
-        <p
-          id='headerLinksProfile'
-          className={classNames({active: this.testActive('profile')})}
-          onClick={this.handleLinkClick}>Profile</p>
-        {log_in_out}
+        <MediaQuery query='(min-width: 40rem)'>
+          <p
+            id='headerLinksHome'
+            className={classNames({active: this.testActive('home')})}
+            onClick={this.handleLinkClick}>Home</p>
+          <p
+            id='headerLinksHow'
+            className={classNames({active: this.testActive('howitworks')})}
+            onClick={this.handleLinkClick}>How it works</p>
+          <p
+            id='headerLinksProfile'
+            className={classNames({active: this.testActive('profile')})}
+            onClick={this.handleLinkClick}>Profile</p>
+          {log_in_out}
+        </MediaQuery>
+        <MediaQuery query='(max-width: 64rem)'>
+          <a>YY</a>
+        </MediaQuery>
       </div>
     );
   }

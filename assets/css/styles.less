@@ -15,12 +15,41 @@
 @colorThemeBDark: #1E1E3D;
 
 
+// =============== MEDIA BREAKS ========
+
+@mediabreak1: 55rem;
+@mediabreak2: 40rem;
+
+.break1(@rules) {
+	@media (max-width: @mediabreak1) {
+		@rules();
+	}
+}
+
+.break2(@rules) {
+	@media (max-width: @mediabreak2) {
+		@rules();
+	}
+}
+
+
 // =============== CONSTANTS ============
 
-@headerHeight: 4rem;
-@headerLogoWidth: 15rem;
-@headerLinksWidth: 28rem;
+@pageWidth: 64rem;
 
+@headerHeight: 4rem;
+
+@headerLogoWidth: 11.5rem;
+@headerLogoWidthSmall: 8.6rem;
+
+@headerLinksWidth: 21rem;
+@headerLinksWidthSmall: 3rem;
+
+@headerSearchWidthSmall: 3rem;
+// @headerMinSearchWidth: 20rem;
+
+// @headerMinWidth: @headerLogoWidth + @headerLinksWidth + @headerMinSearchWidth;
+@headerMinWidth: @headerLogoWidthSmall + @headerLinksWidthSmall + @headerSearchWidthSmall;
 
 // =============== MIXINS ===============
 
@@ -60,6 +89,11 @@
 
 
 // =============== GENERAL =============
+
+* {
+	box-sizing: border-box;
+}
+
 body {
   background-color: @colorLightGray;
 }
@@ -70,9 +104,11 @@ button {
 
 
 // =============== Content =============
+
 #content {
 	margin-top: @headerHeight;
 	overflow: hidden;
+	min-height: ~'calc(100vh - @{headerHeight})';
 }
 
 
@@ -90,69 +126,178 @@ button {
 
 // ================ HEADER =============
 
-#header {
+#headerContainer {
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 50;
 	width: 100%;
 	height: @headerHeight;
-	z-index: 50;
-	padding: 0 1rem;
-	white-space: nowrap;
-	overflow: hidden;
-	min-width: 55rem;
-
+	text-align: center;
+	padding: 0 1.5rem;
 	.themeBBackground;
 
-	#headerLogo, #headerLinks, #headerSearch {
-		line-height: @headerHeight;
-		text-align: center;
+	#header {
+		display: inline-block;
+		height: 100%;
 		white-space: nowrap;
 		overflow: hidden;
-	}
+		width: 100%;
+		max-width: @pageWidth;
+		min-width: @headerMinWidth;
 
-	#headerLogo {
-		float: left;
-		width: @headerLogoWidth;
-		font-size: 2rem;
-		font-weight: bold;
 
-		.pseudolink;
-	}
+		#headerLogo, #headerLinks, #headerSearch {
+			line-height: @headerHeight;
+			text-align: center;
+			white-space: nowrap;
+			overflow: hidden;
+		}
 
-	#headerLinks {
-		float: right;
-		width: @headerLinksWidth;
-		font-size: 1.1rem;
+		#headerLogo {
+			float: left;
+			width: @headerLogoWidth;
+			text-align: left;
+			font-size: 2rem;
+			font-weight: bold;
 
-		& > p {
-			display: inline-block;
-			margin: 0 .75rem;
+			.break2({
+				width: @headerLogoWidthSmall;
+				font-size: 1.5rem;
+			});
 
 			.pseudolink;
+		}
 
-			&.active {
+		#headerLinks {
+			float: right;
+			width: @headerLinksWidth;
+			text-align: right;
+			font-size: 1.1rem;
+
+			.break2({
+				// TODO: Turn breaks like this that also occur in javascript
+				// into classes so there's no sync issues with the javascript
+				// timing (like we have now)
+				width: @headerLinksWidthSmall;
+				text-align: center;
+			});
+
+			p {
+				display: inline-block;
+				margin: 0 .75rem;
+
+				.pseudolink;
+
+				&.active {
+					font-weight: bold;
+					letter-spacing: -1px;
+				}
+
+				&:hover:not(.active) {
+					color: #C1C1D1;
+				}
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+				&:first-child {
+					margin-left: 0;
+				}
+			}
+		}
+
+		#headerSearch {
+			margin-left: @headerLogoWidth;
+			margin-right: @headerLinksWidth;
+			font-size: 1.1rem;
+
+			.break1({
+				margin: 0;
+				float: right;
+				width: @headerSearchWidthSmall;
+			});
+
+			input {
+				width: 80%;
+				padding: .5rem 1rem;
+				font-size: 1.1rem;
+				border-radius: .3rem;
+				border-width: 0;
+			}
+
+			// p {
+			// 	color: @colorWhite;
+			// }
+		}
+	}
+}
+
+
+// ============= Footer ==============
+
+#footer {
+	#footerTop {
+		padding: 1rem;
+		text-align: center;
+		background-color: fade(@colorThemeB, 10%);
+		// background-color: fade(#2f2f2f, 40%);
+
+		#footerTopLinks {
+			margin-bottom: 1rem;
+			color: @colorDarkGray;
+
+			& > a {
+				display: inline-block;
 				font-weight: bold;
-				letter-spacing: -1px;
-			}
+				margin: 0 1rem;
 
-			&:hover:not(.active) {
-				color: #C1C1D1;
+				&:hover {
+					cursor: pointer;
+					color: @colorThemeB;
+				}
 			}
+		}
+
+		#footerTopSocial {
+
+
+		// 	& > a {
+		// 		display: inline-block;
+		// 		width: 3rem;
+		// 		height: 3rem;
+		// 		background-size: 3rem 3rem;
+		// 	}
+		//
+		// 	#twitterLink {
+		// 		background-image: url('../img/social/twitter_gray.png');
+		// 	}
 		}
 	}
 
-	#headerSearch {
-		margin-left: @headerLogoWidth;
-		margin-right: @headerLinksWidth;
+	#footerBottom {
+		padding: .5rem;
+		text-align: center;
+		font-size: .75rem;
 
-		input {
-			width: 80%;
-			max-width: 30rem;
-			padding: .5rem 1rem;
-			font-size: 1.1rem;
-			border-radius: .3rem;
-			border-width: 0;
+		color: @colorLightGray;
+		background-color: @colorThemeB;
+
+		// color: @colorWhite;
+		// background-color: #2f2f2f;
+
+		& > * {
+			display: inline-block;
+		}
+
+		& > a:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+
+		.footerBottomSeparator {
+			margin: 0 .5rem;
 		}
 	}
 }
