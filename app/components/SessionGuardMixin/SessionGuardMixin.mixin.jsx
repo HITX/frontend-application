@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Navigation = require('react-router').Navigation;
+var SessionMixin = require('./SessionMixin.comp.jsx');
 var SessionStore = require('../../stores/Session.store.js');
 
 var SessionGuardMixin = {
@@ -13,13 +14,7 @@ var SessionGuardMixin = {
     }
   },
 
-  mixins: [Navigation],
-
-  getInitialState: function() {
-    return {
-      session: SessionStore.getSessionData()
-    };
-  },
+  mixins: [SessionMixin, Navigation],
 
   _onSessionChange: function() {
     if (SessionStore.hasSession()) {
@@ -30,15 +25,6 @@ var SessionGuardMixin = {
       this.transitionTo('howitworks');
     }
   },
-
-  componentDidMount: function() {
-    SessionStore.addChangeListener(this._onSessionChange);
-  },
-
-  componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onSessionChange);
-  },
-
 };
 
 module.exports = SessionGuardMixin;

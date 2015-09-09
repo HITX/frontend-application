@@ -16,7 +16,7 @@ var paths = {
   app: {
     entry: './app/main.jsx',
     css: './assets/css/*.less',
-    js: './app/**/*.jsx'
+    js: ['./app/**/*.jsx', './app/**/*.js']
   },
   server: {
     entry: './server/main.js',

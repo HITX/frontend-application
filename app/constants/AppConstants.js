@@ -6,7 +6,11 @@ module.exports = {
 	ActionTypes: keyMirror({
 		// Session
 		SESSION_LOAD: null,
-    SESSION_DROP: null
+    SESSION_DROP: null,
+
+		// Project
+		PROJECT_LOAD: null,
+		PROJECT_DROP: null
 	}),
 
 	PayloadSources: keyMirror({

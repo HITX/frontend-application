@@ -4,6 +4,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 // var PayloadSources = AppConstants.PayloadSources;
 var ActionTypes = AppConstants.ActionTypes;
+var UserTypes = AppConstants.UserTypes;
 
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
@@ -27,20 +28,45 @@ function _dropSession() {
 }
 
 var SessionStore = objectAssign({}, EventEmitter.prototype, {
-  addChangeListener: function(cb) {
-    this.on(CHANGE_EVENT, cb);
+  addChangeListener: function(cb) { this.on(CHANGE_EVENT, cb); },
+  removeChangeListener: function(cb) { this.removeListener(CHANGE_EVENT, cb); },
+
+  hasSession: function() { return _hasSession; },
+  getSessionData: function() { return _hasSession ? _sessionData : null; },
+
+  isIntern: function() {
+    return _hasSession && _sessionData.user_type == UserTypes.INTERN;
+  },
+  isOrg: function () {
+    return _hasSession && _sessionData.user_type == UserTypes.ORG;
   },
 
-  removeChangeListener: function(cb) {
-    this.removeListener(CHANGE_EVENT, cb);
+  ownsProject: function(projectId) {
+    if (!_hasSession || !this.isOrg()) {
+      return false;
+    }
+
+    for (var idx in _sessionData.projects) {
+      var project = _sessionData.projects[idx];
+      if (project.id == projectId) {
+        return true;
+      }
+    }
+    return false;
   },
 
-  hasSession: function() {
-    return _hasSession;
-  },
+  isProjectSubmitter: function(projectId) {
+    if (!_hasSession || !this.isIntern()) {
+      return false;
+    }
 
-  getSessionData: function() {
-    return _sessionData;
+    for (var idx in _sessionData.submissions) {
+      var submission = _sessionData.submissions[idx];
+      if (submission.project.id == projectId) {
+        return true;
+      }
+    }
+    return false;
   }
 });
 

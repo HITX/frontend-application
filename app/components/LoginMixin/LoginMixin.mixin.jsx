@@ -89,7 +89,7 @@ var LoginModal = React.createClass({
 
     Internshyps.login(this.state.emailVal, this.state.passwordVal, LOGIN_URL).then(
       function(result) {
-        Internshyps.get('me', {'expand': 'submissions.project.owner'}).then(
+        Internshyps.get('me', {'expand': 'submissions.project.owner,projects'}).then(
           function(result) {
             SessionActions.loadSession(result.response);
           },

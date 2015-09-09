@@ -12,7 +12,7 @@ var UserTypes = require('../../constants/AppConstants.js').UserTypes;
 
 var SessionStore = require('../../stores/Session.store.js');
 
-var SessionGuardMixin = require('../SessionGuardMixin/SessionGuardMixin.mixin.jsx');
+var SessionGuardMixin = require('../SessionMixins/SessionGuardMixin.mixin.jsx');
 
 var Home = React.createClass({
 
