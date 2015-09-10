@@ -4,10 +4,7 @@ var React = require('react');
 
 var UserTypes = require('../../constants/AppConstants.js').UserTypes;
 
-var InternProjects = require('./InternProjects.comp.jsx');
-var OrgProjects = require('./OrgProjects.comp.jsx');
-
-var SessionStore = require('../../stores/Session.store.js');
+var ActionButton = require('./ActionButton.comp.jsx');
 
 var ProjectStore = require('../../stores/Project.store.js');
 var ProjectActions = require('../../actions/Project.actions.js');
@@ -15,11 +12,7 @@ var ProjectActions = require('../../actions/Project.actions.js');
 var Projects = React.createClass({
 
   getInitialState: function() {
-    return {userType: SessionStore.getUserType()};
-  },
-
-  _onSessionChange: function() {
-    this.setState({userType: SessionStore.getUserType()});
+    return {project: null};
   },
 
   _onProjectChange: function() {
@@ -31,7 +24,6 @@ var Projects = React.createClass({
   },
 
   componentDidMount: function() {
-    SessionStore.addChangeListener(this._onSessionChange);
     ProjectStore.addChangeListener(this._onProjectChange);
 
     Internshyps.get(
@@ -49,7 +41,6 @@ var Projects = React.createClass({
   },
 
   componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onSessionChange);
     ProjectStore.removeChangeListener(this._onProjectChange);
   },
 
@@ -58,18 +49,6 @@ var Projects = React.createClass({
     var project = this.state.project;
     if (!project) {
       return null;
-    }
-
-    var userSpecific;
-    switch(this.state.userType) {
-      case UserTypes.INTERN:
-        userSpecific = <InternProjects projectId={this.props.params.id}/>;
-        break;
-      case UserTypes.ORG:
-        userSpecific = <OrgProjects projectId={this.props.params.id}/>;
-        break;
-      default:
-        userSpecific = {};
     }
 
     return (
@@ -91,7 +70,7 @@ var Projects = React.createClass({
             </div>
           </div>
           <div id='projectsHeaderRight'>
-            {userSpecific}
+            <ActionButton projectId={this.props.params.id}/>
           </div>
         </div>
         <div id='projectsDescBlock'>
