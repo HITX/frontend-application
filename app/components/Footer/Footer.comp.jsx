@@ -23,7 +23,7 @@ var Footer = React.createClass({
           </div>
         </div>
         <div id='footerBottom'>
-          <p>Copyright (c) 3001-3008 OurName Inc.</p>
+          <p>&copy; 2015 Internshyps Inc. All rights reserved</p>
           {separator}
           <Link to='howitworks'>Legal 1</Link>
           {separator}

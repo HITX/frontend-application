@@ -55,6 +55,11 @@ var Projects = React.createClass({
 
   render: function() {
 
+    var project = this.state.project;
+    if (!project) {
+      return null;
+    }
+
     var userSpecific;
     switch(this.state.userType) {
       case UserTypes.INTERN:
@@ -65,11 +70,6 @@ var Projects = React.createClass({
         break;
       default:
         userSpecific = {};
-    }
-
-    var project = this.state.project;
-    if (!project) {
-      return null;
     }
 
     return (
@@ -102,7 +102,6 @@ var Projects = React.createClass({
           <p id='projectsReqText'>Requirements:</p>
           <pre id='projectsReqVal'>requirements go here</pre>
         </div>
-        {userSpecific}
       </div>
     );
   }

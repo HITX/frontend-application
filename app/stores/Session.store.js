@@ -40,40 +40,10 @@ var SessionStore = objectAssign({}, EventEmitter.prototype, {
   },
   isIntern: function() {
     return this.getUserType() == UserTypes.INTERN;
-    // return _hasSession && _sessionData.user_type == UserTypes.INTERN;
   },
   isOrg: function () {
     return this.getUserType() == UserTypes.ORG;
-    // return _hasSession && _sessionData.user_type == UserTypes.ORG;
   },
-
-  // ownsProject: function(projectId) {
-  //   if (!_hasSession || !this.isOrg()) {
-  //     return false;
-  //   }
-  //
-  //   for (var idx in _sessionData.projects) {
-  //     var project = _sessionData.projects[idx];
-  //     if (project.id == projectId) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // },
-  //
-  // isProjectSubmitter: function(projectId) {
-  //   if (!_hasSession || !this.isIntern()) {
-  //     return false;
-  //   }
-  //
-  //   for (var idx in _sessionData.submissions) {
-  //     var submission = _sessionData.submissions[idx];
-  //     if (submission.project.id == projectId) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // },
 
   getOrgProjectById: function(projectId) {
     if (!_hasSession || !this.isOrg()) {

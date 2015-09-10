@@ -10,17 +10,41 @@ var InternProjects = React.createClass({
     projectId: React.PropTypes.string.isRequired
   },
 
-  render: function() {
+  getInitialState: function() {
+    return {
+      submission: SessionStore.getInternSubmissionByProjectId(this.props.projectId)
+    };
+  },
 
-    var submission = SessionStore.getInternSubmissionByProjectId(this.props.projectId);
-    if (submission == null) {
-      console.log('Intern user is not a submitter for project')
-      return null;
+  handleRegisterClick: function() {
+    console.log('Will handle register click here');
+  },
+
+  handleSubmissionClick: function() {
+    console.log('Will handle submission click here');
+  },
+
+  render: function() {
+    var actionButton;
+    if (!this.state.submission) {
+      actionButton =
+        <button
+          id='projectsRegisterButton'
+          onClick={this.handleRegisterClick}>
+          Register
+        </button>
+    } else {
+      actionButton =
+        <button
+          id='projectsSubmissionButton'
+          onClick={this.handleSubmissionClick}>
+          My Submission &rsaquo;
+        </button>
     }
 
     return (
       <div id='internProjects'>
-        <p>Intern Projects Component</p>
+        {actionButton}
       </div>
     );
   }
