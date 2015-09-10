@@ -1,54 +1,107 @@
 'use strict'
 
 var React = require('react');
+
+var UserTypes = require('../../constants/AppConstants.js').UserTypes;
+
+var InternProjects = require('./InternProjects.comp.jsx');
+var OrgProjects = require('./OrgProjects.comp.jsx');
+
 var SessionStore = require('../../stores/Session.store.js');
 
-function _getSessionState(projectId) {
-  return {
-    isOwner: SessionStore.ownsProject(projectId),
-    isSubmitter: SessionStore.isProjectSubmitter(projectId)
-  };
-}
+var ProjectStore = require('../../stores/Project.store.js');
+var ProjectActions = require('../../actions/Project.actions.js');
 
 var Projects = React.createClass({
 
-  // statics: {
-  //   willTransitionTo: function(transition, params) {
-  //     if (SessionStore.ownsProject(params.id)) {
-  //       console.log('Current user owns this project!');
-  //       // transition.redirect('ownedProjects');
-  //     }
-  //   }
-  // },
-
   getInitialState: function() {
-    return _getSessionState(this.props.params.id);
+    return {userType: SessionStore.getUserType()};
   },
 
   _onSessionChange: function() {
-    this.setState(_getSessionState(this.props.params.id));
+    this.setState({userType: SessionStore.getUserType()});
+  },
+
+  _onProjectChange: function() {
+    if (this.isMounted()) {
+      this.setState({
+        project: ProjectStore.getProjectData()
+      });
+    }
   },
 
   componentDidMount: function() {
     SessionStore.addChangeListener(this._onSessionChange);
+    ProjectStore.addChangeListener(this._onProjectChange);
+
+    Internshyps.get(
+      'projects/' + this.props.params.id,
+      {'expand': 'owner'}
+    ).then(
+      function(result) {
+        ProjectActions.loadProject(result.response);
+      },
+      function(err) {
+        console.log('Error retrieving project');
+        console.log(err);
+      }
+    );
   },
 
   componentWillUnmount: function() {
     SessionStore.removeChangeListener(this._onSessionChange);
+    ProjectStore.removeChangeListener(this._onProjectChange);
   },
 
   render: function() {
 
-    var userSpecific = {};
-    if (this.state.isOwner) {
-      userSpecific = <p>Project Owner</p>;
-    } else if (this.state.isSubmitter) {
-      userSpecific = <p>Project Submitter</p>
+    var userSpecific;
+    switch(this.state.userType) {
+      case UserTypes.INTERN:
+        userSpecific = <InternProjects projectId={this.props.params.id}/>;
+        break;
+      case UserTypes.ORG:
+        userSpecific = <OrgProjects projectId={this.props.params.id}/>;
+        break;
+      default:
+        userSpecific = {};
+    }
+
+    var project = this.state.project;
+    if (!project) {
+      return null;
     }
 
     return (
       <div id='projects'>
-        <p>Projects page</p>
+        <div id='projectsHeader'>
+          <div id='projectsHeaderLeft'>
+            <p id='projectsTitle'>{project.title}</p>
+            <div id='projectsOrgBlock'>
+              <img id='projectsOrgLogo' src='/img/initec_logo.jpg'/>
+              <p id='projectsOrgName'>{project.owner.org_name}</p>
+              <p id='projectsPrize'>${Math.round(project.prize)}</p>
+            </div>
+            <div id='projectsInfoBlock'>
+              <p id='projectsDeadlineText'>Deadline -&nbsp;</p>
+              <p id='projectsDeadlineVal'>{project.end_date}</p>
+              <p id='projectsSpacer'>|</p>
+              <p id='projectsSubmissionsCountText'>Submissions -&nbsp;</p>
+              <p id='projectsSubmissionsCountVal'>{project.submission_count}</p>
+            </div>
+          </div>
+          <div id='projectsHeaderRight'>
+            {userSpecific}
+          </div>
+        </div>
+        <div id='projectsDescBlock'>
+          <p id='projectsDescText'>Description:</p>
+          <pre id='projectsDescVal'>{project.description}</pre>
+        </div>
+        <div id='projectsReqBlock'>
+          <p id='projectsReqText'>Requirements:</p>
+          <pre id='projectsReqVal'>requirements go here</pre>
+        </div>
         {userSpecific}
       </div>
     );

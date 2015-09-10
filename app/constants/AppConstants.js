@@ -19,6 +19,7 @@ module.exports = {
 	}),
 
 	UserTypes: {
+		ANONYMOUS: 0,
 		INTERN: 1,
 		ORG: 2
 	},

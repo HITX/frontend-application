@@ -24,7 +24,7 @@ var Newsfeed = React.createClass({
       }.bind(this),
       function(err) {
         console.log('Error retrieving newsfeed:');
-        console.log(err)
+        console.log(err);
       }
     );
   },

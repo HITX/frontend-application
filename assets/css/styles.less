@@ -10,9 +10,10 @@
 @colorShadowMid: #AFAFAF;
 @colorShadowHigh: #CFCFCF;
 @colorThemeA: #FF9933;
-@colorThemeADark: #CC7A28;
+// @colorThemeADark: #CC7A28;
 @colorThemeB: #333366;
-@colorThemeBDark: #1E1E3D;
+@colorThemeBLight: #C1C1D1;
+// @colorThemeBDark: #1E1E3D;
 
 
 // =============== MEDIA BREAKS ========
@@ -46,10 +47,10 @@
 @headerLinksWidthSmall: 3rem;
 
 @headerSearchWidthSmall: 3rem;
-// @headerMinSearchWidth: 20rem;
 
-// @headerMinWidth: @headerLogoWidth + @headerLinksWidth + @headerMinSearchWidth;
 @headerMinWidth: @headerLogoWidthSmall + @headerLinksWidthSmall + @headerSearchWidthSmall;
+
+@projectsActionWidth: 15rem;
 
 // =============== MIXINS ===============
 
@@ -106,9 +107,14 @@ button {
 // =============== Content =============
 
 #content {
+	margin: auto;
 	margin-top: @headerHeight;
+	padding: 1rem 0;
 	overflow: hidden;
+	width: 100%;
+	max-width: @pageWidth;
 	min-height: ~'calc(100vh - @{headerHeight})';
+	background-color: @colorWhite;
 }
 
 
@@ -174,6 +180,8 @@ button {
 			width: @headerLinksWidth;
 			text-align: right;
 			font-size: 1.1rem;
+			font-weight: bold;
+			color: @colorThemeBLight;
 
 			.break2({
 				// TODO: Turn breaks like this that also occur in javascript
@@ -185,17 +193,18 @@ button {
 
 			p {
 				display: inline-block;
-				margin: 0 .75rem;
+				margin: 0 .5rem;
 
-				.pseudolink;
+				&:not(.active) {
+					.pseudolink;
+				}
 
 				&.active {
-					font-weight: bold;
-					letter-spacing: -1px;
+					color: @colorWhite;
 				}
 
 				&:hover:not(.active) {
-					color: #C1C1D1;
+					color: @colorWhite;
 				}
 
 				&:last-child {
@@ -774,6 +783,97 @@ button {
 .itemListItem {
 	width: 30rem;
 	max-height: 15rem;
+}
+
+
+// ============= Projects ===============
+
+#projects {
+	padding: 1rem;
+
+	#projectsHeader {
+		overflow: hidden;
+		padding-bottom: .5rem;
+		border-bottom: 2px solid @colorLightGray;
+		margin-bottom: 2rem;
+
+		& > * {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		#projectsHeaderLeft {
+			width: ~'calc(100% - @{projectsActionWidth})';
+
+			#projectsTitle {
+				font-size: 2rem;
+				margin-bottom: 1rem;
+			}
+
+			#projectsOrgBlock {
+				margin-bottom: .5rem;
+
+				& > * {
+					display: inline-block;
+					vertical-align: middle;
+				}
+
+				#projectsOrgLogo {
+					width: 2rem;
+					height: 2rem;
+				}
+
+				#projectsOrgName {
+					font-size: 1rem;
+					margin-left: .5rem;
+				}
+
+				#projectsPrize {
+					margin-left: 2rem;
+					padding: 3.5px;
+					font-weight: bold;
+					color: @colorThemeB;
+					border: 2px solid @colorThemeB;
+					border-radius: .35rem;
+				}
+			}
+
+			#projectsInfoBlock {
+				& > * {
+					display: inline-block;
+				}
+
+				#projectsDeadlineVal, #projectsSubmissionsCountVal {
+					font-weight: bold;
+					color: @colorThemeA;
+				}
+
+				#projectsSpacer {
+					margin: 0 .5rem;
+				}
+			}
+		}
+
+		#projectsHeaderRight {
+			width: @projectsActionWidth;
+			// float: right;
+		}
+	}
+
+	#projectsDescBlock, #projectsReqBlock {
+		margin-bottom: 1rem;
+	}
+
+	#projectsDescText, #projectsReqText {
+		font-size: 1rem;
+		font-weight: bold;
+		color: @colorThemeB;
+		text-decoration: underline;
+	}
+
+	#projectsDescVal, #projectsReqVal {
+		padding: 0 1rem;
+	}
 }
 
 
