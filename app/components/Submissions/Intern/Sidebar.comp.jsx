@@ -2,9 +2,9 @@
 
 var React = require('react');
 
-var InternSubmissionsSidebarItem = require('./InternSubmissionsSidebarItem.comp.jsx');
+var SidebarItem = require('./SidebarItem.comp.jsx');
 
-var InternSubmissionsSidebar = React.createClass({
+var Sidebar = React.createClass({
 
   propTypes: {
     submissions: React.PropTypes.array.isRequired
@@ -23,7 +23,7 @@ var InternSubmissionsSidebar = React.createClass({
               var lineBreak = (idx == arr.length - 1) ? {} : <hr/>
               return (
                 <div key={item.id}>
-                  <InternSubmissionsSidebarItem data={item}/>
+                  <SidebarItem data={item}/>
                   {lineBreak}
                 </div>
               );
@@ -35,4 +35,4 @@ var InternSubmissionsSidebar = React.createClass({
   }
 });
 
-module.exports = InternSubmissionsSidebar;
+module.exports = Sidebar;

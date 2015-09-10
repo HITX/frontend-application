@@ -38,7 +38,7 @@ var InternProjects = React.createClass({
         <button
           id='projectsSubmissionButton'
           onClick={this.handleSubmissionClick}>
-          My Submission &rsaquo;
+          Edit Submission &rsaquo;
         </button>
     }
 

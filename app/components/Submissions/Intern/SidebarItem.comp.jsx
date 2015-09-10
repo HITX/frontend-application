@@ -2,9 +2,9 @@
 
 var React = require('react');
 
-var Statuses = require('../../constants/AppConstants.js').SubmissionStatuses;
+var Statuses = require('../../../constants/AppConstants.js').SubmissionStatuses;
 
-var InternSubmissionsSidebarItem = React.createClass({
+var SidebarItem = React.createClass({
 
   propTypes: {
     data: React.PropTypes.object.isRequired
@@ -48,4 +48,4 @@ var InternSubmissionsSidebarItem = React.createClass({
   }
 });
 
-module.exports = InternSubmissionsSidebarItem;
+module.exports = SidebarItem;

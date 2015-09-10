@@ -3,7 +3,7 @@
 var React = require('react');
 
 var Newsfeed = require('../Newsfeed/Newsfeed.comp.jsx');
-var InternSubmissionsSidebar = require('../Submissions/InternSubmissionsSidebar.comp.jsx');
+var InternSubmissionsSidebar = require('../Submissions/Intern/Sidebar.comp.jsx');
 
 var InternHome = React.createClass({
 
