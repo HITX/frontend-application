@@ -14,7 +14,11 @@ module.exports = {
 
 		// Intern
 		INTERN_LOAD: null,
-		INTERN_DROP: null
+		INTERN_DROP: null,
+
+		// Org
+		ORG_LOAD: null,
+		ORG_DROP: null
 	}),
 
 	PayloadSources: keyMirror({
