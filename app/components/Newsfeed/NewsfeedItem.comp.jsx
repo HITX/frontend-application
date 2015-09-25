@@ -4,6 +4,9 @@ var React = require('react');
 var Navigation = require('react-router').Navigation;
 var classNames = require('classnames');
 
+var DeadlineWidget = require('../Widgets/Deadline.comp.jsx');
+var SubmissionCountWidget = require('../Widgets/SubmissionCount.comp.jsx');
+
 var NewsfeedItem = React.createClass({
 
   mixins: [Navigation],
@@ -14,85 +17,78 @@ var NewsfeedItem = React.createClass({
 
   getInitialState: function() {
     return {
-      baseHovered: false,
-      orgHovered: false
+      hovered: false
     };
   },
 
-  handleBaseHover: function(hovered) {
+  // handleBaseHover: function(hovered) {
+  //   this.setState({
+  //     baseHovered: hovered
+  //   });
+  // },
+  //
+  // handleOrgHover: function(hovered) {
+  //   this.setState({
+  //     orgHovered: hovered
+  //   });
+  // },
+  //
+  // handleBaseClick: function() {
+  //   this.transitionTo('projects', {id: this.props.data.id});
+  // },
+  //
+  // handleOrgClick: function(event) {
+  //   this.transitionTo('orgs', {id: this.props.data.owner.id});
+  //   event.stopPropagation();
+  // },
+
+  handleHover: function(hovered) {
     this.setState({
-      baseHovered: hovered
+      hovered: hovered
     });
   },
 
-  handleOrgHover: function(hovered) {
-    this.setState({
-      orgHovered: hovered
-    });
-  },
-
-  handleBaseClick: function() {
-    this.transitionTo('projects', {id: this.props.data.id});
-  },
-
-  handleOrgClick: function(event) {
-    this.transitionTo('orgs', {id: this.props.data.owner.id});
-    event.stopPropagation();
+  handleClick: function() {
+    this.transitionTo('projects', {id: this.props.data.id})
   },
 
   render: function() {
+
+    var testDesc = 'lakdjf lakdjf;lakdj lakdj ajjd alkdjf adlfja dlkj l jadlkfjad falkj';
+
     return (
       <div
-        className={classNames('newsfeedItem', {highlight: this.state.baseHovered})}
-        onClick={this.handleBaseClick}
-        onMouseEnter={this.handleBaseHover.bind(this, true)}
-        onMouseLeave={this.handleBaseHover.bind(this, false)}>
-        <div className='newsfeedItemTop'>
+        className='newsfeedItem'
+        onMouseOver={this.handleHover.bind(this, true)}
+        onMouseOut={this.handleHover.bind(this, false)}
+        onClick={this.handleClick}>
+        <div className='newsfeedItemLeft'>
           <img
             className='newsfeedItemLogo'
-            src='/img/initec_logo.jpg'
-            onClick={this.handleOrgClick}
-            onMouseEnter={this.handleOrgHover.bind(this, true)}
-            onMouseLeave={this.handleOrgHover.bind(this, false)}/>
-          <p
-            className={classNames('newsfeedItemOrgName', {highlight: this.state.orgHovered})}
-            onClick={this.handleOrgClick}
-            onMouseEnter={this.handleOrgHover.bind(this, true)}
-            onMouseLeave={this.handleOrgHover.bind(this, false)}>
-              {this.props.data.owner.org_name}
-          </p>
+            src='/img/initec_logo.jpg'/>
+          <br/>
+          <p className='newsfeedItemPrize'>${Math.round(this.props.data.prize)}</p>
         </div>
         <div className='newsfeedItemMiddle'>
-          <div className='newsfeedItemTitleBlock'>
-            <p className='newsfeedItemTitle'>{this.props.data.title}</p>
-            <p className='newsfeedItemPrize'>${Math.round(this.props.data.prize)}</p>
-          </div>
-          <p className='newsfeedItemDesc'>{this.props.data.description}</p>
+          <p
+            className={classNames('newsfeedItemTitle', {hovered: this.state.hovered})}>
+            {this.props.data.title}
+          </p>
+          <p className='newsfeedItemOrgName'>{this.props.data.owner.org_name}</p>
+          <p className='newsfeedItemDesc'>{testDesc}</p>
         </div>
-        <hr/>
-        <div className='newsfeedItemBottom'>
-          <div className='newsfeedItemSubmissionsBlock'>
-            <p className='newsfeedItemSubmissionsText'>Submissions: &nbsp;</p>
-            <p className='newsfeedItemSubmissionsVal'>{this.props.data.submission_count}</p>
-          </div>
-          <div className='newsfeedItemDeadlineBlock'>
-            <p className='newsfeedItemDeadlineText'>Deadline: &nbsp;</p>
-              <p className='newsfeedItemDeadlineVal'>{this.props.data.end_date}</p>
-          </div>
+        <div className='newsfeedItemRight'>
+          <p>Tag 1</p>
+          <p>Tag 2</p>
+          <p>Tag 3</p>
+        </div>
+        <div className='newsfeedItemFooter'>
+          <DeadlineWidget date={this.props.data.end_date}/>
+          <SubmissionCountWidget count={this.props.data.submission_count}/>
         </div>
       </div>
     );
   }
-
-  // render: function() {
-  //   return (
-  //     <div className='newsfeedItem'>
-  //       <p className='newsfeedItemTitle'>{this.props.data.title}</p>
-  //       <p className='newsfeedItemDesc'>{this.props.data.description}</p>
-  //       <button className='newsfeedItemButton' onClick={this.handleClick}>&rsaquo;</button>
-  //     </div>
-  //   );
-  // }
 });
 
 module.exports = NewsfeedItem;

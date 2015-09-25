@@ -4,8 +4,11 @@ var React = require('react');
 
 var Navigation = require('react-router').Navigation;
 
-var InternHome = require('./InternHome.comp.jsx');
-var OrgHome = require('./OrgHome.comp.jsx');
+// var InternHome = require('./InternHome.comp.jsx');
+// var OrgHome = require('./OrgHome.comp.jsx');
+var InternSidebar = require('./InternSidebar.comp.jsx');
+var OrgSidebar = require('./OrgSidebar.comp.jsx');
+var Newsfeed = require('../Newsfeed/Newsfeed.comp.jsx');
 var Error = require('../Error/Error.comp.jsx');
 
 var UserTypes = require('../../constants/AppConstants.js').UserTypes;
@@ -19,21 +22,26 @@ var Home = React.createClass({
   mixins: [SessionGuardMixin],
 
   render: function() {
-    var homeComp;
+    var sidebar;
     switch(this.state.session.user_type) {
       case UserTypes.INTERN:
-        homeComp = <InternHome session={this.state.session}/>;
+        sidebar = <InternSidebar submissions={this.state.session.submissions}/>;
         break;
       case UserTypes.ORG:
-        homeComp = <OrgHome session={this.state.session}/>;
+        sidebar = <OrgSidebar/>;
         break;
       default:
-        homeComp = <Error message={'Unknown user type'}/>;
+        sidebar = <Error message={'Unknown user type'}/>;
     }
 
     return (
       <div id="home">
-        {homeComp}
+        <div id='itemList'>
+          <Newsfeed/>
+        </div>
+        <div id='sidebar'>
+          {sidebar}
+        </div>
       </div>
     );
   }

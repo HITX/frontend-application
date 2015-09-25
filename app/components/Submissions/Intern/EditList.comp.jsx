@@ -8,10 +8,6 @@ var EditList = React.createClass({
 
   mixins: [SessionGuardMixin],
 
-  // willTransitionTo: function() {
-  //   console.log('Transition test');
-  // },
-
   render: function() {
     return (
       <div id='internSubmissionsEditList'>

@@ -215,6 +215,16 @@ button {
 					margin-left: 0;
 				}
 			}
+
+			#headerLinksIcon {
+				.pseudolink;
+
+				img {
+					vertical-align: middle;
+					height: 1.5rem;
+					width: 1.5rem;
+				}
+			}
 		}
 
 		#headerSearch {
@@ -234,11 +244,24 @@ button {
 				font-size: 1.1rem;
 				border-radius: .3rem;
 				border-width: 0;
+
+				background-image: url('../img/search_icon_gray.svg');
+				background-size: 1.5rem 1.5rem;
+				background-position: right .5rem center;
+				background-repeat: no-repeat;
+
+				padding-right: 2.5rem;
 			}
 
-			// p {
-			// 	color: @colorWhite;
-			// }
+			#headerSearchIcon {
+				.pseudolink;
+
+				img {
+					vertical-align: middle;
+					height: 1.5rem;
+					width: 1.5rem;
+				}
+			}
 		}
 	}
 }
@@ -556,9 +579,37 @@ button {
 	}
 }
 
+
+.deadlineWidget {
+	& > * {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	img {
+		margin-right: .5rem;
+		height: 2rem;
+		width: 2rem;
+	}
+}
+
+.submissionCountWidget {
+	& > * {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	img {
+		margin-right: .5rem;
+		height: 2rem;
+		width: 2rem;
+	}
+}
+
+
 // ============= Home ==================
 
-#internHome {
+#home {
 	text-align: center;
 	margin-top: 2rem;
 
@@ -569,106 +620,112 @@ button {
 	#itemList {
 		width: 60%;
 		float: left;
-		text-align: right;
+		text-align: center;
 
 		#newsfeed {
 			display: inline-block;
+			text-align: left;
 
 			.newsfeedItem {
-				margin: 1.5rem;
-				padding: 1rem;
-				border: 2px solid transparent;
-				border-radius: .5rem;
-				background-color: @colorWhite;
+				max-height: 15rem;
 
-				.itemListItem;
-				.shadow_mid;
-
-				&.highlight {
-					cursor: pointer;
-					border: 2px solid fade(@colorThemeB, 10%);
-				}
+				.pseudolink;
 
 				& > * {
-					width: 100%;
+					display: inline-block;
+					vertical-align: middle;
 				}
 
-				.newsfeedItemTop {
-					text-align: left;
-					& > * {
+				.newsfeedItemLeft {
+					width: 7rem;
+					text-align: center;
+
+					.newsfeedItemLogo {
+						width: 3rem;
+						height: 3rem;
+					}
+
+					.newsfeedItemPrize {
 						display: inline-block;
-					}
-
-					img.newsfeedItemLogo {
-						width: 5rem;
-						height: 5rem;
-						vertical-align: middle;
-
-						&:hover {
-							cursor: pointer;
-						}
-					}
-
-					.newsfeedItemOrgName {
-						margin-left: 2rem;
-						font-size: 2rem;
-						font-weight: bold;
-						vertical-align: middle;
-
-						&.highlight {
-							color: @colorThemeA;
-							cursor: pointer;
-						}
+						min-width: 3rem;
+						font-size: .75rem;
+						.prize;
 					}
 				}
 
 				.newsfeedItemMiddle {
-					position: relative;
-					margin-top: .5rem;
-					text-align: left;
+					width: 20rem;
+					border-right: 2px solid @colorLightGray;
 
 					.newsfeedItemTitle {
-						display: inline-block;
-						width: 100% - 20rem;
 						font-size: 1.5rem;
-						vertical-align: middle;
-						overflow: hidden;
-						text-overflow: ellipsis;
+						font-weight: bold;
+						color: fade(@colorThemeB, 50%);
+
+						&.hovered {
+							color: @colorThemeB;
+						}
 					}
 
-					.newsfeedItemPrize {
-						position: absolute;
-						right: 0;
-						display: inline-block;
-						padding: 3.5px;
-						font-weight: bold;
-						color: @colorThemeB;
-						border: 2px solid @colorThemeB;
-						border-radius: .35rem;
-						vertical-align: middle;
+					.newsfeedItemOrgName {
+						font-size: 1.25rem;
+						font-style: italic;
+						color: @colorDarkGray;
 					}
 
 					.newsfeedItemDesc {
-						margin-top: .5rem;
+						margin-top: .75rem;
+						font-size: 1rem;
+						color: @colorDarkGray;
 					}
 				}
 
-				.newsfeedItemBottom {
-					position: relative;
-					text-align: left;
+				.newsfeedItemRight {
+					width: 5rem;
+					padding: 0 .5rem;
 
-					& * {
+					& > * {
 						display: inline-block;
+						margin-bottom: .2rem;
+						font-size: .75rem;
+						.tag;
+
+						&:last-child {
+							margin-bottom: 0;
+						}
+					}
+				}
+
+				.newsfeedItemFooter {
+					display: block;
+					text-align: right;
+					margin-top: .75rem;
+					margin-right: 5.5rem;
+					color: @colorDarkGray;
+					font-weight: bold;
+
+					& > * {
+						display: inline-block;
+						margin-right: 1.5rem;
+
+						&:last-child {
+							margin-right: 0;
+						}
 					}
 
-					.newsfeedItemDeadlineBlock {
-						position: absolute;
-						right: 0;
+					.deadlineWidget {
+						img {
+							width: 1rem;
+							height: 1rem;
+
+						}
 					}
 
-					.newsfeedItemSubmissionsVal, .newsfeedItemDeadlineVal {
-						color: @colorThemeA;
-						font-weight: bold;
+					.submissionCountWidget {
+						img {
+							width: 1rem;
+							height: 1rem;
+						}
 					}
 				}
 			}
@@ -676,102 +733,130 @@ button {
 	}
 
 	#sidebar {
-		// position: fixed;
+		position: relative;
 		width: 40%;
 		text-align: left;
+		background-color: red;
 
-		#internSubmissionsSidebar {
+		#internSidebar {
 			position: fixed;
 			display: inline-block;
 			// background-color: green;
 
 			& > * {
 				width: 15rem;
-				margin: 1.5rem;
-				padding: 1rem;
-				background-color: @colorWhite;
-				border-radius: .5rem;
+				// margin: 1.5rem;
+				// padding: 1rem;
 			}
 
-			#iSSHeader {
-				font-size: 1rem;
+			#iSHeader {
+				background-color: fade(@colorThemeA, 80%);
+				color: @colorWhite;
+				font-size: 1.25rem;
+				font-weight: bold;
+				padding: 1rem;
+				margin-bottom: 1rem;
+				.pseudolink;
+
+				&:hover {
+					background-color: @colorThemeA;
+				}
 
 				& > * {
 					display: inline-block;
 				}
 
-				.shadow_mid;
-				.pseudolink;
-
-				#iSSHeaderArrow {
+				#iSHeaderArrow {
 					margin-left: .5rem;
 					float: right;
 				}
 			}
 
-			#iSSBody {
-				.iSSItem {
+			#iSBody {
 
-					.pseudolink;
-
-					.iSSItemTop {
-
-						& > * {
-							text-align: left;
-							display: inline-block;
-						}
-
-						.iSSItemLogo {
-							width: 4rem;
-							height: 4rem;
-							vertical-align: middle;
-						}
-
-						.iSSItemTitleBlock {
-							margin-left: 1rem;
-							vertical-align: middle;
-
-							.iSSItemTitle {
-								margin-bottom: .2rem;
-							}
-
-							.iSSItemPrize {
-								display: inline-block;
-								padding: 3.5px;
-								font-size: .75rem;
-								font-weight: bold;
-								color: @colorThemeB;
-								border: 1px solid @colorThemeB;
-								border-radius: .35rem;
-								// text-align: center;
-							}
-						}
-					}
-
-					.iSSItemBottom {
-						margin-top: .5rem;
-
-						& > * {
-							display: inline-block;
-						}
-
-						.iSSStatus {
-							margin-right: 1rem;
-						}
-
-						.iSSEndDateVal {
-							font-weight: bold;
-							color: @colorThemeA;
-						}
-
-						.iSSEndDateText, .iSSEndDateVal {
-							float: right;
-						}
-
-					}
+				#iSNoProjects {
+					color: @colorDarkGray;
+					padding: 1rem;
 				}
 
-				.shadow_mid;
+				.iSItem {
+					color: @colorDarkGray;
+					border-bottom: 2px solid @colorLightGray;
+					padding: 1rem;
+					.pseudolink;
+
+					&:last-child {
+						border-bottom: 0;
+					}
+
+					&:hover {
+						color: @colorThemeA;
+					}
+
+					& > * {
+						display: inline-block;
+					}
+
+					.iSItemArrow {
+						float: right;
+					}
+
+					// .iSItemTop {
+					//
+					// 	& > * {
+					// 		text-align: left;
+					// 		display: inline-block;
+					// 	}
+					//
+					// 	.iSItemLogo {
+					// 		width: 4rem;
+					// 		height: 4rem;
+					// 		vertical-align: middle;
+					// 	}
+					//
+					// 	.iSItemTitleBlock {
+					// 		margin-left: 1rem;
+					// 		vertical-align: middle;
+					//
+					// 		.iSItemTitle {
+					// 			margin-bottom: .2rem;
+					// 		}
+					//
+					// 		.iSItemPrize {
+					// 			display: inline-block;
+					// 			padding: 3.5px;
+					// 			font-size: .75rem;
+					// 			font-weight: bold;
+					// 			color: @colorThemeB;
+					// 			border: 1px solid @colorThemeB;
+					// 			border-radius: .35rem;
+					// 			// text-align: center;
+					// 		}
+					// 	}
+					// }
+					//
+					// .iSItemBottom {
+					// 	margin-top: .5rem;
+					//
+					// 	& > * {
+					// 		display: inline-block;
+					// 	}
+					//
+					// 	.iSStatus {
+					// 		margin-right: 1rem;
+					// 	}
+					//
+					// 	.iSEndDateVal {
+					// 		font-weight: bold;
+					// 		color: @colorThemeA;
+					// 	}
+					//
+					// 	.iSEndDateText, .iSEndDateVal {
+					// 		float: right;
+					// 	}
+					//
+					// }
+				}
 			}
 		}
 	}
@@ -780,9 +865,20 @@ button {
 
 // ================= TODO ==================
 
-.itemListItem {
-	width: 30rem;
-	max-height: 15rem;
+.prize {
+	padding: 3.5px;
+	font-weight: bold;
+	color: @colorThemeB;
+	border: 2px solid @colorThemeB;
+	border-radius: .35rem;
+	vertical-align: middle;
+}
+
+.tag {
+	padding: 3.5px;
+	color: @colorThemeA;
+	border: 2px solid @colorThemeA;
+	border-radius: .35rem;
 }
 
 

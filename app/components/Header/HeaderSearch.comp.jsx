@@ -10,8 +10,10 @@ var HeaderSearch = React.createClass({
         <MediaQuery query='(min-width: 55rem)'>
           <input type='text' placeholder='Non-existent Search (Wow it does nothing!)'/>
         </MediaQuery>
-        <MediaQuery query='(max-width: 64rem)'>
-          <p>XX</p>
+        <MediaQuery
+          id ='headerSearchIcon'
+          query='(max-width: 64rem)'>
+          <img src='/img/search_icon_white.svg'/>
         </MediaQuery>
       </div>
     );

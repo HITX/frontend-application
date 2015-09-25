@@ -93,8 +93,10 @@ var HeaderLinks = React.createClass({
             onClick={this.handleLinkClick}>Profile</p>
           {log_in_out}
         </MediaQuery>
-        <MediaQuery query='(max-width: 64rem)'>
-          <a>YY</a>
+        <MediaQuery
+          id='headerLinksIcon'
+          query='(max-width: 64rem)'>
+          <img src='/img/bars_icon_white.svg'/>
         </MediaQuery>
       </div>
     );
