@@ -10,7 +10,9 @@ var DeadlineWidget = React.createClass({
 
   render: function() {
     return (
-      <div className='deadlineWidget'>
+      <div
+        className='deadlineWidget'
+        title='Deadline'>
         <img src='/img/clock_icon.svg'/>
         <p>{this.props.date}</p>
       </div>

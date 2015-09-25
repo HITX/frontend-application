@@ -6,6 +6,7 @@ var classNames = require('classnames');
 
 var DeadlineWidget = require('../Widgets/Deadline.comp.jsx');
 var SubmissionCountWidget = require('../Widgets/SubmissionCount.comp.jsx');
+var PrizeWidget = require('../Widgets/Prize.comp.jsx');
 
 var NewsfeedItem = React.createClass({
 
@@ -20,27 +21,6 @@ var NewsfeedItem = React.createClass({
       hovered: false
     };
   },
-
-  // handleBaseHover: function(hovered) {
-  //   this.setState({
-  //     baseHovered: hovered
-  //   });
-  // },
-  //
-  // handleOrgHover: function(hovered) {
-  //   this.setState({
-  //     orgHovered: hovered
-  //   });
-  // },
-  //
-  // handleBaseClick: function() {
-  //   this.transitionTo('projects', {id: this.props.data.id});
-  // },
-  //
-  // handleOrgClick: function(event) {
-  //   this.transitionTo('orgs', {id: this.props.data.owner.id});
-  //   event.stopPropagation();
-  // },
 
   handleHover: function(hovered) {
     this.setState({
@@ -67,7 +47,7 @@ var NewsfeedItem = React.createClass({
             className='newsfeedItemLogo'
             src='/img/initec_logo.jpg'/>
           <br/>
-          <p className='newsfeedItemPrize'>${Math.round(this.props.data.prize)}</p>
+          <PrizeWidget prize={this.props.data.prize}/>
         </div>
         <div className='newsfeedItemMiddle'>
           <p

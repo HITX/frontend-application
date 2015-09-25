@@ -9,6 +9,10 @@ var ActionButton = require('./ActionButton.comp.jsx');
 var ProjectStore = require('../../stores/Project.store.js');
 var ProjectActions = require('../../actions/Project.actions.js');
 
+var DeadlineWidget = require('../Widgets/Deadline.comp.jsx');
+var SubmissionCountWidget = require('../Widgets/SubmissionCount.comp.jsx');
+var PrizeWidget = require('../Widgets/Prize.comp.jsx');
+
 var Projects = React.createClass({
 
   getInitialState: function() {
@@ -45,7 +49,6 @@ var Projects = React.createClass({
   },
 
   render: function() {
-
     var project = this.state.project;
     if (!project) {
       return null;
@@ -55,31 +58,32 @@ var Projects = React.createClass({
       <div id='projects'>
         <div id='projectsHeader'>
           <div id='projectsHeaderLeft'>
+            <img id='projectsOrgLogo' src='/img/initec_logo.jpg'/>
+          </div>
+          <div id='projectsHeaderMiddle'>
             <p id='projectsTitle'>{project.title}</p>
-            <div id='projectsOrgBlock'>
-              <img id='projectsOrgLogo' src='/img/initec_logo.jpg'/>
-              <p id='projectsOrgName'>{project.owner.org_name}</p>
-              <p id='projectsPrize'>${Math.round(project.prize)}</p>
-            </div>
-            <div id='projectsInfoBlock'>
-              <p id='projectsDeadlineText'>Deadline -&nbsp;</p>
-              <p id='projectsDeadlineVal'>{project.end_date}</p>
-              <p id='projectsSpacer'>|</p>
-              <p id='projectsSubmissionsCountText'>Submissions -&nbsp;</p>
-              <p id='projectsSubmissionsCountVal'>{project.submission_count}</p>
-            </div>
+            <p id='projectsOrgName'>{project.owner.org_name}</p>
           </div>
           <div id='projectsHeaderRight'>
             <ActionButton projectId={this.props.params.id}/>
           </div>
         </div>
-        <div id='projectsDescBlock'>
-          <p id='projectsDescText'>Description:</p>
-          <pre id='projectsDescVal'>{project.description}</pre>
+        <div id='projectsSubHeader'>
+          <PrizeWidget prize={project.prize}/>
+          <DeadlineWidget date={project.end_date}/>
+          <SubmissionCountWidget count={project.submission_count}/>
         </div>
-        <div id='projectsReqBlock'>
-          <p id='projectsReqText'>Requirements:</p>
-          <pre id='projectsReqVal'>requirements go here</pre>
+        <div id='projectsDescBlock'>
+          <p id='projectsDescTitle'>Description</p>
+          <pre id='projectsDesc'>{project.description}</pre>
+        </div>
+        <div id='projectsSkillsBlock'>
+          <p id='projectsSkillsTitle'>Skills</p>
+          <ul id='projectsSkillsList'>
+            <li>Tag 1</li>
+            <li>Tag 2</li>
+            <li>Tag 3</li>
+          </ul>
         </div>
       </div>
     );

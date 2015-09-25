@@ -606,6 +606,17 @@ button {
 	}
 }
 
+.prizeWidget {
+	p {
+		display: inline-block;
+		padding: 3.5px;
+		font-weight: bold;
+		color: @colorThemeB;
+		border: 2px solid @colorThemeB;
+		border-radius: .35rem;
+		vertical-align: middle;
+	}
+}
 
 // ============= Home ==================
 
@@ -645,11 +656,9 @@ button {
 						height: 3rem;
 					}
 
-					.newsfeedItemPrize {
-						display: inline-block;
+					.prizeWidget {
 						min-width: 3rem;
 						font-size: .75rem;
-						.prize;
 					}
 				}
 
@@ -800,62 +809,6 @@ button {
 					.iSItemArrow {
 						float: right;
 					}
-
-					// .iSItemTop {
-					//
-					// 	& > * {
-					// 		text-align: left;
-					// 		display: inline-block;
-					// 	}
-					//
-					// 	.iSItemLogo {
-					// 		width: 4rem;
-					// 		height: 4rem;
-					// 		vertical-align: middle;
-					// 	}
-					//
-					// 	.iSItemTitleBlock {
-					// 		margin-left: 1rem;
-					// 		vertical-align: middle;
-					//
-					// 		.iSItemTitle {
-					// 			margin-bottom: .2rem;
-					// 		}
-					//
-					// 		.iSItemPrize {
-					// 			display: inline-block;
-					// 			padding: 3.5px;
-					// 			font-size: .75rem;
-					// 			font-weight: bold;
-					// 			color: @colorThemeB;
-					// 			border: 1px solid @colorThemeB;
-					// 			border-radius: .35rem;
-					// 			// text-align: center;
-					// 		}
-					// 	}
-					// }
-					//
-					// .iSItemBottom {
-					// 	margin-top: .5rem;
-					//
-					// 	& > * {
-					// 		display: inline-block;
-					// 	}
-					//
-					// 	.iSStatus {
-					// 		margin-right: 1rem;
-					// 	}
-					//
-					// 	.iSEndDateVal {
-					// 		font-weight: bold;
-					// 		color: @colorThemeA;
-					// 	}
-					//
-					// 	.iSEndDateText, .iSEndDateVal {
-					// 		float: right;
-					// 	}
-					//
-					// }
 				}
 			}
 		}
@@ -865,15 +818,6 @@ button {
 
 // ================= TODO ==================
 
-.prize {
-	padding: 3.5px;
-	font-weight: bold;
-	color: @colorThemeB;
-	border: 2px solid @colorThemeB;
-	border-radius: .35rem;
-	vertical-align: middle;
-}
-
 .tag {
 	padding: 3.5px;
 	color: @colorThemeA;
@@ -881,17 +825,29 @@ button {
 	border-radius: .35rem;
 }
 
+.fillButton(@color) {
+	font-weight: bold;
+	color: @color;
+	padding: .5rem 1rem;
+	border: 2px solid @color;
+	border-radius: .5rem;
+
+	.pseudolink;
+
+	&:hover {
+		background-color: @color;
+		color: @colorWhite;
+	}
+}
 
 // ============= Projects ===============
 
 #projects {
-	padding: 1rem;
-
 	#projectsHeader {
-		overflow: hidden;
-		padding-bottom: .5rem;
-		border-bottom: 2px solid @colorLightGray;
-		margin-bottom: 2rem;
+		@leftWidth: 10rem;
+		@rightWidth: 13rem;
+
+		padding: 0 1rem;
 
 		& > * {
 			display: inline-block;
@@ -899,87 +855,122 @@ button {
 		}
 
 		#projectsHeaderLeft {
-			width: ~'calc(100% - @{projectsActionWidth})';
+			width: @leftWidth;
+			text-align: left;
+			vertical-align: middle;
+
+			#projectsOrgLogo {
+				@logoSize: @leftWidth - 3rem;
+				height: @logoSize;
+				width: @logoSize;
+			}
+		}
+
+		#projectsHeaderMiddle {
+			width: ~'calc(100% - @{leftWidth} - @{rightWidth})';
+			padding: 0 2rem;
 
 			#projectsTitle {
 				font-size: 2rem;
-				margin-bottom: 1rem;
-			}
-
-			#projectsOrgBlock {
+				font-weight: bold;
 				margin-bottom: .5rem;
-
-				& > * {
-					display: inline-block;
-					vertical-align: middle;
-				}
-
-				#projectsOrgLogo {
-					width: 2rem;
-					height: 2rem;
-				}
-
-				#projectsOrgName {
-					font-size: 1rem;
-					margin-left: .5rem;
-				}
-
-				#projectsPrize {
-					margin-left: 2rem;
-					padding: 3.5px;
-					font-weight: bold;
-					color: @colorThemeB;
-					border: 2px solid @colorThemeB;
-					border-radius: .35rem;
-				}
+				color: @colorThemeB;
 			}
 
-			#projectsInfoBlock {
-				& > * {
-					display: inline-block;
-				}
-
-				#projectsDeadlineVal, #projectsSubmissionsCountVal {
-					font-weight: bold;
-					color: @colorThemeA;
-				}
-
-				#projectsSpacer {
-					margin: 0 .5rem;
-				}
+			#projectsOrgName {
+				font-size: 1.5rem;
+				// font-style: italic;
+				color: @colorDarkGray;
 			}
 		}
 
 		#projectsHeaderRight {
-			width: @projectsActionWidth;
-			// float: right;
+			width: @rightWidth;
+
+			#projectsActionButton {
+				button {
+					font-size: 1.25rem;
+					.fillButton(@colorThemeA);
+				}
+			}
 		}
 	}
 
-	#projectsDescBlock, #projectsReqBlock {
-		margin-bottom: 1rem;
+	#projectsSubHeader {
+		background-color: fade(@colorThemeB, 10%);
+		margin: 0 1rem;
+		padding: .5rem 1rem;
+		color: @colorDarkGray;
+		font-weight: bold;
+
+		& > * {
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 2rem;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		.prizeWidget {
+			p {
+				background-color: @colorWhite;
+				color: @colorDarkGray;
+				border: 0;
+				padding: .5rem;
+			}
+		}
+
+		@iconSize: 1.5rem;
+
+		.deadlineWidget {
+			img {
+				height: @iconSize;
+				width: @iconSize
+			}
+		}
+
+		.submissionCountWidget {
+			img {
+				height: @iconSize;
+				width: @iconSize;
+			}
+		}
 	}
 
-	#projectsDescText, #projectsReqText {
-		font-size: 1rem;
+	#projectsDescBlock, #projectsSkillsBlock {
+		margin-top: 1rem;
+		padding: 1rem 2rem;
+	}
+
+	#projectsDescTitle, #projectsSkillsTitle {
+		font-size: 1.5rem;
 		font-weight: bold;
 		color: @colorThemeB;
-		text-decoration: underline;
 	}
 
-	#projectsDescVal, #projectsReqVal {
-		padding: 0 1rem;
+	#projectsDesc, #projectsSkillsList {
+		margin: 1rem;
+		margin-bottom: 0;
 	}
 
-	#projectsRegisterButton {
-		padding: .4rem .5rem;
-		color: @colorThemeA;
-		border: .2rem solid @colorThemeA;
-		border-radius: .5rem;
-		font-size: 1.5rem;
+	#projectsSkillsBlock {
+		#projectsSkillsList {
+			display: inline-block;
+			list-style: disc inside none;
 
-		&:hover {
-			.themeABackground;
+			& > * {
+				display: list-item;
+				padding: .25rem;
+				color: @colorDarkGray;
+
+				.pseudolink;
+
+				&:hover {
+					color: @colorThemeA;
+				}
+			}
 		}
 	}
 }

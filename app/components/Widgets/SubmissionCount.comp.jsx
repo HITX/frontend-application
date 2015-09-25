@@ -10,7 +10,9 @@ var SubmissionCountWidget = React.createClass({
 
   render: function() {
     return (
-      <div className='submissionCountWidget'>
+      <div
+        className='submissionCountWidget'
+        title='Current number of submissions'>
         <img src='/img/person_icon.svg'/>
         <p>{this.props.count}</p>
       </div>
