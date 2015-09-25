@@ -33,7 +33,7 @@ var HeaderLinks = React.createClass({
 
   componentDidMount: function() {
     SessionStore.addChangeListener(this._onChange);
-    this.signup
+    // this.signup
   },
 
   componentWillUnmount: function() {
@@ -56,6 +56,17 @@ var HeaderLinks = React.createClass({
         break;
       case 'headerLinksHow':
         this.transitionTo('howitworks');
+        break;
+      case 'headerLinksProfile':
+        if (this.state.hasSession) {
+          var userId = SessionStore.getSessionData().id;
+
+          if (SessionStore.isIntern()) {
+            this.transitionTo('interns', {id: userId});
+          } else {
+            this.transitionTo('orgs', {id: userId});
+          }
+        }
         break;
     }
   },

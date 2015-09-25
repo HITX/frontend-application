@@ -10,7 +10,11 @@ module.exports = {
 
 		// Project
 		PROJECT_LOAD: null,
-		PROJECT_DROP: null
+		PROJECT_DROP: null,
+
+		// Intern
+		INTERN_LOAD: null,
+		INTERN_DROP: null
 	}),
 
 	PayloadSources: keyMirror({

@@ -29,7 +29,7 @@ var NewsfeedItem = React.createClass({
   },
 
   handleClick: function() {
-    this.transitionTo('projects', {id: this.props.data.id})
+    this.transitionTo('projects', {id: this.props.data.id});
   },
 
   render: function() {

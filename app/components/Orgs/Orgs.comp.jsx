@@ -5,7 +5,7 @@ var React = require('react');
 var Orgs = React.createClass({
   render: function() {
     return (
-      <div id='projects'>
+      <div id='orgs'>
         <p>Orgs page</p>
       </div>
     );

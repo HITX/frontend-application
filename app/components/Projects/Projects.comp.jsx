@@ -13,7 +13,11 @@ var DeadlineWidget = require('../Widgets/Deadline.comp.jsx');
 var SubmissionCountWidget = require('../Widgets/SubmissionCount.comp.jsx');
 var PrizeWidget = require('../Widgets/Prize.comp.jsx');
 
+var Navigation = require('react-router').Navigation;
+
 var Projects = React.createClass({
+
+  mixins: [Navigation],
 
   getInitialState: function() {
     return {project: null};
@@ -48,6 +52,10 @@ var Projects = React.createClass({
     ProjectStore.removeChangeListener(this._onProjectChange);
   },
 
+  handleOwnerClick: function() {
+    this.transitionTo('orgs', {id: this.state.project.owner.id});
+  },
+
   render: function() {
     var project = this.state.project;
     if (!project) {
@@ -62,7 +70,11 @@ var Projects = React.createClass({
           </div>
           <div id='projectsHeaderMiddle'>
             <p id='projectsTitle'>{project.title}</p>
-            <p id='projectsOrgName'>{project.owner.org_name}</p>
+            <p
+              id='projectsOrgName'
+              onClick={this.handleOwnerClick}>
+              {project.owner.org_name}
+            </p>
           </div>
           <div id='projectsHeaderRight'>
             <ActionButton projectId={this.props.params.id}/>

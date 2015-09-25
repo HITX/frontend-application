@@ -879,8 +879,12 @@ button {
 
 			#projectsOrgName {
 				font-size: 1.5rem;
-				// font-style: italic;
 				color: @colorDarkGray;
+				.pseudolink;
+
+				&:hover {
+					color: @colorThemeB;
+				}
 			}
 		}
 
@@ -970,6 +974,48 @@ button {
 				&:hover {
 					color: @colorThemeA;
 				}
+			}
+		}
+	}
+}
+
+
+// ============= Interns ================
+
+#interns {
+	#internsHeader {
+		padding: 0 1rem;
+
+		& > * {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		#internsHeaderLeft {
+			margin-right: 2rem;
+			text-align: center;
+
+			#internsAvatar {
+				height: 7rem;
+				width: 7rem;
+			}
+
+			#internsEmail {
+				padding: .5rem;
+				color: @colorDarkGray;
+			}
+		}
+
+		#internsHeaderRight {
+			#internsName {
+				font-size: 2rem;
+			}
+
+			#internsUsername {
+				font-size: 1.5rem;
+				font-style: italic;
+				color: @colorDarkGray;
+				margin-top: .5rem;
 			}
 		}
 	}
