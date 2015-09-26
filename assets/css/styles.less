@@ -745,20 +745,16 @@ button {
 		position: relative;
 		width: 40%;
 		text-align: left;
-		background-color: red;
 
-		#internSidebar {
+		#internSidebar, #orgSidebar {
 			position: fixed;
 			display: inline-block;
-			// background-color: green;
 
 			& > * {
 				width: 15rem;
-				// margin: 1.5rem;
-				// padding: 1rem;
 			}
 
-			#iSHeader {
+			#iSHeader, #oSHeader {
 				background-color: fade(@colorThemeA, 80%);
 				color: @colorWhite;
 				font-size: 1.25rem;
@@ -775,20 +771,42 @@ button {
 					display: inline-block;
 				}
 
-				#iSHeaderArrow {
+				#iSHeaderArrow, #oSHeaderArrow {
 					margin-left: .5rem;
 					float: right;
 				}
 			}
 
-			#iSBody {
+			#oSSubHeader {
+				// font-weight: bold;
+				padding: 1rem;
+				color: @colorDarkGray;
+				border-bottom: 1px solid @colorDarkGray;
+				.pseudolink;
 
-				#iSNoProjects {
+				&:hover {
+					color: @colorThemeA;
+				}
+
+				& > * {
+					display: inline-block;
+					vertical-align: middle;
+				}
+
+				#oSSubHeaderPlus {
+					margin-left: .5rem;
+					float: right;
+				}
+			}
+
+			#iSBody, #oSBody {
+
+				#iSNoProjects, #oSNoProjects {
 					color: @colorDarkGray;
 					padding: 1rem;
 				}
 
-				.iSItem {
+				.iSItem, .oSItem {
 					color: @colorDarkGray;
 					border-bottom: 2px solid @colorLightGray;
 					padding: 1rem;
@@ -806,7 +824,7 @@ button {
 						display: inline-block;
 					}
 
-					.iSItemArrow {
+					.iSItemArrow, .oSItemArrow {
 						float: right;
 					}
 				}

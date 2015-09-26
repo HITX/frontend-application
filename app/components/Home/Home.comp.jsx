@@ -28,7 +28,7 @@ var Home = React.createClass({
         sidebar = <InternSidebar submissions={this.state.session.submissions}/>;
         break;
       case UserTypes.ORG:
-        sidebar = <OrgSidebar/>;
+        sidebar = <OrgSidebar projects={this.state.session.projects}/>;
         break;
       default:
         sidebar = <Error message={'Unknown user type'}/>;

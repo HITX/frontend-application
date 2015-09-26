@@ -12,12 +12,10 @@ var InternSidebar = React.createClass({
   render: function() {
 
     var items = this.props.submissions.map(
-      function(item, idx, arr) {
-        var lineBreak = (idx == arr.length - 1) ? {} : <hr/>
+      function(item) {
         return (
           <div key={item.id}>
             <SidebarItem submission={item}/>
-            {lineBreak}
           </div>
         );
       }
