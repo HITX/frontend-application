@@ -998,6 +998,73 @@ button {
 }
 
 
+// ============= Project Creation =======
+
+#projectCreation {
+	text-align: center;
+
+	table {
+		width: 100%;
+		margin-bottom: 2rem;
+		border-collapse: collapse;
+		text-align: left;
+
+		#pCFirstCol {
+			width: 20rem;
+		}
+
+		#pCSecondCol {
+			// background-color: fade(@colorThemeB, 20%);
+		}
+
+		tr {
+			border-bottom: 2px solid @colorLightGray;
+
+			&:last-child {
+				border-bottom: 0;
+			}
+
+			td {
+				padding: 1rem;
+
+				&:first-child {
+					font-size: 1.25rem;
+					font-weight: bold;
+					color: @colorThemeB;
+				}
+
+				textarea {
+					width: 30rem;
+				}
+			}
+		}
+
+		#pCTitleRow {
+			textarea {
+				height: 5rem;
+			}
+		}
+
+		#pCDescRow {
+			textarea {
+				height: 15rem;
+			}
+		}
+
+		#pCPrizeRow {
+			input {
+				margin-left: .5rem;
+				width: 5rem;
+			}
+		}
+	}
+
+	#pCCreateButton {
+		.fillButton(@colorThemeA);
+	}
+}
+
+
 // ============= Interns ================
 
 #interns {

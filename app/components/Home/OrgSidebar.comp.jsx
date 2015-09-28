@@ -4,13 +4,21 @@ var React = require('react');
 
 var SidebarItem = require('./OrgSidebarItem.comp.jsx');
 
+var Navigation = require('react-router').Navigation;
+
 var OrgSidebar = React.createClass({
+
+  mixins: [Navigation],
+
   propTypes: {
     projects: React.PropTypes.array.isRequired
   },
 
-  render: function() {
+  handleNewProjectClick: function() {
+    this.transitionTo('projectCreation');
+  },
 
+  render: function() {
     var items = this.props.projects.map(
       function(item) {
         return (
@@ -31,7 +39,9 @@ var OrgSidebar = React.createClass({
           <p>My Projects</p>
           <p id='oSHeaderArrow'>&rsaquo;</p>
         </div>
-        <div id='oSSubHeader'>
+        <div
+          id='oSSubHeader'
+          onClick={this.handleNewProjectClick}>
           <p>New Project</p>
           <p id='oSSubHeaderPlus'>+</p>
         </div>
