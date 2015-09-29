@@ -58,6 +58,8 @@ window.Internshyps = (function() {
   }
 
   return {
+    hasToken: function() { return !!authToken; },
+
     get: function(urlPath, params) {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
