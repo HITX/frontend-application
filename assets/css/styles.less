@@ -52,6 +52,8 @@
 
 @projectsActionWidth: 15rem;
 
+@contentMinHeight: ~'calc(100vh - @{headerHeight})';
+
 // =============== MIXINS ===============
 
 .shadow_low {
@@ -109,11 +111,10 @@ button {
 #content {
 	margin: auto;
 	margin-top: @headerHeight;
-	padding: 1rem 0;
 	overflow: hidden;
 	width: 100%;
 	max-width: @pageWidth;
-	min-height: ~'calc(100vh - @{headerHeight})';
+	min-height: @contentMinHeight;
 	background-color: @colorWhite;
 }
 
@@ -609,12 +610,14 @@ button {
 .prizeWidget {
 	p {
 		display: inline-block;
+		min-width: 3rem;
 		padding: 3.5px;
 		font-weight: bold;
 		color: @colorThemeB;
 		border: 2px solid @colorThemeB;
 		border-radius: .35rem;
 		vertical-align: middle;
+		text-align: center;
 	}
 }
 
@@ -622,10 +625,14 @@ button {
 
 #home {
 	text-align: center;
-	margin-top: 2rem;
+	// margin-top: 2rem;
+	height: @contentMinHeight;
+
+	@topMargin: 2rem;
 
 	& > * {
 		display: inline-block;
+		margin-top: @topMargin;
 	}
 
 	#itemList {
@@ -633,14 +640,27 @@ button {
 		float: left;
 		text-align: center;
 
+		height: ~'calc(100% - @{topMargin})';
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
 		#newsfeed {
 			display: inline-block;
 			text-align: left;
 
 			.newsfeedItem {
-				max-height: 15rem;
-
+				margin-bottom: 2rem;
 				.pseudolink;
+
+				&:last-child {
+					margin-bottom: 0;
+					.newsfeedItemFooter {
+						border-bottom: 0;
+					}
+				}
 
 				& > * {
 					display: inline-block;
@@ -657,8 +677,10 @@ button {
 					}
 
 					.prizeWidget {
-						min-width: 3rem;
 						font-size: .75rem;
+						p {
+							min-width: 3rem;
+						}
 					}
 				}
 
@@ -712,6 +734,8 @@ button {
 					margin-right: 5.5rem;
 					color: @colorDarkGray;
 					font-weight: bold;
+					border-bottom: 2px solid @colorLightGray;
+					padding-bottom: 1rem;
 
 					& > * {
 						display: inline-block;
@@ -744,11 +768,12 @@ button {
 	#sidebar {
 		position: relative;
 		width: 40%;
-		text-align: left;
+		text-align: center;
 
 		#internSidebar, #orgSidebar {
-			position: fixed;
+			// position: fixed;
 			display: inline-block;
+			text-align: left;
 
 			& > * {
 				width: 15rem;
@@ -940,6 +965,7 @@ button {
 				background-color: @colorWhite;
 				color: @colorDarkGray;
 				border: 0;
+				min-width: 4rem;
 				padding: .5rem;
 			}
 		}

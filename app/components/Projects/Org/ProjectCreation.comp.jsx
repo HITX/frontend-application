@@ -2,6 +2,8 @@
 
 var React = require('react');
 
+var SessionActions = require('../../../actions/Session.actions.js');
+
 var Navigation = require('react-router').Navigation;
 var SessionGuardMixin = require('../../SessionMixins/SessionGuardMixin.mixin.jsx');
 var InputMixinFactory = require('../../InputMixinFactory/InputMixinFactory.mixin.jsx');
@@ -32,7 +34,17 @@ var ProjectCreation = React.createClass({
     if (this.validateInputs()) {
       Internshyps.post('projects', this.getAllInputData()).then(
         function(result) {
-          this.transitionTo('home');
+          Internshyps.get('me', {'expand': 'submissions.project.owner,projects'}).then(
+            function(result) {
+              SessionActions.loadSession(result.response);
+              this.transitionTo('home');
+            }.bind(this),
+            function(err) {
+              SessionActions.dropSession();
+              console.log('Error retrieving session data');
+              console.log(err.response);
+            }
+          );
         }.bind(this),
         function(err) {
           console.log('Project creation server error:');

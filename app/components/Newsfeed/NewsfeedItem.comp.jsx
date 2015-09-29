@@ -8,6 +8,8 @@ var DeadlineWidget = require('../Widgets/Deadline.comp.jsx');
 var SubmissionCountWidget = require('../Widgets/SubmissionCount.comp.jsx');
 var PrizeWidget = require('../Widgets/Prize.comp.jsx');
 
+var MAX_DESC_LENGTH = 140;
+
 var NewsfeedItem = React.createClass({
 
   mixins: [Navigation],
@@ -34,7 +36,10 @@ var NewsfeedItem = React.createClass({
 
   render: function() {
 
-    var testDesc = 'lakdjf lakdjf;lakdj lakdj ajjd alkdjf adlfja dlkj l jadlkfjad falkj';
+    var truncDesc = this.props.data.description;
+    if (truncDesc.length > MAX_DESC_LENGTH) {
+      truncDesc = truncDesc.substring(0, MAX_DESC_LENGTH) + '...';
+    }
 
     return (
       <div
@@ -55,7 +60,7 @@ var NewsfeedItem = React.createClass({
             {this.props.data.title}
           </p>
           <p className='newsfeedItemOrgName'>{this.props.data.owner.org_name}</p>
-          <p className='newsfeedItemDesc'>{testDesc}</p>
+          <p className='newsfeedItemDesc'>{truncDesc}</p>
         </div>
         <div className='newsfeedItemRight'>
           <p>Tag 1</p>

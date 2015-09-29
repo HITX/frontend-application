@@ -8,6 +8,11 @@ var InternSidebar = React.createClass({
   propTypes: {
     submissions: React.PropTypes.array.isRequired
   },
+  
+  // TODO
+  handleHeaderClick: function() {
+    console.log('Not yet implemented');
+  },
 
   render: function() {
 
@@ -25,7 +30,7 @@ var InternSidebar = React.createClass({
 
     return (
       <div id='internSidebar'>
-        <div id='iSHeader'>
+        <div id='iSHeader' onClick={this.handleHeaderClick}>
           <p>My Projects</p>
           <p id='iSHeaderArrow'>&rsaquo;</p>
         </div>

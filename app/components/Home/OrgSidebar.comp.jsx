@@ -14,6 +14,11 @@ var OrgSidebar = React.createClass({
     projects: React.PropTypes.array.isRequired
   },
 
+  // TODO
+  handleHeaderClick: function() {
+    console.log('Not yet implemented');
+  },
+
   handleNewProjectClick: function() {
     this.transitionTo('projectCreation');
   },
@@ -33,7 +38,7 @@ var OrgSidebar = React.createClass({
 
     return (
       <div id='orgSidebar'>
-        <div id='oSHeader'>
+        <div id='oSHeader' onClick={this.handleHeaderClick}>
           <p>My Projects</p>
           <p id='oSHeaderArrow'>&rsaquo;</p>
         </div>
