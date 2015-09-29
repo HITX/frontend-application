@@ -4,6 +4,8 @@ var React = require('react');
 var Navigation = require('react-router').Navigation;
 var SessionStore = require('../../stores/Session.store.js');
 
+// TODO: turn this into a factory that can allow only certain user types access
+
 var SessionGuardMixin = {
   statics: {
     willTransitionTo: function(transition) {

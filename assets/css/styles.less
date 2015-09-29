@@ -778,10 +778,10 @@ button {
 			}
 
 			#oSSubHeader {
-				// font-weight: bold;
+				font-weight: bold;
 				padding: 1rem;
 				color: @colorDarkGray;
-				border-bottom: 1px solid @colorDarkGray;
+				border-bottom: 2px solid @colorLightGray;
 				.pseudolink;
 
 				&:hover {
@@ -1035,6 +1035,12 @@ button {
 
 				textarea {
 					width: 30rem;
+				}
+
+				textarea, input {
+					&.invalid {
+						background-color: fade(red, 20%);
+					}
 				}
 			}
 		}

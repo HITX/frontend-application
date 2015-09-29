@@ -22,9 +22,7 @@ var OrgSidebar = React.createClass({
     var items = this.props.projects.map(
       function(item) {
         return (
-          <div key={item.id}>
-            <SidebarItem project={item}/>
-          </div>
+          <SidebarItem key={item.id} project={item}/>
         );
       }
     );

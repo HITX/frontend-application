@@ -14,9 +14,7 @@ var InternSidebar = React.createClass({
     var items = this.props.submissions.map(
       function(item) {
         return (
-          <div key={item.id}>
-            <SidebarItem submission={item}/>
-          </div>
+          <SidebarItem key={item.id} submission={item}/>
         );
       }
     );
