@@ -22,6 +22,13 @@ var SessionActions = {
       actionType: ActionTypes.SESSION_ADD_PROJECT,
       data: projectData
     });
+  },
+
+  addSubmission: function(submissionData) {
+    AppDispatcher.handleClientAction({
+      actionType: ActionTypes.SESSION_ADD_SUBMISSION,
+      data: submissionData
+    });
   }
 }
 

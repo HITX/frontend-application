@@ -8,6 +8,7 @@ module.exports = {
 		SESSION_LOAD: null,
     SESSION_DROP: null,
 		SESSION_ADD_PROJECT: null,
+		SESSION_ADD_SUBMISSION: null,
 
 		// Project
 		PROJECT_LOAD: null,

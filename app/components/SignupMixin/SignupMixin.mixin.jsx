@@ -151,7 +151,7 @@ var SignupModal = React.createClass({
     }.bind(this), {profile: {}});
 
     var endpoint = this.async_signup_type == 'ORG' ? 'orgs' : 'interns';
-    Internshyps.post(endpoint, data).then(
+    Internshyps.post(endpoint, data, null).then(
       function(result) {
         // this.setState({ message: 'User created. Logging in...' });
 

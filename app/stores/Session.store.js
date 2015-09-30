@@ -33,6 +33,12 @@ function _addProject(projectData) {
   }
 }
 
+function _addSubmission(submissionData) {
+  if (_hasSession) {
+    _sessionData.submissions.unshift(submissionData);
+  }
+}
+
 var SessionStore = objectAssign({}, EventEmitter.prototype, {
   addChangeListener: function(cb) { this.on(CHANGE_EVENT, cb); },
   removeChangeListener: function(cb) { this.removeListener(CHANGE_EVENT, cb); },
@@ -95,6 +101,10 @@ SessionStore.dispatcherToken = AppDispatcher.register(function(payload) {
       break;
     case ActionTypes.SESSION_ADD_PROJECT:
       _addProject(action.data);
+      SessionStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.SESSION_ADD_SUBMISSION:
+      _addSubmission(action.data);
       SessionStore.emit(CHANGE_EVENT);
       break;
     default:

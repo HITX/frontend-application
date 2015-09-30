@@ -72,10 +72,10 @@ window.Internshyps = (function() {
       });
     },
 
-    post: function(urlPath, data) {
+    post: function(urlPath, data, params) {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
-        req.open('POST', _buildUrl(urlPath, null));
+        req.open('POST', _buildUrl(urlPath, params));
         if (authToken) {
           req.setRequestHeader('Authorization', 'Bearer ' + authToken);
         }

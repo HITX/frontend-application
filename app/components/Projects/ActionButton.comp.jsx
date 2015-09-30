@@ -6,6 +6,7 @@ var Navigation = require('react-router').Navigation;
 
 var UserTypes = require('../../constants/AppConstants.js').UserTypes;
 
+var SessionActions = require('../../actions/Session.actions.js');
 var SessionStore = require('../../stores/Session.store.js');
 
 var ActionButton = React.createClass({
@@ -35,8 +36,19 @@ var ActionButton = React.createClass({
   },
 
   handleRegisterClick: function() {
-    console.log('Will handle register click here');
-    
+    var endpoint = 'projects/' + this.props.projectId + '/register';
+    Internshyps.post(endpoint, null, {'expand': 'project'}).then(
+      function(result) {
+        var submission = result.response;
+        SessionActions.addSubmission(submission);
+        // this.transitionTo('home');
+        this.transitionTo('submissions', {id: submission.id});
+      }.bind(this),
+      function(err) {
+        console.log('Registration error');
+        console.log(err.response);
+      }
+    );
   },
 
   handleSubmissionClick: function(submissionId) {

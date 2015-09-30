@@ -32,7 +32,7 @@ var ProjectCreation = React.createClass({
 
   handleCreateClick: function() {
     if (this.validateInputs()) {
-      Internshyps.post('projects', this.getAllInputData()).then(
+      Internshyps.post('projects', this.getAllInputData(), null).then(
         function(result) {
           SessionActions.addProject(result.response);
           this.transitionTo('home');
