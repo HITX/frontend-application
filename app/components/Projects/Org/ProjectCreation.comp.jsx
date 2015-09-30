@@ -34,17 +34,8 @@ var ProjectCreation = React.createClass({
     if (this.validateInputs()) {
       Internshyps.post('projects', this.getAllInputData()).then(
         function(result) {
-          Internshyps.get('me', {'expand': 'submissions.project.owner,projects'}).then(
-            function(result) {
-              SessionActions.loadSession(result.response);
-              this.transitionTo('home');
-            }.bind(this),
-            function(err) {
-              SessionActions.dropSession();
-              console.log('Error retrieving session data');
-              console.log(err.response);
-            }
-          );
+          SessionActions.addProject(result.response);
+          this.transitionTo('home');
         }.bind(this),
         function(err) {
           console.log('Project creation server error:');

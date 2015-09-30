@@ -2,11 +2,15 @@
 
 var React = require('react');
 
+var Navigation = require('react-router').Navigation;
+
 var UserTypes = require('../../constants/AppConstants.js').UserTypes;
 
 var SessionStore = require('../../stores/Session.store.js');
 
 var ActionButton = React.createClass({
+
+  mixins: [Navigation],
 
   propTypes: {
     projectId: React.PropTypes.string.isRequired
@@ -30,13 +34,14 @@ var ActionButton = React.createClass({
     SessionStore.removeChangeListener(this._onSessionChange);
   },
 
-  // handleRegisterClick: function() {
-  //   console.log('Will handle register click here');
-  // },
-  //
-  // handleSubmissionClick: function() {
-  //   console.log('Will handle submission click here');
-  // },
+  handleRegisterClick: function() {
+    console.log('Will handle register click here');
+    
+  },
+
+  handleSubmissionClick: function(submissionId) {
+    this.transitionTo('submissions', {id: submissionId});
+  },
 
   _render_helper: function() {
     var userSpecific;
@@ -45,13 +50,15 @@ var ActionButton = React.createClass({
         var submission = SessionStore.getInternSubmissionByProjectId(this.props.projectId);
         if (submission) {
           return (
-            <button id='projectsEditSubmissionButton'>
+            <button
+              id='projectsEditSubmissionButton'
+              onClick={this.handleSubmissionClick.bind(this, submission.id)}>
               Edit Submission &rsaquo;
             </button>
           );
         }
         return (
-          <button id='projectsRegisterButton'>
+          <button id='projectsRegisterButton' onClick={this.handleRegisterClick}>
             Register
           </button>
         );

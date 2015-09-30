@@ -15,6 +15,13 @@ var SessionActions = {
     AppDispatcher.handleClientAction({
       actionType: ActionTypes.SESSION_DROP
     });
+  },
+
+  addProject: function(projectData) {
+    AppDispatcher.handleClientAction({
+      actionType: ActionTypes.SESSION_ADD_PROJECT,
+      data: projectData
+    });
   }
 }
 

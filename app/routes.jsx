@@ -13,7 +13,6 @@ var Orgs = require('./components/Orgs/Orgs.comp.jsx');
 var Interns = require('./components/Interns/Interns.comp.jsx');
 var ProjectCreation = require('./components/Projects/Org/ProjectCreation.comp.jsx');
 var Submissions = require('./components/Submissions/Submissions.comp.jsx');
-var SubmissionsInternEditList = require('./components/Submissions/Intern/EditList.comp.jsx');
 var NotFound = require('./components/NotFound/NotFound.comp.jsx');
 
 var routes = (
@@ -26,7 +25,6 @@ var routes = (
 			<Route name='interns' path='interns/:id' handler={Interns}/>
 			<Route name='projectCreation' path='project-creation' handler={ProjectCreation}/>
 			<Route name='submissions' path='submissions/:id' handler={Submissions}/>
-			<Route name='my-submissions' path='my-submissions' handler={SubmissionsInternEditList}/>
 		</Route>
 		<NotFoundRoute handler={NotFound}/>
 	</Route>

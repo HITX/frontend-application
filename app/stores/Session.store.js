@@ -27,6 +27,12 @@ function _dropSession() {
   _sessionData = {};
 }
 
+function _addProject(projectData) {
+  if (_hasSession) {
+    _sessionData.projects.unshift(projectData);
+  }
+}
+
 var SessionStore = objectAssign({}, EventEmitter.prototype, {
   addChangeListener: function(cb) { this.on(CHANGE_EVENT, cb); },
   removeChangeListener: function(cb) { this.removeListener(CHANGE_EVENT, cb); },
@@ -85,6 +91,10 @@ SessionStore.dispatcherToken = AppDispatcher.register(function(payload) {
       break;
     case ActionTypes.SESSION_DROP:
       _dropSession();
+      SessionStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.SESSION_ADD_PROJECT:
+      _addProject(action.data);
       SessionStore.emit(CHANGE_EVENT);
       break;
     default:
