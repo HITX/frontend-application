@@ -33,22 +33,22 @@ var OrgSidebar = React.createClass({
     );
 
     if (items.length == 0) {
-      items = <p id='oSNoProjects'>No current projects</p>;
+      items = <p className='sidebarEmpty'>No current projects</p>;
     }
 
     return (
       <div id='orgSidebar'>
-        <div id='oSHeader' onClick={this.handleHeaderClick}>
+        <div className='sidebarHeaderClickable' onClick={this.handleHeaderClick}>
           <p>My Projects</p>
-          <p id='oSHeaderArrow'>&rsaquo;</p>
+          <p className='sidebarHeaderArrow'>&rsaquo;</p>
         </div>
         <div
-          id='oSSubHeader'
+          className='sidebarSubHeader'
           onClick={this.handleNewProjectClick}>
           <p>New Project</p>
-          <p id='oSSubHeaderPlus'>+</p>
+          <p className='sidebarSubHeaderArrow'>+</p>
         </div>
-        <div id='oSBody'>
+        <div className='sidebarBody'>
           {items}
         </div>
       </div>

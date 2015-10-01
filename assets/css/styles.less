@@ -621,6 +621,108 @@ button {
 	}
 }
 
+// ============= Sidebar ===============
+
+.sidebar {
+	display: inline-block;
+	text-align: left;
+
+	& > * {
+		width: 15rem;
+	}
+
+
+
+	.sidebarHeader, .sidebarHeaderClickable {
+		// background-color: fade(@colorThemeA, 80%);
+		color: @colorWhite;
+		font-size: 1.25rem;
+		font-weight: bold;
+		padding: 1rem;
+		margin-bottom: 1rem;
+		// .pseudolink;
+
+		&:hover {
+			background-color: @colorThemeA;
+		}
+
+		& > * {
+			display: inline-block;
+		}
+
+		.sidebarHeaderArrow {
+			margin-left: .5rem;
+			float: right;
+		}
+	}
+
+	.sidebarHeader {
+		background-color: @colorThemeA;
+	}
+
+	.sidebarHeaderClickable {
+		background-color: fade(@colorThemeA, 80%);
+		.pseudolink;
+
+		&:hover {
+			background-color: @colorThemeA;
+		}
+	}
+
+	.sidebarSubHeader {
+		font-weight: bold;
+		padding: 1rem;
+		color: @colorDarkGray;
+		border-bottom: 2px solid @colorLightGray;
+		.pseudolink;
+
+		&:hover {
+			color: @colorThemeA;
+		}
+
+		& > * {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.sidebarSubHeaderArrow {
+			margin-left: .5rem;
+			float: right;
+		}
+	}
+
+	.sidebarBody {
+		.sidebarEmpty {
+			color: @colorDarkGray;
+			padding: 1rem;
+		}
+
+		.sidebarItem {
+			color: @colorDarkGray;
+			border-bottom: 2px solid @colorLightGray;
+			padding: 1rem;
+			.pseudolink;
+
+			&:last-child {
+				border-bottom: 0;
+			}
+
+			&:hover {
+				color: @colorThemeA;
+			}
+
+			& > * {
+				display: inline-block;
+			}
+
+			.sidebarItemArrow {
+				float: right;
+			}
+		}
+	}
+}
+
+
 // ============= Home ==================
 
 #home {
@@ -766,94 +868,11 @@ button {
 	}
 
 	#sidebar {
-		position: relative;
 		width: 40%;
 		text-align: center;
 
 		#internSidebar, #orgSidebar {
-			// position: fixed;
-			display: inline-block;
-			text-align: left;
-
-			& > * {
-				width: 15rem;
-			}
-
-			#iSHeader, #oSHeader {
-				background-color: fade(@colorThemeA, 80%);
-				color: @colorWhite;
-				font-size: 1.25rem;
-				font-weight: bold;
-				padding: 1rem;
-				margin-bottom: 1rem;
-				.pseudolink;
-
-				&:hover {
-					background-color: @colorThemeA;
-				}
-
-				& > * {
-					display: inline-block;
-				}
-
-				#iSHeaderArrow, #oSHeaderArrow {
-					margin-left: .5rem;
-					float: right;
-				}
-			}
-
-			#oSSubHeader {
-				font-weight: bold;
-				padding: 1rem;
-				color: @colorDarkGray;
-				border-bottom: 2px solid @colorLightGray;
-				.pseudolink;
-
-				&:hover {
-					color: @colorThemeA;
-				}
-
-				& > * {
-					display: inline-block;
-					vertical-align: middle;
-				}
-
-				#oSSubHeaderPlus {
-					margin-left: .5rem;
-					float: right;
-				}
-			}
-
-			#iSBody, #oSBody {
-
-				#iSNoProjects, #oSNoProjects {
-					color: @colorDarkGray;
-					padding: 1rem;
-				}
-
-				.iSItem, .oSItem {
-					color: @colorDarkGray;
-					border-bottom: 2px solid @colorLightGray;
-					padding: 1rem;
-					.pseudolink;
-
-					&:last-child {
-						border-bottom: 0;
-					}
-
-					&:hover {
-						color: @colorThemeA;
-					}
-
-					& > * {
-						display: inline-block;
-					}
-
-					.iSItemArrow, .oSItemArrow {
-						float: right;
-					}
-				}
-			}
+			.sidebar;
 		}
 	}
 }
@@ -1096,6 +1115,40 @@ button {
 	}
 }
 
+
+// ============= Submissions ============
+
+#submissions {
+
+	#submissionsHeader {
+		background-color: fade(red, 20%);
+	}
+
+	#submissionsViewer, #submissionsSidebar {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	#submissionsViewer {
+		width: 60%;
+		text-align: center;
+		background-color: fade(blue, 20%);
+	}
+
+	#submissionsSidebar {
+		width: 40%;
+		text-align: center;
+		background-color: fade(green, 20%);
+
+		#sidebar {
+			.sidebar;
+		}
+	}
+
+	#submissionsFooter {
+		background-color: fade(purple, 20%);
+	}
+}
 
 // ============= Interns ================
 

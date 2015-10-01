@@ -22,10 +22,10 @@ var OrgSidebarItem = React.createClass({
 
     return (
       <div
-        className='oSItem'
+        className='sidebarItem'
         onClick={this.handleClick}>
-        <p className='oSItemTitle'>{data.title}</p>
-        <p className='oSItemArrow'>&rsaquo;</p>
+        <p className='sidebarItemTitle'>{data.title}</p>
+        <p className='sidebarItemArrow'>&rsaquo;</p>
       </div>
     );
   }

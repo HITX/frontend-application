@@ -19,15 +19,14 @@ var InternSidebarItem = React.createClass({
   },
 
   render: function() {
-
-    var data = this.props.submission
+    var data = this.props.submission;
 
     return (
       <div
-        className='iSItem'
+        className='sidebarItem'
         onClick={this.handleClick}>
-        <p className='iSItemTitle'>{data.project.title}</p>
-        <p className='iSItemArrow'>&rsaquo;</p>
+        <p className='sidebarTitle'>{data.project.title}</p>
+        <p className='sidebarItemArrow'>&rsaquo;</p>
       </div>
     );
   }
