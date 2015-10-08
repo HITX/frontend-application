@@ -21,8 +21,8 @@ var SidebarItem = React.createClass({
       <div
         className='sidebarItem'
         onClick={this.props.onItemClick.bind(null, this.props.file)}>
-        <p className='sidebarTitle'>{data.filename}</p>
-        <p className='sidebarItemArrow'>&rsaquo;</p>
+        <p className='sidebarItemArrow'>&lsaquo;</p>
+        <p className='sidebarItemTitle'>{data.filename}</p>
       </div>
     );
   }

@@ -623,7 +623,7 @@ button {
 
 // ============= Sidebar ===============
 
-.sidebar {
+.sidebar(@pointLeft) {
 	display: inline-block;
 	text-align: left;
 
@@ -631,16 +631,12 @@ button {
 		width: 15rem;
 	}
 
-
-
 	.sidebarHeader, .sidebarHeaderClickable {
-		// background-color: fade(@colorThemeA, 80%);
 		color: @colorWhite;
 		font-size: 1.25rem;
 		font-weight: bold;
 		padding: 1rem;
 		margin-bottom: 1rem;
-		// .pseudolink;
 
 		&:hover {
 			background-color: @colorThemeA;
@@ -686,6 +682,15 @@ button {
 		}
 
 		.sidebarSubHeaderArrow {
+			min-width: 1rem;
+			text-align: center;
+		}
+
+		.sidebarSubHeaderTitle when (@pointLeft = true) {
+			margin-left: .5rem;
+		}
+
+		.sidebarSubHeaderArrow when (@pointLeft = false) {
 			margin-left: .5rem;
 			float: right;
 		}
@@ -716,10 +721,31 @@ button {
 			}
 
 			.sidebarItemArrow {
+				min-width: 1rem;
+				text-align: center;
+			}
+
+			.sidebarItemTitle when (@pointLeft = true) {
+				margin-left: .5rem;
+			}
+
+			.sidebarItemArrow when (@pointLeft = false) {
 				float: right;
 			}
 		}
 	}
+}
+
+.sidebarPointRight {
+	.sidebar(false);
+}
+
+.sidebarPointLeft {
+	.sidebar(true);
+}
+
+.sidebar {
+	.sidebarPointRight;
 }
 
 
@@ -1131,17 +1157,27 @@ button {
 
 	#submissionsViewer {
 		width: 60%;
-		text-align: center;
 		background-color: fade(blue, 20%);
+
+		#viewerHeader {
+			text-align: center;
+		}
 	}
 
 	#submissionsSidebar {
 		width: 40%;
 		text-align: center;
-		background-color: fade(green, 20%);
+		// background-color: fade(green, 20%);
 
 		#sidebar {
-			.sidebar;
+			.sidebarPointLeft;
+
+			.spinnerWidget {
+				vertical-align: middle;
+				text-align: center;
+				height: 1rem;
+				width: 1rem;
+			}
 
 			input[type='file'] {
 				display: none;

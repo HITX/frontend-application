@@ -25,7 +25,7 @@ var InternSidebarItem = React.createClass({
       <div
         className='sidebarItem'
         onClick={this.handleClick}>
-        <p className='sidebarTitle'>{data.project.title}</p>
+        <p className='sidebarItemTitle'>{data.project.title}</p>
         <p className='sidebarItemArrow'>&rsaquo;</p>
       </div>
     );

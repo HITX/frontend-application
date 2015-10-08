@@ -4,6 +4,8 @@ var React = require('react');
 
 var SidebarItem = require('./SidebarItem.comp.jsx');
 
+var SpinnerWidget = require('../Widgets/Spinner.comp.jsx');
+
 var SubmissionActions = require('../../actions/Submission.actions.js');
 var SubmissionStore = require('../../stores/Submission.store.js');
 
@@ -68,8 +70,8 @@ var Sidebar = React.createClass({
             <div
               key={'uploading_' + idx}
               className='sidebarItem'>
-              <p className='sidebarTitle'>{item}</p>
-              <p className='sidebarItemArrow'>...</p>
+              <SpinnerWidget/>
+              <p className='sidebarItemTitle'>{item}</p>
             </div>
           );
         }
@@ -84,8 +86,8 @@ var Sidebar = React.createClass({
         <div
           className='sidebarSubHeader'
           onClick={this.handleNewFileClick}>
-          <p>New File</p>
           <p className='sidebarSubHeaderArrow'>+</p>
+          <p className='sidebarSubHeaderTitle'>New File</p>
           <input
             type='file'
             ref='fileInput'
