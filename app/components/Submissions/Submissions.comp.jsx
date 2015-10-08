@@ -87,7 +87,12 @@ var Submissions = React.createClass({
         </div>
         <FileViewer file={currentFile}/>
         <div id='submissionsSidebar'>
-          <Sidebar files={files} uploadingFiles={uploadingFiles} onItemClick={this.handleFileItemClick}/>
+          <Sidebar
+            submissionId={this.props.params.id}
+            files={files}
+            currentFile={currentFile}
+            uploadingFiles={uploadingFiles}
+            onItemClick={this.handleFileItemClick}/>
         </div>
         <div id='submissionsFooter'>
           <button>Submit</button>

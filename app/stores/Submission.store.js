@@ -116,10 +116,13 @@ SubmissionStore.dispatcherToken = AppDispatcher.register(function(payload) {
       _addUploadingFile(action.data);
       SubmissionStore.emit(CHANGE_EVENT);
       break;
-    case ActionTypes.SUBMISSION_UPLOADING_FILE_FINISH:
+    case ActionTypes.SUBMISSION_UPLOADING_FILE_SUCCEED:
       _removeUploadingFile(action.data.filename);
       _addSubmissionFile(action.data);
       SubmissionStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.SUBMISSION_UPLOADING_FILE_FAIL:
+      _removeUploadingFile(action.data);
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILES_DROP:
       _dropUploadingFiles();

@@ -5,7 +5,7 @@ var React = require('react');
 var PrizeWidget = React.createClass({
 
   propTypes: {
-    prize: React.PropTypes.number.isRequired
+    prize: React.PropTypes.string.isRequired
   },
 
   render: function() {

@@ -116,20 +116,32 @@ window.Internshyps = (function() {
       });
     },
 
-    postFile: function(filename) {
+    postFormData: function(urlPath, data, params) {
       return new Promise(function(resolve, reject) {
-        setTimeout(function() {
-          resolve({
-            status: 200,
-            message: 'fake whatever',
-            response: {
-              'filename': filename,
-              'file': 'fake_url',
-              'id': 'fake_id',
-              'submission': 'fake_submission_id'
-            }
-          });
-        }, 3000);
+        var req = new XMLHttpRequest();
+        req.open('POST', _buildUrl(urlPath, params));
+        if (authToken) {
+          req.setRequestHeader('Authorization', 'Bearer ' + authToken);
+        }
+        // req.setRequestHeader('Content-Type', 'multipart/form-data');
+        _handler(req, resolve, reject);
+        var formData = new FormData();
+        for (var key in data) {
+          formData.append(key, data[key]);
+        }
+        req.send(formData);
+        // setTimeout(function() {
+        //   resolve({
+        //     status: 200,
+        //     message: 'fake whatever',
+        //     response: {
+        //       'filename': filename,
+        //       'file': 'fake_url',
+        //       'id': 'fake_id',
+        //       'submission': 'fake_submission_id'
+        //     }
+        //   });
+        // }, 3000);
       });
     },
 

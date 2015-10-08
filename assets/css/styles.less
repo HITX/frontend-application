@@ -15,6 +15,9 @@
 @colorThemeBLight: #C1C1D1;
 // @colorThemeBDark: #1E1E3D;
 
+@colorError: darken(#FF7F7F, 20%);
+@colorErrorBackground: fade(red, 20%);
+
 
 // =============== MEDIA BREAKS ========
 
@@ -88,6 +91,11 @@
 
 .themeBText {
 	color: @colorThemeB;
+}
+
+.errorMessage {
+	color: @colorError;
+	background-color: @colorErrorBackground;
 }
 
 
@@ -665,11 +673,19 @@ button {
 		}
 	}
 
+	.sidebarMessage {
+		margin-top: -.5rem;
+		margin-bottom: 1rem;
+		padding: .5rem;
+		.errorMessage;
+	}
+
 	.sidebarSubHeader {
 		font-weight: bold;
 		padding: 1rem;
 		color: @colorDarkGray;
 		border-bottom: 2px solid @colorLightGray;
+		white-space: nowrap;
 		.pseudolink;
 
 		&:hover {
@@ -682,8 +698,15 @@ button {
 		}
 
 		.sidebarSubHeaderArrow {
-			min-width: 1rem;
+			width: 1rem;
 			text-align: center;
+		}
+
+		.sidebarSubHeaderTitle {
+			width: 12rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		.sidebarSubHeaderTitle when (@pointLeft = true) {
@@ -706,23 +729,40 @@ button {
 			color: @colorDarkGray;
 			border-bottom: 2px solid @colorLightGray;
 			padding: 1rem;
-			.pseudolink;
+			white-space: nowrap;
+			// .pseudolink;
 
 			&:last-child {
 				border-bottom: 0;
+			}
+
+			&:not(.selected) {
+				.pseudolink;
 			}
 
 			&:hover {
 				color: @colorThemeA;
 			}
 
+			&.selected {
+				color: @colorThemeA;
+			}
+
 			& > * {
 				display: inline-block;
+				vertical-align: middle;
 			}
 
 			.sidebarItemArrow {
-				min-width: 1rem;
+				width: 1rem;
 				text-align: center;
+			}
+
+			.sidebarItemTitle {
+				width: 12rem;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 
 			.sidebarItemTitle when (@pointLeft = true) {
@@ -1110,7 +1150,8 @@ button {
 
 				textarea, input {
 					&.invalid {
-						background-color: fade(red, 20%);
+						.errorMessage;
+						// background-color: @colorErrorBackground;
 					}
 				}
 			}
@@ -1147,7 +1188,7 @@ button {
 #submissions {
 
 	#submissionsHeader {
-		background-color: fade(red, 20%);
+		background-color: @colorErrorBackground;
 	}
 
 	#submissionsViewer, #submissionsSidebar {

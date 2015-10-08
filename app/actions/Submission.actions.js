@@ -37,10 +37,17 @@ var SubmissionActions = {
     });
   },
 
-  finishUploadingFile: function(fileData) {
+  succeedUploadingFile: function(fileData) {
     AppDispatcher.handleClientAction({
-      actionType: ActionTypes.SUBMISSION_UPLOADING_FILE_FINISH,
+      actionType: ActionTypes.SUBMISSION_UPLOADING_FILE_SUCCEED,
       data: fileData
+    });
+  },
+
+  failUploadingFile: function(filename) {
+    AppDispatcher.handleClientAction({
+      actionType: ActionTypes.SUBMISSION_UPLOADING_FILE_FAIL,
+      data: filename
     });
   },
 
