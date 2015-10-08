@@ -72,6 +72,37 @@ window.Internshyps = (function() {
       });
     },
 
+    getFile: function(url) {
+      return new Promise(function(resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.open('GET', url);
+
+        req.onload = function() {
+          if (_statusIsSuccess(req.status)) {
+            resolve({
+              status: req.status,
+              message: req.statusText,
+              response: req.response
+            });
+          } else {
+            reject({
+              status: req.status,
+              message: req.statusText,
+              response: req.response
+            });
+          }
+        }
+
+        req.onerror = function() {
+          reject({
+            status: 0,
+            message: 'Network Error'
+          });
+        }
+        req.send();
+      });
+    },
+
     post: function(urlPath, data, params) {
       return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
@@ -82,6 +113,23 @@ window.Internshyps = (function() {
         req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         _handler(req, resolve, reject);
         req.send(JSON.stringify(data));
+      });
+    },
+
+    postFile: function(filename) {
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          resolve({
+            status: 200,
+            message: 'fake whatever',
+            response: {
+              'filename': filename,
+              'file': 'fake_url',
+              'id': 'fake_id',
+              'submission': 'fake_submission_id'
+            }
+          });
+        }, 3000);
       });
     },
 

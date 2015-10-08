@@ -12,7 +12,7 @@ var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
 var _hasSession = false;
-var _sessionData = {};
+var _sessionData = null;
 
 function _loadSession(sessionData) {
 
@@ -24,7 +24,7 @@ function _loadSession(sessionData) {
 
 function _dropSession() {
   _hasSession = false;
-  _sessionData = {};
+  _sessionData = null;
 }
 
 function _addProject(projectData) {
@@ -44,7 +44,7 @@ var SessionStore = objectAssign({}, EventEmitter.prototype, {
   removeChangeListener: function(cb) { this.removeListener(CHANGE_EVENT, cb); },
 
   hasSession: function() { return _hasSession; },
-  getSessionData: function() { return _hasSession ? _sessionData : null; },
+  getSessionData: function() { return _sessionData; },
 
   getUserType: function() {
     if (!_hasSession) { return UserTypes.ANONYMOUS; }

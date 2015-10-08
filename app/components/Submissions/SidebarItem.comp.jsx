@@ -5,7 +5,8 @@ var React = require('react');
 var SidebarItem = React.createClass({
 
   propTypes: {
-    file: React.PropTypes.object.isRequired
+    file: React.PropTypes.object.isRequired,
+    onItemClick: React.PropTypes.func.isRequired
   },
 
   handleClick: function() {
@@ -19,8 +20,8 @@ var SidebarItem = React.createClass({
     return (
       <div
         className='sidebarItem'
-        onClick={this.handleClick}>
-        <p className='sidebarTitle'>{filename.txt}</p>
+        onClick={this.props.onItemClick.bind(null, this.props.file)}>
+        <p className='sidebarTitle'>{data.filename}</p>
         <p className='sidebarItemArrow'>&rsaquo;</p>
       </div>
     );

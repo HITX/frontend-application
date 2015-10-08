@@ -14,6 +14,15 @@ module.exports = {
 		PROJECT_LOAD: null,
 		PROJECT_DROP: null,
 
+		// Submission
+		SUBMISSION_LOAD: null,
+		SUBMISSION_FILES_LOAD: null,
+		SUBMISSION_DROP: null,
+		SUBMISSION_FILES_DROP: null,
+		SUBMISSION_UPLOADING_FILE_ADD: null,
+		SUBMISSION_UPLOADING_FILE_FINISH: null,
+		SUBMISSION_UPLOADING_FILES_DROP: null,
+
 		// Intern
 		INTERN_LOAD: null,
 		INTERN_DROP: null,
