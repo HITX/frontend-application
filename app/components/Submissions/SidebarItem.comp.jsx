@@ -23,7 +23,7 @@ var SidebarItem = React.createClass({
 
   render: function() {
     var data = this.props.file;
-    console.log(data);
+    // console.log(data);
 
     return (
       <div

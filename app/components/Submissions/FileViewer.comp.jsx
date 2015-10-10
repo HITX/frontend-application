@@ -21,7 +21,7 @@ var FileViewer = React.createClass({
       content: null
     });
 
-    Internshyps.getFile(this.props.file.file).then(
+    Internshyps.getFile(this.props.file.url).then(
       function(result) {
         if (this.isMounted()) {
           this.setState({
@@ -45,7 +45,7 @@ var FileViewer = React.createClass({
 
   componentDidUpdate: function(prevProps, prevState) {
     if (this.props.file) {
-      if (!prevProps.file || this.props.file.file != prevProps.file.file) {
+      if (!prevProps.file || this.props.file.url != prevProps.file.url) {
         this._fetchFileContents();
       }
     }
