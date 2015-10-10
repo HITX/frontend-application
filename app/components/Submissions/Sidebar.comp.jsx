@@ -15,8 +15,7 @@ var Sidebar = React.createClass({
     submissionId: React.PropTypes.string.isRequired,
     files: React.PropTypes.array,
     currentFile: React.PropTypes.object,
-    uploadingFiles: React.PropTypes.array,
-    onItemClick: React.PropTypes.func.isRequired
+    uploadingFiles: React.PropTypes.array
   },
 
   getInitialState: function() {
@@ -67,8 +66,7 @@ var Sidebar = React.createClass({
             <SidebarItem
               key={item.id}
               selected={currentFileId == item.id}
-              file={item}
-              onItemClick={this.props.onItemClick}/>
+              file={item}/>
           );
         }.bind(this)
       );

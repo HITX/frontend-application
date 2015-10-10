@@ -30,6 +30,19 @@ var SubmissionActions = {
     });
   },
 
+  updateCurrentFile: function(currentFileData) {
+    AppDispatcher.handleClientAction({
+      actionType: ActionTypes.SUBMISSION_CURRENT_FILE_UPDATE,
+      data: currentFileData
+    });
+  },
+
+  dropCurrentFile: function() {
+    AppDispatcher.handleClientAction({
+      actionType: ActionTypes.SUBMISSION_CURRENT_FILE_DROP
+    });
+  },
+
   addUploadingFile: function(filename) {
     AppDispatcher.handleClientAction({
       actionType: ActionTypes.SUBMISSION_UPLOADING_FILE_ADD,

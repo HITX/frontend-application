@@ -29,7 +29,7 @@ var Submissions = React.createClass({
         submission: SubmissionStore.getSubmissionData(),
         files: SubmissionStore.getSubmissionFilesData(),
         uploadingFiles: SubmissionStore.getUploadingFilesData(),
-        currentFile: null
+        currentFile: SubmissionStore.getCurrentFileData(),
       });
     }
   },
@@ -68,11 +68,11 @@ var Submissions = React.createClass({
     SubmissionStore.removeChangeListener(this._onSubmissionChange);
   },
 
-  handleFileItemClick: function(fileObj) {
-    this.setState({
-      currentFile: fileObj
-    });
-  },
+  // handleFileItemClick: function(fileObj) {
+  //   this.setState({
+  //     currentFile: fileObj
+  //   });
+  // },
 
   render: function() {
     var submission = this.state.submission;
@@ -90,8 +90,7 @@ var Submissions = React.createClass({
             submissionId={this.props.params.id}
             files={files}
             currentFile={currentFile}
-            uploadingFiles={uploadingFiles}
-            onItemClick={this.handleFileItemClick}/>
+            uploadingFiles={uploadingFiles}/>
             <FileViewer file={currentFile}/>
         </div>
         <div id='submissionsFooter'>

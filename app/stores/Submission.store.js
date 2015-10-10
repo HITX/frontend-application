@@ -15,6 +15,10 @@ var _submissionData = null;
 
 var _hasSubmissionFiles = false;
 var _submissionFilesData = null;
+var _submissionFilesMetadata = null;
+
+var _hasCurrentFile = false;
+var _currentFileData = null;
 
 var _hasUploadingFiles = false;
 var _uploadingFilesData = [];
@@ -34,18 +38,31 @@ function _dropSubmission() {
 
 function _loadSubmissionFiles(submissionFilesData) {
   _hasSubmissionFiles = true;
-  _submissionFilesData = submissionFilesData;
+  _submissionFilesData = submissionFilesData.results;
+  delete submissionFilesData.results;
+  _submissionFilesMetadata = submissionFilesData;
 }
 
 function _addSubmissionFile(submissionFileData) {
   if (_hasSubmissionFiles) {
-    _submissionFilesData.results.unshift(submissionFileData);
+    _submissionFilesData.unshift(submissionFileData);
   }
 }
 
 function _dropSubmissionFiles() {
   _hasSubmissionFiles = false;
   _submissionFilesData = null;
+  _submissionFilesMetadata = null;
+}
+
+function _updateCurrentFile(currentFileData) {
+  _hasCurrentFile = true;
+  _currentFileData = currentFileData;
+}
+
+function _dropCurrentFile() {
+  _hasCurrentFile = false;
+  _currentFileData = null;
 }
 
 function _addUploadingFile(filename) {
@@ -74,15 +91,12 @@ var SubmissionStore = objectAssign({}, EventEmitter.prototype, {
 
   hasSubmission: function() { return _hasSubmission; },
   hasSubmissionFiles: function() { return _hasSubmissionFiles; },
+  hasCurrentFile: function() { return _hasCurrentFile; },
   hasUploadingFiles: function() { return _hasUploadingFiles; },
 
   getSubmissionData: function() { return _submissionData; },
-  getSubmissionFilesData: function() {
-    if (this.hasSubmissionFiles()) {
-      return _submissionFilesData.results;
-    }
-    return null;
-  },
+  getSubmissionFilesData: function() { return _submissionFilesData; },
+  getCurrentFileData: function() { return _currentFileData; },
   getUploadingFilesData: function() {
     if (this.hasUploadingFiles()) {
       return _uploadingFilesData;
@@ -98,39 +112,50 @@ SubmissionStore.dispatcherToken = AppDispatcher.register(function(payload) {
   switch(action.actionType) {
     case ActionTypes.SUBMISSION_LOAD:
       _loadSubmission(action.data);
-      SubmissionStore.emit(CHANGE_EVENT);
+      // SubmissionStore.emit(CHANGE_EVENT);
       break;
     case ActionTypes.SUBMISSION_FILES_LOAD:
       _loadSubmissionFiles(action.data);
-      SubmissionStore.emit(CHANGE_EVENT);
+      // SubmissionStore.emit(CHANGE_EVENT);
       break;
     case ActionTypes.SUBMISSION_DROP:
       _dropSubmission();
-      SubmissionStore.emit(CHANGE_EVENT);
+      // SubmissionStore.emit(CHANGE_EVENT);
       break;
-    case ActionTypes.SUBMISSIN_FILES_DROP:
+    case ActionTypes.SUBMISSION_FILES_DROP:
       _dropSubmissionFiles();
-      SubmissionStore.emit(CHANGE_EVENT);
+      // SubmissionStore.emit(CHANGE_EVENT);
+      break;
+    case ActionTypes.SUBMISSION_CURRENT_FILE_UPDATE:
+      _updateCurrentFile(action.data);
+      // SubmissionStore
+      break;
+    case ActionTypes.SUBMISSION_CURRENT_FILE_DROP:
+      _dropCurrentFile();
+      //
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILE_ADD:
       _addUploadingFile(action.data);
-      SubmissionStore.emit(CHANGE_EVENT);
+      // SubmissionStore.emit(CHANGE_EVENT);
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILE_SUCCEED:
       _removeUploadingFile(action.data.filename);
       _addSubmissionFile(action.data);
-      SubmissionStore.emit(CHANGE_EVENT);
+      // SubmissionStore.emit(CHANGE_EVENT);
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILE_FAIL:
       _removeUploadingFile(action.data);
+      //
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILES_DROP:
       _dropUploadingFiles();
-      SubmissionStore.emit(CHANGE_EVENT);
+      // SubmissionStore.emit(CHANGE_EVENT);
       break;
     default:
       return true;
   }
+
+  SubmissionStore.emit(CHANGE_EVENT);
 });
 
 module.exports = SubmissionStore;
