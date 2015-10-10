@@ -1,0 +1,22 @@
+// =============== MEDIA BREAKS ========
+
+@mediabreak1: 55rem;
+@mediabreak2: 40rem;
+
+.break(@breakWidth, @rules) {
+	@media (max-width: @breakWidth) {
+		@rules();
+	}
+}
+
+.break1(@rules) {
+	@media (max-width: @mediabreak1) {
+		@rules();
+	}
+}
+
+.break2(@rules) {
+	@media (max-width: @mediabreak2) {
+		@rules();
+	}
+}

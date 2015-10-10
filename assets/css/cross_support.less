@@ -1,0 +1,24 @@
+.flexbox(@inline: false, @flow: row) {
+  & when(@inline = true) {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+  }
+
+  & when(@inline = false) {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  -webkit-flex-flow: @flow;
+  flex-flow: @flow;
+}
+
+.flex(@flex) {
+  -webkit-flex: @flex;
+  flex: @flex;
+}
+
+.flexOrder(@order) {
+  -webkit-order: @order;
+  order: @order;
+}

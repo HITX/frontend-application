@@ -1,0 +1,170 @@
+@import 'cross_support.less';
+@import 'colors.less';
+@import 'media.less';
+
+// ============= Sidebar ===============
+
+.sidebar(
+  @direction,
+  @breakpoint: @mediabreak1,
+  @order: 2,
+  @breakOrder: 1
+) when (@direction = in), (@direction = out) {
+  .flex(0 0 @sidebarWidth);
+  .flexOrder(@order);
+	text-align: left;
+
+  @sidebarWidth: 15rem;
+
+  .break(@breakpoint, {
+    .flexOrder(@breakOrder);
+    .flex(none);
+  });
+
+	& > * {
+		width: @sidebarWidth;
+
+    .break(@breakpoint, {
+      width: 100%;
+    });
+	}
+
+	.sidebarHeader {
+		color: @colorWhite;
+    background-color: @colorThemeA;
+		font-size: 1.25rem;
+		font-weight: bold;
+		padding: 1rem;
+		margin-bottom: 1rem;
+
+		& > * {
+			display: inline-block;
+		}
+
+    .break(@breakpoint, {
+      &:after {
+        float: right;
+        content: '\25bc';
+      }
+    });
+	}
+
+	.sidebarMessage {
+		margin-top: -.5rem;
+		margin-bottom: 1rem;
+		padding: .5rem;
+		.errorMessage;
+	}
+
+	.sidebarSubHeader {
+		font-weight: bold;
+		padding: 1rem;
+		color: @colorDarkGray;
+		border-bottom: 2px solid @colorLightGray;
+		white-space: nowrap;
+		.pseudolink;
+
+		&:hover {
+			color: @colorThemeA;
+		}
+
+		& > * {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.sidebarSubHeaderArrow {
+			width: 1rem;
+			text-align: center;
+		}
+
+		.sidebarSubHeaderTitle {
+			width: @sidebarWidth - 3rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.sidebarSubHeaderTitle when (@direction = in) {
+			margin-left: .5rem;
+		}
+
+		.sidebarSubHeaderArrow when (@direction = out) {
+			margin-left: .5rem;
+			float: right;
+		}
+	}
+
+	.sidebarBody {
+		.sidebarEmpty {
+			color: @colorDarkGray;
+			padding: 1rem;
+		}
+
+		.sidebarItem {
+			color: @colorDarkGray;
+			border-bottom: 2px solid @colorLightGray;
+			padding: 1rem;
+			white-space: nowrap;
+
+			&:last-child {
+				border-bottom: 0;
+			}
+
+			&.selected {
+				color: @colorThemeA;
+			}
+
+			&:not(.selected) {
+				.pseudolink;
+
+        &:hover {
+          background-color: @colorLightGray;
+        }
+			}
+
+			& > * {
+				display: inline-block;
+				vertical-align: middle;
+			}
+
+			.sidebarItemArrow {
+				width: 1rem;
+				text-align: center;
+			}
+
+			.sidebarItemTitle {
+				width: @sidebarWidth - 3rem;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+
+        // TODO: Fix this shit
+        .break(@breakpoint, {
+          width: auto;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        });
+			}
+
+			.sidebarItemTitle when (@direction = in) {
+				margin-left: .5rem;
+			}
+
+			.sidebarItemArrow when (@direction = out) {
+				float: right;
+			}
+		}
+	}
+}
+
+.sidebar(@direction) when not (@direction = in) and not (@direction = out) {
+  /* WARNING - Invalid sidebar direction */
+  invalid-direction: @direction;
+}
+
+// TODO: Remove this and give @direction a default
+.sidebar {
+  .sidebar(out);
+}

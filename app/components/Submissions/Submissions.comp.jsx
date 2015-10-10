@@ -85,6 +85,33 @@ var Submissions = React.createClass({
         <div id='submissionsHeader'>
           <p>{submission ? submission.project.title : null}</p>
         </div>
+        <div id='submissionsMain'>
+          <Sidebar
+            submissionId={this.props.params.id}
+            files={files}
+            currentFile={currentFile}
+            uploadingFiles={uploadingFiles}
+            onItemClick={this.handleFileItemClick}/>
+            <FileViewer file={currentFile}/>
+        </div>
+        <div id='submissionsFooter'>
+          <button>Submit</button>
+        </div>
+      </div>
+    );
+  },
+
+  old_render: function() {
+    var submission = this.state.submission;
+    var files = this.state.files;
+    var uploadingFiles = this.state.uploadingFiles;
+    var currentFile = this.state.currentFile;
+
+    return (
+      <div id='submissions'>
+        <div id='submissionsHeader'>
+          <p>{submission ? submission.project.title : null}</p>
+        </div>
         <FileViewer file={currentFile}/>
         <div id='submissionsSidebar'>
           <Sidebar
