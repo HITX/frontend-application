@@ -18,8 +18,7 @@ var Submissions = React.createClass({
     return {
       submission: null,
       files: null,
-      uploadingFiles: null,
-      currentFile: null
+      uploadingFiles: null
     };
   },
 
@@ -28,8 +27,7 @@ var Submissions = React.createClass({
       this.setState({
         submission: SubmissionStore.getSubmissionData(),
         files: SubmissionStore.getSubmissionFilesData(),
-        uploadingFiles: SubmissionStore.getUploadingFilesData(),
-        currentFile: SubmissionStore.getCurrentFileData(),
+        uploadingFiles: SubmissionStore.getUploadingFilesData()
       });
     }
   },
@@ -68,17 +66,11 @@ var Submissions = React.createClass({
     SubmissionStore.removeChangeListener(this._onSubmissionChange);
   },
 
-  // handleFileItemClick: function(fileObj) {
-  //   this.setState({
-  //     currentFile: fileObj
-  //   });
-  // },
 
   render: function() {
     var submission = this.state.submission;
     var files = this.state.files;
     var uploadingFiles = this.state.uploadingFiles;
-    var currentFile = this.state.currentFile;
 
     return (
       <div id='submissions'>
@@ -89,36 +81,8 @@ var Submissions = React.createClass({
           <Sidebar
             submissionId={this.props.params.id}
             files={files}
-            currentFile={currentFile}
             uploadingFiles={uploadingFiles}/>
-            <FileViewer file={currentFile}/>
-        </div>
-        <div id='submissionsFooter'>
-          <button>Submit</button>
-        </div>
-      </div>
-    );
-  },
-
-  old_render: function() {
-    var submission = this.state.submission;
-    var files = this.state.files;
-    var uploadingFiles = this.state.uploadingFiles;
-    var currentFile = this.state.currentFile;
-
-    return (
-      <div id='submissions'>
-        <div id='submissionsHeader'>
-          <p>{submission ? submission.project.title : null}</p>
-        </div>
-        <FileViewer file={currentFile}/>
-        <div id='submissionsSidebar'>
-          <Sidebar
-            submissionId={this.props.params.id}
-            files={files}
-            currentFile={currentFile}
-            uploadingFiles={uploadingFiles}
-            onItemClick={this.handleFileItemClick}/>
+            <FileViewer/>
         </div>
         <div id='submissionsFooter'>
           <button>Submit</button>

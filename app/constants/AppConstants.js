@@ -16,8 +16,9 @@ module.exports = {
 
 		// Submission
 		SUBMISSION_LOAD: null,
-		SUBMISSION_FILES_LOAD: null,
 		SUBMISSION_DROP: null,
+		SUBMISSION_FILES_LOAD: null,
+		SUBMISSION_FILE_UPDATE: null,
 		SUBMISSION_FILES_DROP: null,
 		SUBMISSION_CURRENT_FILE_UPDATE: null,
 		SUBMISSION_CURRENT_FILE_DROP: null,
@@ -33,6 +34,14 @@ module.exports = {
 		// Org
 		ORG_LOAD: null,
 		ORG_DROP: null
+	}),
+
+	EventTypes: keyMirror({
+		// Submission
+		SUBMISSION_CHANGE: null,
+		SUBMISSION_FILES_CHANGE: null,
+		SUBMISSION_CURRENT_FILE_CHANGE: null,
+		SUBMISSION_UPLOADING_FILES_CHANGE: null
 	}),
 
 	PayloadSources: keyMirror({

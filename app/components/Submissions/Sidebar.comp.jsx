@@ -14,12 +14,31 @@ var Sidebar = React.createClass({
   propTypes: {
     submissionId: React.PropTypes.string.isRequired,
     files: React.PropTypes.array,
-    currentFile: React.PropTypes.object,
     uploadingFiles: React.PropTypes.array
   },
 
   getInitialState: function() {
-    return {message: null};
+    return {
+      currentFileId: null,
+      message: null
+    };
+  },
+
+  _onSubmissionChange: function() {
+    if (this.isMounted()) {
+      var currentFile = SubmissionStore.getCurrentFileData();
+      this.setState({
+        currentFileId: currentFile ? currentFile.id : null
+      });
+    }
+  },
+
+  componentDidMount: function() {
+    SubmissionStore.addChangeListener(this._onSubmissionChange);
+  },
+
+  componentWillUnmount: function() {
+    SubmissionStore.removeChangeListener(this._onSubmissionChange);
   },
 
   handleFileChange: function(e) {
@@ -52,11 +71,7 @@ var Sidebar = React.createClass({
   },
 
   render: function() {
-
-    var currentFileId = null;
-    if (this.props.currentFile) {
-      currentFileId = this.props.currentFile.id;
-    }
+    var currentFileId = this.state.currentFileId;
 
     var items = <p>'Loading...'</p>
     if (this.props.files) {
@@ -65,7 +80,7 @@ var Sidebar = React.createClass({
           return (
             <SidebarItem
               key={item.id}
-              selected={currentFileId == item.id}
+              selected={currentFileId && currentFileId == item.id}
               file={item}/>
           );
         }.bind(this)

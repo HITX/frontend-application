@@ -11,6 +11,12 @@ var SubmissionActions = {
     });
   },
 
+  dropSubmission: function() {
+    AppDispatcher.handleClientAction({
+      actionType: ActionTypes.SUBMISSION_DROP
+    });
+  },
+
   loadSubmissionFiles: function(submissionFilesData) {
     AppDispatcher.handleClientAction({
       actionType: ActionTypes.SUBMISSION_FILES_LOAD,
@@ -18,9 +24,10 @@ var SubmissionActions = {
     });
   },
 
-  dropSubmission: function() {
+  updateSubmissionFile: function(submissionFileData) {
     AppDispatcher.handleClientAction({
-      actionType: ActionTypes.SUBMISSION_DROP
+      actionType: ActionTypes.SUBMISSION_FILE_UPDATE,
+      data: submissionFileData
     });
   },
 
@@ -30,10 +37,10 @@ var SubmissionActions = {
     });
   },
 
-  updateCurrentFile: function(currentFileData) {
+  updateCurrentFile: function(currentFileId) {
     AppDispatcher.handleClientAction({
       actionType: ActionTypes.SUBMISSION_CURRENT_FILE_UPDATE,
-      data: currentFileData
+      data: currentFileId
     });
   },
 

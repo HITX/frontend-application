@@ -2,17 +2,49 @@
 
 var React = require('react');
 
-var FileViewer = React.createClass({
+var EventTypes = require('../../constants/AppConstants.js').EventTypes;
 
-  propTypes: {
-    file: React.PropTypes.object,
-  },
+var SubmissionActions = require('../../actions/Submission.actions.js');
+var SubmissionStore = require('../../stores/Submission.store.js');
+
+var FORBIDDEN_MESSAGE = (
+'Access to this file is forbidden.\
+ Please check that you are logged in correctly.'
+)
+
+var FileViewer = React.createClass({
 
   getInitialState: function() {
     return {
+      file: SubmissionStore.getCurrentFileData(),
+      retry_allowed: true,
       content_loading: false,
       content: null
     };
+  },
+
+  _updateFileUrl: function() {
+    if (this.isMounted()) {
+      this.setState({
+        retry_allowed: false,
+      });
+    }
+
+    Internshyps.get('submission-files/' + this.state.file.id).then(
+      function(result) {
+        SubmissionActions.updateSubmissionFile(result.response);
+      },
+      function(err) {
+        console.log('Error retreiving submission file metadata');
+        console.log(err.response);
+        if (this.isMounted()) {
+          this.setState({
+            content_loading: false,
+            content: 'Error retreiving submission file metadata'
+          });
+        }
+      }
+    );
   },
 
   _fetchFileContents: function() {
@@ -21,31 +53,68 @@ var FileViewer = React.createClass({
       content: null
     });
 
-    Internshyps.getFile(this.props.file.url).then(
+    Internshyps.getFile(this.state.file.url).then(
       function(result) {
         if (this.isMounted()) {
           this.setState({
             content_loading: false,
-            content: result.response
+            content: result.response,
+            retry_allowed: true
           });
         }
       }.bind(this),
       function(err) {
-        console.log('Error retreiving file');
-        console.log(err.response);
-      }
+        if (this.state.retry_allowed) {
+          this._updateFileUrl();
+        } else {
+          console.log('Error retreiving file');
+          console.log(err.response);
+          if (this.isMounted) {
+            this.setState({
+              content_loading: false,
+              content: FORBIDDEN_MESSAGE
+            });
+          }
+        }
+      }.bind(this)
     );
   },
 
+  _onSubmissionChange: function(eventTypes) {
+    if (this.isMounted()) {
+      for (var i = 0; i < eventTypes.length; i++) {
+        var type = eventTypes[i];
+        switch(type) {
+          case EventTypes.SUBMISSION_CURRENT_FILE_CHANGE:
+            this.setState({
+              file: SubmissionStore.getCurrentFileData(),
+              retry_allowed: true
+            });
+            break;
+          case EventTypes.SUBMISSION_FILES_CHANGE:
+            this.setState({
+              file: SubmissionStore.getCurrentFileData()
+            });
+            break;
+        }
+      }
+    }
+  },
+
   componentDidMount: function() {
-    if (this.props.file) {
+    SubmissionStore.addChangeListener(this._onSubmissionChange);
+    if (this.state.file) {
       this._fetchFileContents();
     }
   },
 
+  componentWillUnmount: function() {
+    SubmissionStore.removeChangeListener(this._onSubmissionChange);
+  },
+
   componentDidUpdate: function(prevProps, prevState) {
-    if (this.props.file) {
-      if (!prevProps.file || this.props.file.url != prevProps.file.url) {
+    if (this.state.file) {
+      if (!prevState.file || this.state.file.url != prevState.file.url) {
         this._fetchFileContents();
       }
     }
@@ -65,8 +134,8 @@ var FileViewer = React.createClass({
 
   render: function() {
     var filename = 'No file selected';
-    if (this.props.file) {
-      filename = this.props.file.filename;
+    if (this.state.file) {
+      filename = this.state.file.filename;
     }
 
     return (

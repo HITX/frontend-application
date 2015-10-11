@@ -4,11 +4,13 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 // var PayloadSources = AppConstants.PayloadSources;
 var ActionTypes = AppConstants.ActionTypes;
+var EventTypes = AppConstants.EventTypes;
 
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = 'change';
+
 
 var _hasSubmission = false;
 var _submissionData = null;
@@ -36,6 +38,19 @@ function _dropSubmission() {
   _submissionData = null;
 }
 
+// Helper
+function _getFileIndexById(fileId) {
+  if (!_hasSubmissionFiles) {
+    return -1;
+  }
+  for (var i = 0; i < _submissionFilesData.length; i++) {
+    if (_submissionFilesData[i].id == fileId) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 function _loadSubmissionFiles(submissionFilesData) {
   _hasSubmissionFiles = true;
   _submissionFilesData = submissionFilesData.results;
@@ -49,15 +64,28 @@ function _addSubmissionFile(submissionFileData) {
   }
 }
 
+function _updateSubmissionFile(submissionFileData) {
+  var idx = _getFileIndexById(submissionFileData.id);
+  if (idx >= 0) {
+    if (_hasCurrentFile && _currentFileData === _submissionFilesData[idx]) {
+      _currentFileData = submissionFileData;
+    }
+    _submissionFilesData[idx] = submissionFileData;
+  }
+}
+
 function _dropSubmissionFiles() {
   _hasSubmissionFiles = false;
   _submissionFilesData = null;
   _submissionFilesMetadata = null;
 }
 
-function _updateCurrentFile(currentFileData) {
-  _hasCurrentFile = true;
-  _currentFileData = currentFileData;
+function _updateCurrentFile(currentFileId) {
+  var idx = _getFileIndexById(currentFileId);
+  if (idx >= 0) {
+    _hasCurrentFile = true;
+    _currentFileData = _submissionFilesData[idx];
+  }
 }
 
 function _dropCurrentFile() {
@@ -108,54 +136,69 @@ var SubmissionStore = objectAssign({}, EventEmitter.prototype, {
 SubmissionStore.dispatcherToken = AppDispatcher.register(function(payload) {
   // var source = payload.source;
   var action = payload.action;
+  var eventTypes = null;
 
   switch(action.actionType) {
+    // Submission actions
     case ActionTypes.SUBMISSION_LOAD:
       _loadSubmission(action.data);
-      // SubmissionStore.emit(CHANGE_EVENT);
-      break;
-    case ActionTypes.SUBMISSION_FILES_LOAD:
-      _loadSubmissionFiles(action.data);
-      // SubmissionStore.emit(CHANGE_EVENT);
+      eventTypes = [EventTypes.SUBMISSION_CHANGE];
       break;
     case ActionTypes.SUBMISSION_DROP:
       _dropSubmission();
-      // SubmissionStore.emit(CHANGE_EVENT);
+      eventTypes = [EventTypes.SUBMISSION_CHANGE];
+      break;
+
+    // Submission files actions
+    case ActionTypes.SUBMISSION_FILES_LOAD:
+      _loadSubmissionFiles(action.data);
+      eventTypes = [EventTypes.SUBMISSION_FILES_CHANGE];
+      break;
+    case ActionTypes.SUBMISSION_FILE_UPDATE:
+      _updateSubmissionFile(action.data);
+      eventTypes = [EventTypes.SUBMISSION_FILES_CHANGE];
       break;
     case ActionTypes.SUBMISSION_FILES_DROP:
       _dropSubmissionFiles();
-      // SubmissionStore.emit(CHANGE_EVENT);
+      eventTypes = [EventTypes.SUBMISSION_FILES_CHANGE];
       break;
+
+    // Current file actions
     case ActionTypes.SUBMISSION_CURRENT_FILE_UPDATE:
       _updateCurrentFile(action.data);
-      // SubmissionStore
+      eventTypes = [EventTypes.SUBMISSION_CURRENT_FILE_CHANGE];
       break;
     case ActionTypes.SUBMISSION_CURRENT_FILE_DROP:
       _dropCurrentFile();
-      //
+      eventTypes = [EventTypes.SUBMISSION_CURRENT_FILE_CHANGE];
       break;
+
+    // Uploading files actions
     case ActionTypes.SUBMISSION_UPLOADING_FILE_ADD:
       _addUploadingFile(action.data);
-      // SubmissionStore.emit(CHANGE_EVENT);
+      eventTypes = [EventTypes.SUBMISSION_UPLOADING_FILES_CHANGE];
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILE_SUCCEED:
       _removeUploadingFile(action.data.filename);
       _addSubmissionFile(action.data);
-      // SubmissionStore.emit(CHANGE_EVENT);
+      eventTypes = [
+        EventTypes.SUBMISSION_UPLOADING_FILES_CHANGE,
+        EventTypes.SUBMISSION_FILES_CHANGE
+      ];
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILE_FAIL:
       _removeUploadingFile(action.data);
-      //
+      eventTypes = [EventTypes.SUBMISSION_UPLOADING_FILES_CHANGE];
       break;
     case ActionTypes.SUBMISSION_UPLOADING_FILES_DROP:
       _dropUploadingFiles();
-      // SubmissionStore.emit(CHANGE_EVENT);
+      eventTypes = [EventTypes.SUBMISSION_UPLOADING_FILES_CHANGE];
       break;
     default:
       return true;
   }
 
-  SubmissionStore.emit(CHANGE_EVENT);
+  SubmissionStore.emit(CHANGE_EVENT, eventTypes);
 });
 
 module.exports = SubmissionStore;

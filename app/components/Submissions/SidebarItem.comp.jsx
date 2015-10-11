@@ -18,12 +18,11 @@ var SidebarItem = React.createClass({
   },
 
   handleClick: function() {
-    SubmissionActions.updateCurrentFile(this.props.file);
+    SubmissionActions.updateCurrentFile(this.props.file.id);
   },
 
   render: function() {
     var data = this.props.file;
-    // console.log(data);
 
     return (
       <div
