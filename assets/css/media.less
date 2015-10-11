@@ -10,13 +10,15 @@
 }
 
 .break1(@rules) {
-	@media (max-width: @mediabreak1) {
-		@rules();
-	}
+	.break(@mediabreak1, @rules);
+	// @media (max-width: @mediabreak1) {
+	// 	@rules();
+	// }
 }
 
 .break2(@rules) {
-	@media (max-width: @mediabreak2) {
-		@rules();
-	}
+	.break(@mediabreak1, @rules);
+	// @media (max-width: @mediabreak2) {
+	// 	@rules();
+	// }
 }

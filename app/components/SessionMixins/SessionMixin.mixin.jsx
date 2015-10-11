@@ -1,6 +1,5 @@
 'use strict'
 
-var React = require('react');
 var SessionStore = require('../../stores/Session.store.js');
 
 var SessionMixin = {

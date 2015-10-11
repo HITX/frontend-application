@@ -2,14 +2,20 @@
 
 var React = require('react');
 
+var classNames = require('classnames');
+
 var SidebarItem = require('./SidebarItem.comp.jsx');
 
 var SpinnerWidget = require('../Widgets/Spinner.comp.jsx');
+
+var MediaMixin = require('../MediaMixin/MediaMixin.mixin.jsx');
 
 var SubmissionActions = require('../../actions/Submission.actions.js');
 var SubmissionStore = require('../../stores/Submission.store.js');
 
 var Sidebar = React.createClass({
+
+  mixins: [MediaMixin],
 
   propTypes: {
     submissionId: React.PropTypes.string.isRequired,
@@ -20,7 +26,8 @@ var Sidebar = React.createClass({
   getInitialState: function() {
     return {
       currentFileId: null,
-      message: null
+      message: null,
+      showBody: false
     };
   },
 
@@ -70,6 +77,13 @@ var Sidebar = React.createClass({
     this.refs.fileInput.getDOMNode().click();
   },
 
+  handleHeaderClick: function() {
+    console.log('Will handle header click here');
+    this.setState({
+      showBody: !this.state.showBody
+    });
+  },
+
   render: function() {
     var currentFileId = this.state.currentFileId;
 
@@ -112,9 +126,22 @@ var Sidebar = React.createClass({
       message = <p className='sidebarMessage'>{this.state.message}</p>
     }
 
+    var headerClick = null;
+    if (this.state.media.break1) {
+      headerClick = this.handleHeaderClick;
+    }
+
+    var bodyClass = classNames(
+      'sidebarBody',
+      {hidden: this.state.media.break1 && !this.state.showBody}
+    )
+
     return (
       <div id='sidebar'>
-        <div className='sidebarHeader'>
+        <div
+          className={classNames('sidebarHeader', {clicked: this.state.showBody})}
+          onClick={headerClick}
+        >
           <p>Files</p>
         </div>
         {message}
@@ -129,7 +156,7 @@ var Sidebar = React.createClass({
             onClick={this.handleFileInputClick}
             onChange={this.handleFileChange}/>
         </div>
-        <div className='sidebarBody'>
+        <div className={bodyClass}>
           {uploadingItems}
           {items}
         </div>

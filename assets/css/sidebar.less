@@ -1,3 +1,7 @@
+// TODO: This uses pseudolink mixin which is defined in styles.less
+// somehow it's still working but probs fragile so move mixins to separate
+// file and import here
+
 @import 'cross_support.less';
 @import 'colors.less';
 @import 'media.less';
@@ -42,10 +46,16 @@
 		}
 
     .break(@breakpoint, {
+      .pseudolink;
+
       &:after {
         float: right;
-        content: '\25bc';
+        content: '\25BE';
       }
+
+      &.clicked:after {
+        content: '\25B4'
+      };
     });
 	}
 
@@ -96,6 +106,11 @@
 	}
 
 	.sidebarBody {
+
+    &.hidden {
+      display: none;
+    }
+
 		.sidebarEmpty {
 			color: @colorDarkGray;
 			padding: 1rem;
