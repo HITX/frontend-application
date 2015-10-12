@@ -75,7 +75,10 @@ var Submissions = React.createClass({
     return (
       <div id='submissions'>
         <div id='submissionsHeader'>
-          <p>{submission ? submission.project.title : null}</p>
+          <p id='submissionsHeaderTitle'>
+            {submission ? submission.project.title : null}
+          </p>
+          <button id='submissionsHeaderSubmit'>Submit</button>
         </div>
         <div id='submissionsMain'>
           <Sidebar
@@ -83,9 +86,6 @@ var Submissions = React.createClass({
             files={files}
             uploadingFiles={uploadingFiles}/>
             <FileViewer/>
-        </div>
-        <div id='submissionsFooter'>
-          <button>Submit</button>
         </div>
       </div>
     );

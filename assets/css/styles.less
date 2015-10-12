@@ -995,17 +995,30 @@ button {
 // ============= Submissions ============
 
 #submissions {
-	padding: .5rem;
 	min-height: @contentMinHeight;
 	.flexbox(@flow: column);
 
 	#submissionsHeader {
-		background-color: @colorErrorBackground;
+		width: 100%;
+		padding: 1rem;
+		.flexbox;
+		align-items: center;
+
+		#submissionsHeaderTitle {
+			font-size: 1.5rem;
+			.flex(1 1 100%);
+		}
+
+		#submissionsHeaderSubmit {
+			font-size: 1rem;
+			.fillButton(@colorThemeA);
+			.flex(none);
+		}
 	}
 
 	#submissionsMain {
 		@minViewWidth: 40rem;
-
+		padding: 0 .5rem;
 		.flex(1 1 100%);
 		.flexbox;
 
@@ -1017,22 +1030,53 @@ button {
 			.flex(1 1 100%);
 			.flexOrder(1);
 			min-width: @minViewWidth;
-			background-color: fade(blue, 20%);
+			padding-right: .5rem;
 
 			.break1({
 				.flexOrder(2);
 				min-width: 0;
+				padding-right: 0;
 			});
+
+			#viewerHeader {
+				padding: .5rem;
+				font-size: 1rem;
+				background-color: @colorLightGray;
+				.flexbox;
+
+				// TODO: Do something to wrap just the filename
+				// flex-wrap: wrap;
+
+				align-items: center;
+
+				#viewerFilename {
+					font-style: italic;
+					.flex(1 1 100%);
+					line-height: 100%;
+				}
+
+				#viewerDelete {
+					.fillButton(@colorDarkGray);
+					.flex(none);
+
+					&.hidden {
+						visibility: hidden;
+					}
+				}
+			}
+
+			#viewerBody {
+				padding: .5rem;
+
+				.spinnerWidget {
+					text-align: center;
+					margin-top: 1rem;
+				}
+			}
 		}
 
 		#sidebar {
 			.sidebar(@direction: in, @order: 3);
-			background-color: fade(green, 20%);
-
-			// .break1({
-			// 	.flexOrder(1);
-			// 	.flex(none);
-			// });
 
 			.spinnerWidget {
 				vertical-align: middle;
@@ -1041,14 +1085,10 @@ button {
 				width: 1rem;
 			}
 
-			input[type='file'] {
+			#submissionsFileInput {
 				display: none;
 			}
 		}
-	}
-
-	#submissionsFooter {
-		background-color: fade(purple, 20%);
 	}
 }
 

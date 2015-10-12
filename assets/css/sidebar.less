@@ -39,7 +39,6 @@
 		font-size: 1.25rem;
 		font-weight: bold;
 		padding: 1rem;
-		margin-bottom: 1rem;
 
 		& > * {
 			display: inline-block;
@@ -66,44 +65,44 @@
 		.errorMessage;
 	}
 
-	.sidebarSubHeader {
-		font-weight: bold;
-		padding: 1rem;
-		color: @colorDarkGray;
-		border-bottom: 2px solid @colorLightGray;
-		white-space: nowrap;
-		.pseudolink;
-
-		&:hover {
-			color: @colorThemeA;
-		}
-
-		& > * {
-			display: inline-block;
-			vertical-align: middle;
-		}
-
-		.sidebarSubHeaderArrow {
-			width: 1rem;
-			text-align: center;
-		}
-
-		.sidebarSubHeaderTitle {
-			width: @sidebarWidth - 3rem;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-
-		.sidebarSubHeaderTitle when (@direction = in) {
-			margin-left: .5rem;
-		}
-
-		.sidebarSubHeaderArrow when (@direction = out) {
-			margin-left: .5rem;
-			float: right;
-		}
-	}
+	// .sidebarSubHeader {
+	// 	font-weight: bold;
+	// 	padding: 1rem;
+	// 	color: @colorDarkGray;
+	// 	border-bottom: 2px solid @colorLightGray;
+	// 	white-space: nowrap;
+	// 	.pseudolink;
+  //
+	// 	&:hover {
+	// 		color: @colorThemeA;
+	// 	}
+  //
+	// 	& > * {
+	// 		display: inline-block;
+	// 		vertical-align: middle;
+	// 	}
+  //
+	// 	.sidebarSubHeaderArrow {
+	// 		width: 1rem;
+	// 		text-align: center;
+	// 	}
+  //
+	// 	.sidebarSubHeaderTitle {
+	// 		width: @sidebarWidth - 3rem;
+	// 		white-space: nowrap;
+	// 		overflow: hidden;
+	// 		text-overflow: ellipsis;
+	// 	}
+  //
+	// 	.sidebarSubHeaderTitle when (@direction = in) {
+	// 		margin-left: .5rem;
+	// 	}
+  //
+	// 	.sidebarSubHeaderArrow when (@direction = out) {
+	// 		margin-left: .5rem;
+	// 		float: right;
+	// 	}
+	// }
 
 	.sidebarBody {
 
@@ -125,6 +124,10 @@
 			&:last-child {
 				border-bottom: 0;
 			}
+
+      &.subHeader {
+        font-weight: bold;
+      }
 
 			&.selected {
 				color: @colorThemeA;
@@ -154,9 +157,8 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 
-        // TODO: Fix this shit
         .break(@breakpoint, {
-          width: auto;
+          width: ~'calc(100% - 3rem)';
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

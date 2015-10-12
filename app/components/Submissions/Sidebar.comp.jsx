@@ -145,18 +145,17 @@ var Sidebar = React.createClass({
           <p>Files</p>
         </div>
         {message}
-        <div
-          className='sidebarSubHeader'
-          onClick={this.handleNewFileClick}>
-          <p className='sidebarSubHeaderArrow'>+</p>
-          <p className='sidebarSubHeaderTitle'>Upload New File</p>
-          <input
-            type='file'
-            ref='fileInput'
-            onClick={this.handleFileInputClick}
-            onChange={this.handleFileChange}/>
-        </div>
         <div className={bodyClass}>
+          <div className='sidebarItem subHeader' onClick={this.handleNewFileClick}>
+            <p className='sidebarItemArrow'>+</p>
+            <p className='sidebarItemTitle'>Upload New File</p>
+            <input
+              id='submissionsFileInput'
+              type='file'
+              ref='fileInput'
+              onClick={this.handleFileInputClick}
+              onChange={this.handleFileChange}/>
+          </div>
           {uploadingItems}
           {items}
         </div>

@@ -4,12 +4,14 @@ var React = require('react');
 
 var EventTypes = require('../../constants/AppConstants.js').EventTypes;
 
+var SpinnerWidget = require('../Widgets/Spinner.comp.jsx');
+
 var SubmissionActions = require('../../actions/Submission.actions.js');
 var SubmissionStore = require('../../stores/Submission.store.js');
 
 var FORBIDDEN_MESSAGE = (
-'Access to this file is forbidden.\
- Please check that you are logged in correctly.'
+'Unable to access file. Please check your internet\
+ connection and that you are logged in correctly.'
 )
 
 var FileViewer = React.createClass({
@@ -122,14 +124,14 @@ var FileViewer = React.createClass({
 
   _renderContentHelper: function() {
     if (this.state.content) {
-      return <pre>{this.state.content}</pre>
+      return <pre>{this.state.content}</pre>;
     }
 
     if (this.state.content_loading) {
-      return <p>Loading...</p>
+      return <SpinnerWidget delayMs={100}/>;
     }
 
-    return <p>No content to display</p>
+    return null;
   },
 
   render: function() {
@@ -138,16 +140,21 @@ var FileViewer = React.createClass({
       filename = this.state.file.filename;
     }
 
+    var deleteButtonClass = 'hidden';
+    if (this.state.content) {
+      deleteButtonClass = 'visible';
+    }
+
     return (
       <div id='submissionsViewer'>
         <div id='viewerHeader'>
-          <p>{filename}</p>
+          <p id='viewerFilename'>{filename}</p>
+          <button id='viewerDelete' className={deleteButtonClass}>
+            Delete
+          </button>
         </div>
         <div id='viewerBody'>
           {this._renderContentHelper()}
-        </div>
-        <div id='viewerFooter'>
-          <button>Delete</button>
         </div>
       </div>
     );
