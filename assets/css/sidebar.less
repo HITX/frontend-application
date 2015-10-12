@@ -172,6 +172,12 @@
 			.sidebarItemArrow when (@direction = out) {
 				float: right;
 			}
+
+      &:not(.subHeader) .sidebarItemArrow when (@direction = in) {
+        .break(@breakpoint, {
+          display: none;
+        });
+      }
 		}
 	}
 }

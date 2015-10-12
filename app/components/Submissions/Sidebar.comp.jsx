@@ -136,6 +136,9 @@ var Sidebar = React.createClass({
       {hidden: this.state.media.break1 && !this.state.showBody}
     )
 
+    // TODO: potentially remove the upload new file button
+    // on break1 if file selection on mobile is untenable
+
     return (
       <div id='sidebar'>
         <div

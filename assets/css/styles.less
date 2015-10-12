@@ -1050,9 +1050,11 @@ button {
 				align-items: center;
 
 				#viewerFilename {
+					margin-right: .5rem;
 					font-style: italic;
 					.flex(1 1 100%);
-					line-height: 100%;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 
 				#viewerDelete {
