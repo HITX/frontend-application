@@ -74,6 +74,21 @@ function _updateSubmissionFile(submissionFileData) {
   }
 }
 
+function _removeSubmissionFile(submissionFileId) {
+  var idx = _getFileIndexById(submissionFileId);
+  if (idx >= 0) {
+    var removed = _submissionFilesData.splice(idx, 1)[0];
+    if (_submissionFilesData.length == 0) {
+      _hasSubmissionFiles = false;
+      _submissionFilesData = null;
+    }
+    if (_currentFileData === removed) {
+      _hasCurrentFile = false;
+      _currentFileData = null;
+    }
+  }
+}
+
 function _dropSubmissionFiles() {
   _hasSubmissionFiles = false;
   _submissionFilesData = null;
@@ -149,6 +164,13 @@ SubmissionStore.dispatcherToken = AppDispatcher.register(function(payload) {
       eventTypes = [EventTypes.SUBMISSION_CHANGE];
       break;
 
+
+    // TODO: Although technically working, semantically some of these
+    // submission file actions should also emit the current_file_change
+    // event when altering the current file as a side effect. When fixing
+    // note that FileViewer component might break if this is implemented,
+    // so work is required there too
+
     // Submission files actions
     case ActionTypes.SUBMISSION_FILES_LOAD:
       _loadSubmissionFiles(action.data);
@@ -156,6 +178,10 @@ SubmissionStore.dispatcherToken = AppDispatcher.register(function(payload) {
       break;
     case ActionTypes.SUBMISSION_FILE_UPDATE:
       _updateSubmissionFile(action.data);
+      eventTypes = [EventTypes.SUBMISSION_FILES_CHANGE];
+      break;
+    case ActionTypes.SUBMISSION_FILE_REMOVE:
+      _removeSubmissionFile(action.data);
       eventTypes = [EventTypes.SUBMISSION_FILES_CHANGE];
       break;
     case ActionTypes.SUBMISSION_FILES_DROP:

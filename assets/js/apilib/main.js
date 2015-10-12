@@ -4,10 +4,8 @@ var Cookies = require('cookies-js');
 
 var ApiConfig = require('../../../config/app/config.js').api;
 
-// var _buildUrl = function(path, query_params = null) {
 function _buildUrl(path, query_params) {
   path = path.replace(/\/$|^\//g, '');
-  // path = path.replace()
   var url = 'http://' + ApiConfig.hostname + ':' + ApiConfig.port + '/' + path + '/';
   if (query_params) {
     var isFirst = true;
@@ -26,18 +24,16 @@ var _statusIsSuccess = function(status) {
 
 var _handler = function(req, res, rej) {
   req.onload = function() {
+    var result = {
+      status: req.status,
+      message: req.statusText,
+      response: req.response == '' ? null : JSON.parse(req.response)
+    }
+
     if (_statusIsSuccess(req.status)) {
-      res({
-        status: req.status,
-        message: req.statusText,
-        response: JSON.parse(req.response)
-      });
+      res(result);
     } else {
-      rej({
-        status: req.status,
-        message: req.statusText,
-        response: JSON.parse(req.response)
-      });
+      rej(result);
     }
   }
 
@@ -129,6 +125,20 @@ window.Internshyps = (function() {
           formData.append(key, data[key]);
         }
         req.send(formData);
+      });
+    },
+
+    // TODO: this is not DRY. Should merge with get/post/etc,
+    // and pass method as argument
+    delete: function(urlPath, params) {
+      return new Promise(function(resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.open('DELETE', _buildUrl(urlPath, params));
+        if (authToken) {
+          req.setRequestHeader('Authorization', 'Bearer ' + authToken);
+        }
+        _handler(req, resolve, reject);
+        req.send();
       });
     },
 

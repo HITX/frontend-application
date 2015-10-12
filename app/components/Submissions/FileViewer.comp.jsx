@@ -119,6 +119,26 @@ var FileViewer = React.createClass({
       if (!prevState.file || this.state.file.url != prevState.file.url) {
         this._fetchFileContents();
       }
+    } else if (this.state.content) {
+      this.setState({content: null});
+    }
+  },
+
+  handleDeleteClick: function() {
+    console.log('Will handle delete click here');
+    var file = this.state.file;
+    if (file) {
+      Internshyps.delete(
+        'submission-files/' + file.id, null
+      ).then(
+        function(result) {
+          SubmissionActions.removeSubmissionFile(file.id);
+        },
+        function(err) {
+          console.log('Error deleting file');
+          console.log(err.response);
+        }
+      );
     }
   },
 
@@ -149,7 +169,11 @@ var FileViewer = React.createClass({
       <div id='submissionsViewer'>
         <div id='viewerHeader'>
           <p id='viewerFilename'>{filename}</p>
-          <button id='viewerDelete' className={deleteButtonClass}>
+          <button
+            id='viewerDelete'
+            className={deleteButtonClass}
+            onClick={this.handleDeleteClick}
+          >
             Delete
           </button>
         </div>

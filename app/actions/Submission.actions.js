@@ -31,6 +31,13 @@ var SubmissionActions = {
     });
   },
 
+  removeSubmissionFile: function(submissionFileId) {
+    AppDispatcher.handleClientAction({
+      actionType: ActionTypes.SUBMISSION_FILE_REMOVE,
+      data: submissionFileId
+    });
+  },
+
   dropSubmissionFiles: function() {
     AppDispatcher.handleClientAction({
       actionType: ActionTypes.SUBMISSION_FILES_DROP

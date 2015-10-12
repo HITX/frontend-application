@@ -66,7 +66,6 @@ var Submissions = React.createClass({
     SubmissionStore.removeChangeListener(this._onSubmissionChange);
   },
 
-
   render: function() {
     var submission = this.state.submission;
     var files = this.state.files;
