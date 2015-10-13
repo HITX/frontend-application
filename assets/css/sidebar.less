@@ -14,6 +14,9 @@
   @order: 2,
   @breakOrder: 1
 ) when (@direction = in), (@direction = out) {
+
+
+
   .flex(0 0 @sidebarWidth);
   .flexOrder(@order);
 	text-align: left;
@@ -64,45 +67,6 @@
 		padding: .5rem;
 		.errorMessage;
 	}
-
-	// .sidebarSubHeader {
-	// 	font-weight: bold;
-	// 	padding: 1rem;
-	// 	color: @colorDarkGray;
-	// 	border-bottom: 2px solid @colorLightGray;
-	// 	white-space: nowrap;
-	// 	.pseudolink;
-  //
-	// 	&:hover {
-	// 		color: @colorThemeA;
-	// 	}
-  //
-	// 	& > * {
-	// 		display: inline-block;
-	// 		vertical-align: middle;
-	// 	}
-  //
-	// 	.sidebarSubHeaderArrow {
-	// 		width: 1rem;
-	// 		text-align: center;
-	// 	}
-  //
-	// 	.sidebarSubHeaderTitle {
-	// 		width: @sidebarWidth - 3rem;
-	// 		white-space: nowrap;
-	// 		overflow: hidden;
-	// 		text-overflow: ellipsis;
-	// 	}
-  //
-	// 	.sidebarSubHeaderTitle when (@direction = in) {
-	// 		margin-left: .5rem;
-	// 	}
-  //
-	// 	.sidebarSubHeaderArrow when (@direction = out) {
-	// 		margin-left: .5rem;
-	// 		float: right;
-	// 	}
-	// }
 
 	.sidebarBody {
 
@@ -185,9 +149,4 @@
 .sidebar(@direction) when not (@direction = in) and not (@direction = out) {
   /* WARNING - Invalid sidebar direction */
   invalid-direction: @direction;
-}
-
-// TODO: Remove this and give @direction a default
-.sidebar {
-  .sidebar(out);
 }

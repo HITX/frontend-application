@@ -83,8 +83,9 @@ var Submissions = React.createClass({
           <Sidebar
             submissionId={this.props.params.id}
             files={files}
-            uploadingFiles={uploadingFiles}/>
-            <FileViewer/>
+            uploadingFiles={uploadingFiles}
+          />
+          <FileViewer/>
         </div>
       </div>
     );

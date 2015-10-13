@@ -4,30 +4,20 @@ var React = require('react');
 var Navigation = require('react-router').Navigation;
 var classNames = require('classnames');
 
+var MediaMixin = require('../MediaMixin/MediaMixin.mixin.jsx');
+
 var DeadlineWidget = require('../Widgets/Deadline.comp.jsx');
 var SubmissionCountWidget = require('../Widgets/SubmissionCount.comp.jsx');
 var PrizeWidget = require('../Widgets/Prize.comp.jsx');
 
-var MAX_DESC_LENGTH = 140;
+var MAX_DESC_LENGTH = 400;//140;
 
 var NewsfeedItem = React.createClass({
 
-  mixins: [Navigation],
+  mixins: [Navigation, MediaMixin],
 
   propTypes: {
     data: React.PropTypes.object.isRequired
-  },
-
-  getInitialState: function() {
-    return {
-      hovered: false
-    };
-  },
-
-  handleHover: function(hovered) {
-    this.setState({
-      hovered: hovered
-    });
   },
 
   handleClick: function() {
@@ -36,41 +26,68 @@ var NewsfeedItem = React.createClass({
 
   render: function() {
 
-    var truncDesc = this.props.data.description;
+    var data = this.props.data;
+    var owner = data.owner;
+
+    var truncDesc = data.description;
     if (truncDesc.length > MAX_DESC_LENGTH) {
       truncDesc = truncDesc.substring(0, MAX_DESC_LENGTH) + '...';
     }
 
+    var title = (
+      <p
+        className='niTitle'
+        onClick={this.handleClick}
+      >
+        {data.title}
+      </p>
+    );
+    var company = (
+      <div className='niOrg'>
+        <img className='niOrgLogo' src={owner.logo_url}/>
+        <p className='niOrgName'>{owner.org_name}</p>
+      </div>
+    );
+    var tags = (
+      <div className='niTags'>
+        <p className='tag'>Tag1</p>
+        <p className='tag'>Tag2</p>
+        <p className='tag'>Tag2</p>
+      </div>
+    );
+    var desc = <p className='niDesc'>{truncDesc}</p>;
+    var info = (
+      <div className='niInfo'>
+        <PrizeWidget prize={data.prize}/>
+          <DeadlineWidget date={data.end_date}/>
+          <SubmissionCountWidget count={data.submission_count}/>
+      </div>
+    );
+
+    if (this.state.media.break1) {
+      return (
+        <div className='newsfeedItem'>
+          {title}
+          {tags}
+          {desc}
+          {info}
+        </div>
+      );
+    }
+
     return (
-      <div
-        className='newsfeedItem'
-        onMouseOver={this.handleHover.bind(this, true)}
-        onMouseOut={this.handleHover.bind(this, false)}
-        onClick={this.handleClick}>
-        <div className='newsfeedItemLeft'>
-          <img
-            className='newsfeedItemLogo'
-            src='/img/initec_logo.jpg'/>
-          <br/>
-          <PrizeWidget prize={this.props.data.prize}/>
+      <div className='newsfeedItem'>
+        <div className='niTop'>
+          <div className='niTopLeft'>
+            {title}
+            {company}
+            {tags}
+          </div>
+          <div className='niTopRight'>
+            {desc}
+          </div>
         </div>
-        <div className='newsfeedItemMiddle'>
-          <p
-            className={classNames('newsfeedItemTitle', {hovered: this.state.hovered})}>
-            {this.props.data.title}
-          </p>
-          <p className='newsfeedItemOrgName'>{this.props.data.owner.org_name}</p>
-          <p className='newsfeedItemDesc'>{truncDesc}</p>
-        </div>
-        <div className='newsfeedItemRight'>
-          <p>Tag 1</p>
-          <p>Tag 2</p>
-          <p>Tag 3</p>
-        </div>
-        <div className='newsfeedItemFooter'>
-          <DeadlineWidget date={this.props.data.end_date}/>
-          <SubmissionCountWidget count={this.props.data.submission_count}/>
-        </div>
+        {info}
       </div>
     );
   }

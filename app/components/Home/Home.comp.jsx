@@ -4,8 +4,6 @@ var React = require('react');
 
 var Navigation = require('react-router').Navigation;
 
-// var InternHome = require('./InternHome.comp.jsx');
-// var OrgHome = require('./OrgHome.comp.jsx');
 var InternSidebar = require('./InternSidebar.comp.jsx');
 var OrgSidebar = require('./OrgSidebar.comp.jsx');
 var Newsfeed = require('../Newsfeed/Newsfeed.comp.jsx');
@@ -35,15 +33,22 @@ var Home = React.createClass({
     }
 
     return (
-      <div id="home">
-        <div id='itemList'>
-          <Newsfeed/>
-        </div>
-        <div id='sidebar'>
-          {sidebar}
-        </div>
+      <div id='home'>
+        {sidebar}
+        <Newsfeed/>
       </div>
     );
+
+    // return (
+    //   <div id="home">
+    //     <div id='itemList'>
+    //       <Newsfeed/>
+    //     </div>
+    //     <div id='sidebar'>
+    //       {sidebar}
+    //     </div>
+    //   </div>
+    // );
   }
 });
 

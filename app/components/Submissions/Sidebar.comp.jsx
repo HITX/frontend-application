@@ -15,13 +15,13 @@ var SubmissionStore = require('../../stores/Submission.store.js');
 
 var Sidebar = React.createClass({
 
-  mixins: [MediaMixin],
-
   propTypes: {
     submissionId: React.PropTypes.string.isRequired,
     files: React.PropTypes.array,
     uploadingFiles: React.PropTypes.array
   },
+
+  mixins: [MediaMixin],
 
   getInitialState: function() {
     return {
@@ -78,7 +78,6 @@ var Sidebar = React.createClass({
   },
 
   handleHeaderClick: function() {
-    console.log('Will handle header click here');
     this.setState({
       showBody: !this.state.showBody
     });

@@ -75,6 +75,7 @@
 
 body {
   background-color: @colorLightGray;
+	// background-color: @colorWhite;
 }
 
 button {
@@ -601,154 +602,240 @@ button {
 // ============= Home ==================
 
 #home {
-	text-align: center;
-	// margin-top: 2rem;
-	height: @contentMinHeight;
+	padding: .5rem;
+	padding-top: 1rem;
+	.flexbox;
 
-	@topMargin: 2rem;
+	.break1({
+		padding: 0;
+		.flexbox(@flow: column);
+	});
 
-	& > * {
-		display: inline-block;
-		margin-top: @topMargin;
-	}
+	#newsfeed {
+		padding: 0 .5rem;
+		.flex(1 1 100%);
+		.flexOrder(1);
 
-	#itemList {
-		width: 60%;
-		float: left;
-		text-align: center;
+		.break1({
+			.flexOrder(2);
+			padding-top: 1rem;
+		});
 
-		height: ~'calc(100% - @{topMargin})';
-		overflow: auto;
+		.newsfeedItem {
+			border-bottom: 2px solid @colorLightGray;
+			margin-bottom: 1rem;
+			padding-bottom: 1rem;
 
-		&::-webkit-scrollbar {
-			display: none;
-		}
+			&:last-child {
+				border-bottom: 0;
+				margin-bottom: 0;
+			}
 
-		#newsfeed {
-			display: inline-block;
-			text-align: left;
-
-			.newsfeedItem {
-				margin-bottom: 2rem;
+			.niTitle {
+				font-size: 1.5rem;
+				font-weight: bold;
+				padding-bottom: 1rem;
 				.pseudolink;
 
-				&:last-child {
-					margin-bottom: 0;
-					.newsfeedItemFooter {
-						border-bottom: 0;
+				&:hover {
+					color: @colorThemeA;
+				}
+
+				.break1({
+					padding-bottom: .5rem;
+				});
+			}
+
+			.niTags {
+				color: @colorDarkGray;
+
+				.break1({
+					padding-bottom: 1rem;
+				});
+
+				.tag {
+					display: inline-block;
+					padding: 0 .15rem;
+					.pseudolink;
+
+					&:hover {
+						color: @colorThemeA;
 					}
 				}
+			}
+
+			.niDesc {
+				font-size: 1.25rem;
+			}
+
+			.niTop {
+				.flexbox;
+				.niTopLeft {
+					.flex(1 1 40%);
+					padding-right: 1rem;
+
+					.niOrg {
+						padding-bottom: .5rem;
+
+						& > * {
+							display: inline-block;
+							vertical-align: middle;
+						}
+
+						.niOrgLogo {
+							width: 1rem;
+							height: 1rem;
+						}
+
+						.niOrgName {
+							margin-left: .5rem;
+							font-style: italic;
+							color: @colorDarkGray;
+						}
+					}
+				}
+
+				.niTopRight {
+					.flex(1 1 60%);
+				}
+			}
+
+			.niInfo {
+				padding-top: .5rem;
+				color: @colorDarkGray;
+				text-align: right;
 
 				& > * {
 					display: inline-block;
-					vertical-align: middle;
-				}
-
-				.newsfeedItemLeft {
-					width: 7rem;
-					text-align: center;
-
-					.newsfeedItemLogo {
-						width: 3rem;
-						height: 3rem;
-					}
-
-					.prizeWidget {
-						font-size: .75rem;
-						p {
-							min-width: 3rem;
-						}
-					}
-				}
-
-				.newsfeedItemMiddle {
-					width: 20rem;
-					border-right: 2px solid @colorLightGray;
-
-					.newsfeedItemTitle {
-						font-size: 1.5rem;
-						font-weight: bold;
-						color: fade(@colorThemeB, 50%);
-
-						&.hovered {
-							color: @colorThemeB;
-						}
-					}
-
-					.newsfeedItemOrgName {
-						font-size: 1.25rem;
-						font-style: italic;
-						color: @colorDarkGray;
-					}
-
-					.newsfeedItemDesc {
-						margin-top: .75rem;
-						font-size: 1rem;
-						color: @colorDarkGray;
-					}
-				}
-
-				.newsfeedItemRight {
-					width: 5rem;
 					padding: 0 .5rem;
+				}
 
-					& > * {
-						display: inline-block;
-						margin-bottom: .2rem;
-						font-size: .75rem;
-						.tag;
+				img {
+					width: 1rem;
+					height: 1rem;
+				}
 
-						&:last-child {
-							margin-bottom: 0;
-						}
+				.prizeWidget {
+					font-size: .75rem;
+				}
+			}
+		}
+
+		.old_newsfeedItem {
+			margin-bottom: 2rem;
+			.pseudolink;
+
+			&:last-child {
+				margin-bottom: 0;
+				.newsfeedItemFooter {
+					border-bottom: 0;
+				}
+			}
+
+			& > * {
+				display: inline-block;
+				vertical-align: middle;
+			}
+
+			.newsfeedItemLeft {
+				width: 7rem;
+				text-align: center;
+
+				.newsfeedItemLogo {
+					width: 3rem;
+					height: 3rem;
+				}
+
+				.prizeWidget {
+					font-size: .75rem;
+					p {
+						min-width: 3rem;
+					}
+				}
+			}
+
+			.newsfeedItemMiddle {
+				width: 20rem;
+				border-right: 2px solid @colorLightGray;
+
+				.newsfeedItemTitle {
+					font-size: 1.5rem;
+					font-weight: bold;
+					color: fade(@colorThemeB, 50%);
+
+					&.hovered {
+						color: @colorThemeB;
 					}
 				}
 
-				.newsfeedItemFooter {
-					display: block;
-					text-align: right;
-					margin-top: .75rem;
-					margin-right: 5.5rem;
+				.newsfeedItemOrgName {
+					font-size: 1.25rem;
+					font-style: italic;
 					color: @colorDarkGray;
-					font-weight: bold;
-					border-bottom: 2px solid @colorLightGray;
-					padding-bottom: 1rem;
+				}
 
-					& > * {
-						display: inline-block;
-						margin-right: 1.5rem;
+				.newsfeedItemDesc {
+					margin-top: .75rem;
+					font-size: 1rem;
+					color: @colorDarkGray;
+				}
+			}
 
-						&:last-child {
-							margin-right: 0;
-						}
+			.newsfeedItemRight {
+				width: 5rem;
+				padding: 0 .5rem;
+
+				& > * {
+					display: inline-block;
+					margin-bottom: .2rem;
+					font-size: .75rem;
+					.tag;
+
+					&:last-child {
+						margin-bottom: 0;
 					}
+				}
+			}
 
-					.deadlineWidget {
-						img {
-							width: 1rem;
-							height: 1rem;
+			.newsfeedItemFooter {
+				display: block;
+				text-align: right;
+				margin-top: .75rem;
+				margin-right: 5.5rem;
+				color: @colorDarkGray;
+				font-weight: bold;
+				border-bottom: 2px solid @colorLightGray;
+				padding-bottom: 1rem;
 
-						}
+				& > * {
+					display: inline-block;
+					margin-right: 1.5rem;
+
+					&:last-child {
+						margin-right: 0;
 					}
+				}
 
-					.submissionCountWidget {
-						img {
-							width: 1rem;
-							height: 1rem;
-						}
+				.deadlineWidget {
+					img {
+						width: 1rem;
+						height: 1rem;
+
+					}
+				}
+
+				.submissionCountWidget {
+					img {
+						width: 1rem;
+						height: 1rem;
 					}
 				}
 			}
 		}
 	}
 
-	#sidebar {
-		width: 40%;
-		text-align: center;
-
-		#internSidebar, #orgSidebar {
-			.sidebar;
-		}
+	#internSidebar, #orgSidebar {
+		.sidebar(@direction: out, @order: 2);
 	}
 }
 
@@ -756,10 +843,9 @@ button {
 // ================= TODO ==================
 
 .tag {
-	padding: 3.5px;
-	color: @colorThemeA;
-	border: 2px solid @colorThemeA;
-	border-radius: .35rem;
+	&:before {
+		content: '#';
+	}
 }
 
 .fillButton(@color) {
@@ -1000,7 +1086,7 @@ button {
 
 	#submissionsHeader {
 		width: 100%;
-		padding: 1rem;
+		padding: .5rem;
 		.flexbox;
 		align-items: center;
 
@@ -1023,6 +1109,7 @@ button {
 		.flexbox;
 
 		.break1({
+			padding: 0;
 			.flexbox(@flow: column);
 		});
 
@@ -1078,7 +1165,7 @@ button {
 		}
 
 		#sidebar {
-			.sidebar(@direction: in, @order: 3);
+			.sidebar(@direction: in, @order: 2);
 
 			.spinnerWidget {
 				vertical-align: middle;
