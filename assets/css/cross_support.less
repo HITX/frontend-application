@@ -3,32 +3,50 @@
 .flexbox(@inline: false, @flow: row) {
   & when(@inline = true) {
     display: -webkit-inline-flex;
-    display: inline-flex;
+    display:         inline-flex;
   }
 
   & when(@inline = false) {
     display: -webkit-flex;
-    display: flex;
+    display:         flex;
   }
 
   -webkit-flex-flow: @flow;
-  flex-flow: @flow;
+          flex-flow: @flow;
 }
 
 .flex(@flex) {
   -webkit-flex: @flex;
-  flex: @flex;
+          flex: @flex;
 }
 
 .flexOrder(@order) {
   -webkit-order: @order;
-  order: @order;
+          order: @order;
 }
+
 
 // ========== Transform ===========
 
 .transform(@val) {
   -webkit-transform: @val;
-  -ms-transform: @val;
-  transform: @val;
+      -ms-transform: @val;
+          transform: @val;
+}
+
+
+// ========== Animation/Transition ===========
+
+.animation(@val) {
+  -webkit-animation: @val;
+     -moz-animation: @val;
+       -o-animation: @val;
+          animation: @val;
+}
+
+.transition(@val) {
+  -webkit-transition: @val;
+     -moz-transition: @val;
+      -ms-transition: @val;
+          transition: @val;
 }
