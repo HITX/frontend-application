@@ -1,0 +1,34 @@
+TODO list:
+
+- Make it so links can be control/right clicked into new tabs
+- URL hint not showing on link hover, href issue? Same as tab click issue?
+- Refactor signup mixin to make use of InputMixinFactory
+- Use InputMixinFactory with validation for login modal
+- Firefox is receiving html responses from API requests, fix that
+- Submission page needs to be editable/non-editable based on user type and
+  submission status. Use proxy page that loads correct components?
+- Make entire newsfeed item (rather than just title) clickable for mobile
+  version
+- Validate API responses
+- Create and use newsfeed store
+- Make sidebar fixed position for both desktop/mobile
+- Make search icon clickable in search input
+- Add error modal and use for API response errors
+- Refactor NotFound route
+- Change 'howitworks' to 'about'
+- Social media links
+- Draggable upload
+- Add download submission files to filesystem
+- Change body's background-color to white, remove padding in content
+- Add img alt attributes
+- Html index page metadata
+- Change fillbutton style when no hovering option (i.e. mobile)?
+- Different header links when not logged in
+- Add company logo to newsfeed item on mobile
+- Switch to specifying element class in jsx rather than less to prevent CSS
+  bloat
+- Split styles.less into sub files, disregard import in subfiles, rather ensure
+  proper import order in styles.less
+- Documentation (at least README)
+- Prefix more stuff properly in cross_support.less
+- Add liscence comments where appropriate?

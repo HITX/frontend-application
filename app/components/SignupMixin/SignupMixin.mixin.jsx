@@ -12,6 +12,7 @@ var SessionActions = require('../../actions/Session.actions.js');
 var KEY_CODE_ENTER = 13;
 var LOGIN_URL = 'http://' + NodeApiConfig.hostname + ':' + NodeApiConfig.port + '/' + NodeApiConfig.login_path;
 
+// TODO: Replace this with InputMixinFactory
 var INPUTS = {
   INTERN: [
     {id: 'firstName', name: 'First Name', field: 'first_name', profile: true, required: false},

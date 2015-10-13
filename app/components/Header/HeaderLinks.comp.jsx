@@ -94,9 +94,23 @@ var HeaderLinks = React.createClass({
 
     var log_in_out;
     if (this.state.hasSession) {
-      log_in_out = <p onClick={this.handleLogoutClick}>Log out</p>;
+      log_in_out = (
+        <p
+          className='headerLink'
+          onClick={this.handleLogoutClick}
+        >
+          Log out
+        </p>
+      );
     } else {
-      log_in_out = <p onClick={this.handleLoginClick}>Log in</p>;
+      log_in_out = (
+        <p
+          className='headerLink' 
+          onClick={this.handleLoginClick}
+        >
+          Log in
+        </p>
+      );
     }
 
     return (
@@ -105,15 +119,15 @@ var HeaderLinks = React.createClass({
         {this.signupModal(this.openLogin)}
         <p
           id='headerLinksHome'
-          className={classNames({active: this.testActive('home')})}
+          className={classNames('headerLink', {active: this.testActive('home')})}
           onClick={this.handleLinkClick}>Home</p>
         <p
           id='headerLinksHow'
-          className={classNames({active: this.testActive('howitworks')})}
+          className={classNames('headerLink', {active: this.testActive('howitworks')})}
           onClick={this.handleLinkClick}>How it works</p>
         <p
           id='headerLinksProfile'
-          className={classNames({active: this.testActive('profile')})}
+          className={classNames('headerLink', {active: this.testActive('profile')})}
           onClick={this.handleLinkClick}>Profile</p>
         {log_in_out}
       </div>
