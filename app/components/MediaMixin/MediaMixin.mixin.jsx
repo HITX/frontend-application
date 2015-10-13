@@ -20,9 +20,9 @@ var MediaMixin = {
 
   _onMediaEvent: function(name, mediaQuery) {
     if (this.isMounted()) {
-      var newState = {media: {}};
-      newState.media[name] = mediaQuery.matches;
-      this.setState(newState);
+      var newMediaState = this.state.media;
+      newMediaState[name] = mediaQuery.matches;
+      this.setState({media: newMediaState});
     }
   },
 
