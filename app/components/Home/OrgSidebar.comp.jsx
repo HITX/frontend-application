@@ -2,21 +2,31 @@
 
 var React = require('react');
 
+var classNames = require('classnames');
+
 var SidebarItem = require('./OrgSidebarItem.comp.jsx');
 
 var Navigation = require('react-router').Navigation;
+var MediaMixin = require('../MediaMixin/MediaMixin.mixin.jsx');
 
 var OrgSidebar = React.createClass({
 
-  mixins: [Navigation],
+  mixins: [Navigation, MediaMixin],
 
   propTypes: {
     projects: React.PropTypes.array.isRequired
   },
 
-  // TODO
+  getInitialState: function() {
+    return {
+      showBody: false
+    };
+  },
+
   handleHeaderClick: function() {
-    console.log('Not yet implemented');
+    this.setState({
+      showBody: !this.state.showBody
+    });
   },
 
   handleNewProjectClick: function() {
@@ -36,19 +46,31 @@ var OrgSidebar = React.createClass({
       items = <p className='sidebarEmpty'>No current projects</p>;
     }
 
+    var headerClick = null;
+    if (this.state.media.break1) {
+      headerClick = this.handleHeaderClick;
+    }
+
+    var bodyClass = classNames(
+      'sidebarBody',
+      {hidden: this.state.media.break1 && !this.state.showBody}
+    )
+
     return (
       <div id='orgSidebar'>
-        <div className='sidebarHeaderClickable' onClick={this.handleHeaderClick}>
-          <p>My Projects</p>
-          <p className='sidebarHeaderArrow'>&rsaquo;</p>
-        </div>
         <div
-          className='sidebarSubHeader'
-          onClick={this.handleNewProjectClick}>
-          <p>New Project</p>
-          <p className='sidebarSubHeaderArrow'>+</p>
+          className={classNames('sidebarHeader', {clicked: this.state.showBody})}
+          onClick={headerClick}
+          >
+          <p>My Projects</p>
         </div>
-        <div className='sidebarBody'>
+        <div className={bodyClass}>
+          <div
+            className='sidebarItem subHeader'
+            onClick={this.handleNewProjectClick}>
+            <p className='sidebarItemTitle'>New Project</p>
+            <p className='sidebarItemArrow'>+</p>
+          </div>
           {items}
         </div>
       </div>

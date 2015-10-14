@@ -55,7 +55,7 @@ var InternSidebar = React.createClass({
         <div
           className={classNames('sidebarHeader', {clicked: this.state.showBody})}
           onClick={headerClick}
-        >
+          >
           <p>My Projects</p>
         </div>
         <div className={bodyClass}>
