@@ -22,7 +22,7 @@ TODO list:
 - Change body's background-color to white, remove padding in content
 - Add img alt attributes
 - Html index page metadata
-- Change fillbutton style when no hovering option (i.e. mobile)?
+- Change fillbutton style when no hovering option (i.e. mobile)
 - Different header links when not logged in
 - Add company logo to newsfeed item on mobile
 - Switch to specifying element class in jsx rather than less to prevent CSS
@@ -38,3 +38,5 @@ TODO list:
 - Redo search icon, make lines thicker to match bars icon
 - After deleting all submission files, sidebar is stuck on 'loading'
 - Header needs an earlier media break (break2?)
+- Org sidebar
+- Fonts

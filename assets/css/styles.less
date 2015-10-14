@@ -184,67 +184,67 @@ button {
 			}
 
 			.break1({
-				img {
+				#headerLinksIcon {
 					height: 1.5rem;
 					width: 1.5rem;
 					.pseudolink;
 				}
+
+				#headerSlideout {
+					@slideoutColorGray: #515151;
+
+					position: fixed;
+					top: 0;
+					right: -90%;
+					z-index: 51;
+					width: 90%;
+					height: 100%;
+					color: @colorWhite;
+					background-color: @slideoutColorGray;
+					.transition(right .4s ease-out);
+
+					&.visible {
+						right: 0;
+						.transition(right .4s ease-out);
+					}
+
+					#slideoutTop {
+						height: @headerHeight;
+						line-height: @headerHeight;
+						font-size: 2rem;
+						text-align: left;
+						padding: 0 1rem;
+
+						p {
+							display: inline-block;
+							.pseudolink;
+						}
+					}
+
+					#slideoutLinks {
+						font-size: 2rem;
+
+						& > * {
+							border-bottom: 1px solid @colorLightGray;
+							text-align: left;
+							padding: 1rem;
+							.pseudolink;
+
+							&:last-child {border-bottom: 0;}
+
+							&:not(#slideoutLogX):after {
+								content: '\203A';
+								float: right;
+							}
+
+							&:hover {
+								color: @slideoutColorGray;
+								background-color: @colorLightGray;
+							}
+						}
+					}
+				}
 			});
-		}
-
-		#headerSlideout {
-			@slideoutColorGray: #515151;
-
-			position: fixed;
-			top: 0;
-			right: -90%;
-			z-index: 51;
-			width: 90%;
-			height: 100%;
-			color: @colorWhite;
-			background-color: @slideoutColorGray;
-			.transition(right .4s ease-out);
-
-			&.visible {
-				right: 0;
-				.transition(right .4s ease-out);
-			}
-
-			#slideoutTop {
-				height: @headerHeight;
-				line-height: @headerHeight;
-				font-size: 2rem;
-				text-align: left;
-				padding: 0 1rem;
-
-				p {
-					display: inline-block;
-					.pseudolink;
-				}
-			}
-
-			#slideoutLinks {
-				font-size: 2rem;
-
-				& > * {
-					border-bottom: 1px solid @colorLightGray;
-					text-align: left;
-					padding: 1rem;
-					.pseudolink;
-
-					&:last-child {border-bottom: 0;}
-
-					&:not(#slideoutLogx):after {
-						content: '\203A';
-						float: right;
-					}
-
-					&:hover {
-						color: @slideoutColorGray;
-						background-color: @colorLightGray;
-					}
-				}
-			}
 		}
 	}
 }
