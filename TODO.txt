@@ -32,3 +32,9 @@ TODO list:
 - Documentation (at least README)
 - Prefix more stuff properly in cross_support.less
 - Add liscence comments where appropriate?
+- Standardize the CSS font sizes (constants? mixins?), maybe set h1 h2 ... and
+  use those in html
+- Generalize/refactor the apilib methods available (ex. request method as param)
+- Redo search icon, make lines thicker to match bars icon
+- After deleting all submission files, sidebar is stuck on 'loading'
+- Header needs an earlier media break (break2?)

@@ -2,8 +2,8 @@
 
 // TODO: Add this polyfill - https://github.com/paulirish/matchMedia.js
 
-var MEDIABREAK1 = '55rem';
-var MEDIABREAK2 = '40rem';
+var MEDIABREAK1 = '40rem';
+var MEDIABREAK2 = '55rem';
 
 var _break1 = window.matchMedia('(max-width: ' + MEDIABREAK1 + ')');
 var _break2 = window.matchMedia('(max-width: ' + MEDIABREAK2 + ')');
